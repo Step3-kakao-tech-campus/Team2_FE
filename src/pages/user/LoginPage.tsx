@@ -1,15 +1,15 @@
 import React, { useState, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
-import Container from '../../../common/atoms/Container';
-import Input from '../../../common/atoms/Input';
-import Button from '../../../common/atoms/Button';
+import Container from '../../common/atoms/Container';
+import Input from '../../common/atoms/Input';
+import Button from '../../common/atoms/Button';
 
-import '..//style.scss';
-import { LocalImage } from '../../../common/atoms/image';
-import LineOr from '../components/LineOr';
-import ButtonWithImage from '../../../common/atoms/ButtonWithImage';
-import ContainerContent from '../../../common/atoms/ContainerContent';
-import ContainerTitle from '../../../common/atoms/ContainerTitle';
+import './style.scss';
+import { LocalImage } from '../../common/atoms/image';
+import LineOr from './components/LineOr';
+import ButtonWithImage from '../../common/atoms/ButtonWithImage';
+import ContainerContent from '../../common/atoms/ContainerContent';
+import ContainerTitle from '../../common/atoms/ContainerTitle';
 
 const LoginPage: React.FC = () => {
     const [username, setUsername] = useState('');
