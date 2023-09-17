@@ -69,19 +69,19 @@ const LoginPage: React.FC = () => {
                             <Link to="/find_username">아이디 찾기</Link>
                         </li>
                         <li className="list_item">
-                            <Link to="/signup">회원가입</Link>
+                            <Link to="/verify">회원가입</Link>
                         </li>
                     </ul>
                     <LineOr />
                     <ButtonWithImage
-                        className="login_with_kakao"
+                        className="login with_kakao"
                         onClick={handleLoginClick}
                         imageSrc="logo_kakao.png"
                     >
-                        카카오톡으로 로그인
+                        카카오톡 계정으로 로그인
                     </ButtonWithImage>
                     <ButtonWithImage
-                        className="login_with_google"
+                        className="login with_google"
                         onClick={handleLoginClick}
                         imageSrc="logo_google.png"
                     >
