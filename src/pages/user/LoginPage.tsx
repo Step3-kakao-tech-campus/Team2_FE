@@ -67,10 +67,10 @@ const LoginPage: React.FC = () => {
                     </Button>
                     <ul className="list_user">
                         <li className="list_item">
-                            <Link to="/find_password">비밀번호 찾기</Link>
+                            <Link to="/find-username">아이디 찾기</Link>
                         </li>
                         <li className="list_item">
-                            <Link to="/find_username">아이디 찾기</Link>
+                            <Link to="/find-password">비밀번호 찾기</Link>
                         </li>
                         <li className="list_item">
                             <Link to="/verify">회원가입</Link>
