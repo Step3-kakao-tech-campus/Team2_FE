@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import './style.scss';
 import './VerifyPage.scss';
@@ -14,7 +15,7 @@ const VerifyPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [code, setCode] = useState('');
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
@@ -36,6 +37,7 @@ const VerifyPage: React.FC = () => {
 
     const handleConfirmCodeClick = () => {
         console.log('인증번호 확인');
+        navigate('/signup');
     };
 
     const handleKakaoSignupClick = () => {};

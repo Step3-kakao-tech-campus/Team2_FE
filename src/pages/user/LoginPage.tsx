@@ -40,23 +40,27 @@ const LoginPage: React.FC = () => {
             </Title>
             <Content>
                 <form className="form_login">
-                    <div className="box_input">
-                        <Input
-                            type="text"
-                            className="input_username"
-                            value={username}
-                            onChange={handleUsernameChange}
-                            placeholder="아이디"
-                        />
+                    <div className="input_item">
+                        <div className="box_input">
+                            <Input
+                                type="text"
+                                className="input_username"
+                                value={username}
+                                onChange={handleUsernameChange}
+                                placeholder="아이디"
+                            />
+                        </div>
                     </div>
-                    <div className="box_input">
-                        <Input
-                            type="password"
-                            className="input_password"
-                            value={password}
-                            onChange={handlePasswordChange}
-                            placeholder="비밀번호"
-                        />
+                    <div className="input_item">
+                        <div className="box_input">
+                            <Input
+                                type="password"
+                                className="input_password"
+                                value={password}
+                                onChange={handlePasswordChange}
+                                placeholder="비밀번호"
+                            />
+                        </div>
                     </div>
                     <Button className="login" onClick={handleLoginClick}>
                         로그인
