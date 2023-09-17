@@ -13,10 +13,10 @@
     margin: 10px;
 }
 
-.content.login,
-.content.signup,
-.content.find_username,
-.content.find_password {
+.form_login,
+.form_signup,
+.form_find_username,
+.form_find_password {
     width: 100%;
     min-width: 320px;
     max-width: 480px;
@@ -25,10 +25,10 @@
 }
 
 @media (min-width: 768px) {
-    .content.login,
-    .content.signup,
-    .content.find_username,
-    .content.find_password {
+    .form_login,
+    .form_signup,
+    .form_find_username,
+    .form_find_password {
         width: 580px;
         margin: 20px auto;
         padding: 55px 70px;

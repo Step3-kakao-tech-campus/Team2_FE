@@ -1,15 +1,13 @@
 import React, { useState, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
-import Container from '../../common/atoms/Container';
-import Input from '../../common/atoms/Input';
-import Button from '../../common/atoms/Button';
 
 import './style.scss';
+import { Container, Title, Content } from '../../common/atoms/Container';
 import { LocalImage } from '../../common/atoms/image';
-import LineOr from './components/LineOr';
 import ButtonWithImage from '../../common/atoms/ButtonWithImage';
-import ContainerContent from '../../common/atoms/ContainerContent';
-import ContainerTitle from '../../common/atoms/ContainerTitle';
+import Input from '../../common/atoms/Input';
+import Button from '../../common/atoms/Button';
+import LineOr from './components/LineOr';
 
 const LoginPage: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -24,7 +22,6 @@ const LoginPage: React.FC = () => {
     };
 
     const handleLoginClick = () => {
-        // TODO: Implement login logic here.
         console.log(
             `Logging in with username: ${username} and Password: ${password}`,
         );
@@ -32,7 +29,7 @@ const LoginPage: React.FC = () => {
 
     return (
         <Container>
-            <ContainerTitle>
+            <Title>
                 <div className="logo">
                     <LocalImage
                         src="logo_big.png"
@@ -40,9 +37,9 @@ const LoginPage: React.FC = () => {
                         height="auto"
                     />
                 </div>
-            </ContainerTitle>
-            <ContainerContent className="login">
-                <form className="login form">
+            </Title>
+            <Content>
+                <form className="form_login">
                     <div className="box_input">
                         <Input
                             type="text"
@@ -61,7 +58,7 @@ const LoginPage: React.FC = () => {
                             placeholder="비밀번호"
                         />
                     </div>
-                    <Button className="btn login" onClick={handleLoginClick}>
+                    <Button className="login" onClick={handleLoginClick}>
                         로그인
                     </Button>
                     <ul className="list_user">
@@ -77,21 +74,21 @@ const LoginPage: React.FC = () => {
                     </ul>
                     <LineOr />
                     <ButtonWithImage
-                        className="btn login_with_kakao"
+                        className="login_with_kakao"
                         onClick={handleLoginClick}
                         imageSrc="logo_kakao.png"
                     >
                         카카오톡으로 로그인
                     </ButtonWithImage>
                     <ButtonWithImage
-                        className="btn login_with_google"
+                        className="login_with_google"
                         onClick={handleLoginClick}
                         imageSrc="logo_google.png"
                     >
                         구글 계정으로 로그인
                     </ButtonWithImage>
                 </form>
-            </ContainerContent>
+            </Content>
         </Container>
     );
 };

@@ -13,9 +13,10 @@ const Button: React.FC<ButtonProps> = ({
     onClick,
     children,
 }) => {
+    const btnName = `btn ${className || ''}`;
     return (
         <button
-            className={className}
+            className={btnName}
             style={style}
             onClick={event => {
                 event.preventDefault();

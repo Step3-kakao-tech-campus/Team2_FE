@@ -15,10 +15,11 @@ const ButtonWithImage: React.FC<ButtonProps> = ({
     children,
     imageSrc,
 }) => {
+    const btnName = `btn ${className || ''}`;
     const alt = `${className}_logo`;
     return (
         <button
-            className={className}
+            className={btnName}
             style={style}
             onClick={event => {
                 event.preventDefault();
