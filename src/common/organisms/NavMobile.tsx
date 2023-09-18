@@ -6,7 +6,7 @@ const NavMobile = () => {
     <div className="navbar_m">
       <div className="navbar_m__item">
         <img src="home.png" alt="메인 페이지" className="navbar_m__item__logo"/>
-        <p className="navbar__item__text_m">메인</p>
+        <p className="navbar_m__item__text">메인</p>
         <img src="select.png" className="navbar_m__item__bar"/>
       </div>
       <div>
