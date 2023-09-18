@@ -1,9 +1,9 @@
-import { LocalImage } from '../../common/atom/image';
+import { LocalImage } from '../../common/atoms/image';
 import {
     Container,
     DescriptionContainer,
     IntroContainer,
-} from '../../common/atom/container';
+} from '../../common/atoms/container';
 import { ChallengeLandingBox, IconDescContainer } from './components/box';
 import React from 'react';
 
