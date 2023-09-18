@@ -7,7 +7,7 @@ import {
 import { ChallengeLandingBox, IconDescContainer } from './components/box';
 import React from 'react';
 
-export const LandingPage = () => {
+const LandingPage = () => {
     return (
         <div className="App">
             <header className="header"></header>
@@ -39,3 +39,5 @@ export const LandingPage = () => {
         </div>
     );
 };
+
+export default LandingPage;
