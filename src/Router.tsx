@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/user/LoginPage';
-import VerifyPage from './pages/user/VerifyPage';
+import VerificationPage from './pages/user/VerificationPage';
 import SignupPage from './pages/user/SignupPage';
 import FindUsernameVerifyPage from './pages/user/FindUsernameVerifyPage';
 import FindUsernameResultPage from './pages/user/FindUsernameResult';
@@ -12,7 +12,7 @@ const Router = () => (
     <>
         <Routes>
             <Route path="login" element={<LoginPage />} />
-            <Route path="verify" element={<VerifyPage />} />
+            <Route path="Verification" element={<VerificationPage />} />
             <Route path="signup" element={<SignupPage />} />
             <Route path="find-username" element={<FindUsernameVerifyPage />} />
             <Route

@@ -10,7 +10,7 @@ import Input from '../../common/atoms/Input';
 import Button from '../../common/atoms/Button';
 import LineOr from './components/LineOr';
 
-const VerifyPage: React.FC = () => {
+const VerificationPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [code, setCode] = useState('');
 
@@ -124,4 +124,4 @@ const VerifyPage: React.FC = () => {
     );
 };
 
-export default VerifyPage;
+export default VerificationPage;
