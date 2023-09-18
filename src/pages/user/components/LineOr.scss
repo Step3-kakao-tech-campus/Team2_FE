@@ -1,4 +1,4 @@
-.line_with_text {
+.line_or {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -8,25 +8,25 @@
     padding: 15px 0;
 }
 
-.line_with_text span {
+.line_or span {
     background-color: #f3f3f4;
     padding: 0 1rem;
     z-index: 1;
     position: relative;
 }
 
-.line_with_text::before,
-.line_with_text::after {
+.line_or::before,
+.line_or::after {
     content: '';
     background-color: #000;
     height: 1px;
     flex: 1;
 }
 
-.line_with_text::before {
+.line_or::before {
     margin-right: 0.5rem;
 }
 
-.line_with_text::after {
+.line_or::after {
     margin-left: 0.5rem;
 }
