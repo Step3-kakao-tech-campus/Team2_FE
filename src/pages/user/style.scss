@@ -13,10 +13,7 @@
     margin: 10px;
 }
 
-.form_login,
-.form_signup,
-.form_find_username,
-.form_find_password {
+.form {
     width: 100%;
     min-width: 320px;
     max-width: 480px;
@@ -25,10 +22,7 @@
 }
 
 @media (min-width: 768px) {
-    .form_login,
-    .form_signup,
-    .form_find_username,
-    .form_find_password {
+    .form {
         width: 580px;
         margin: 20px auto;
         padding: 55px 70px;
@@ -36,8 +30,13 @@
     }
 }
 
-.input_item {
+.form_item {
     margin: 10px 0;
+}
+
+.box_input_with_btn {
+    display: flex;
+    align-items: center;
 }
 
 .box_input {
@@ -47,13 +46,7 @@
     justify-content: center;
 }
 
-.input_email,
-.input_code,
-.input_verify_code,
-.input_username,
-.input_password,
-.input_confirm_password,
-.input_nickname {
+.input {
     width: 100%;
     height: 50px;
     padding: 0px 10px;
@@ -79,12 +72,18 @@
     border-radius: 8px;
 }
 
-.btn.with_kakao {
+.btn.with_input {
+    margin: 0;
+    margin-left: 5px;
+    width: 120px;
+}
+
+.btn.kakao {
     background-color: #ffe400;
     color: black;
 }
 
-.btn.with_google {
+.btn.google {
     background-color: #ffffff;
     color: black;
     border: 1px solid #909090;

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './style.scss';
 import { Container, Title, Content } from '../../common/atoms/Container';
 import { LocalImage } from '../../common/atoms/image';
-import ButtonWithImage from '../../common/atoms/ButtonWithImage';
+import { Form, FormItem } from '../../common/atoms/Form';
 import Input from '../../common/atoms/Input';
 import Button from '../../common/atoms/Button';
 import LineOr from './components/LineOr';
@@ -39,32 +39,37 @@ const LoginPage: React.FC = () => {
                 </div>
             </Title>
             <Content>
-                <form className="form_login">
-                    <div className="input_item">
+                <Form className="login">
+                    <FormItem>
                         <div className="box_input">
                             <Input
                                 type="text"
-                                className="input_username"
+                                className="username"
                                 value={username}
                                 onChange={handleUsernameChange}
                                 placeholder="아이디"
                             />
                         </div>
-                    </div>
-                    <div className="input_item">
+                    </FormItem>
+
+                    <FormItem>
                         <div className="box_input">
                             <Input
                                 type="password"
-                                className="input_password"
+                                className="password"
                                 value={password}
                                 onChange={handlePasswordChange}
                                 placeholder="비밀번호"
                             />
                         </div>
-                    </div>
-                    <Button className="login" onClick={handleLoginClick}>
-                        로그인
-                    </Button>
+                    </FormItem>
+
+                    <FormItem>
+                        <Button className="login" onClick={handleLoginClick}>
+                            로그인
+                        </Button>
+                    </FormItem>
+
                     <ul className="list_user">
                         <li className="list_item">
                             <Link to="/find-username">아이디 찾기</Link>
@@ -76,22 +81,29 @@ const LoginPage: React.FC = () => {
                             <Link to="/verify">회원가입</Link>
                         </li>
                     </ul>
+
                     <LineOr />
-                    <ButtonWithImage
-                        className="login with_kakao"
-                        onClick={handleLoginClick}
-                        imageSrc="logo_kakao.png"
-                    >
-                        카카오톡 계정으로 로그인
-                    </ButtonWithImage>
-                    <ButtonWithImage
-                        className="login with_google"
-                        onClick={handleLoginClick}
-                        imageSrc="logo_google.png"
-                    >
-                        구글 계정으로 로그인
-                    </ButtonWithImage>
-                </form>
+
+                    <FormItem>
+                        <Button
+                            className="login kakao"
+                            onClick={handleLoginClick}
+                            imageSrc="logo_kakao.png"
+                        >
+                            카카오톡 계정으로 로그인
+                        </Button>
+                    </FormItem>
+
+                    <FormItem>
+                        <Button
+                            className="login google"
+                            onClick={handleLoginClick}
+                            imageSrc="logo_google.png"
+                        >
+                            구글 계정으로 로그인
+                        </Button>
+                    </FormItem>
+                </Form>
             </Content>
         </Container>
     );

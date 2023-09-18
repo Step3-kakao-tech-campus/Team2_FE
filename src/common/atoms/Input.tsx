@@ -18,11 +18,13 @@ const Input: React.FC<InputProps> = ({
     onChange,
     placeholder,
 }) => {
+    const inputName = `input ${className || ''}`;
+
     return (
         <input
             type={type}
             id={id}
-            className={className}
+            className={inputName}
             value={value || ''}
             onChange={onChange}
             placeholder={placeholder}

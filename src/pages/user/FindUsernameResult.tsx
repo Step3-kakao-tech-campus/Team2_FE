@@ -2,17 +2,15 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './style.scss';
-import './SignupPage.scss';
 import { Container, Title, Content } from '../../common/atoms/Container';
 import { LocalImage } from '../../common/atoms/image';
 import Button from '../../common/atoms/Button';
-// import { validateEmail, validateNumeric } from '../../utils';
 
 const FindUsernameResultPage: React.FC = () => {
     const navigate = useNavigate();
 
     const handleSignupClick = () => {
-        navigate('/signup');
+        navigate('/verify');
     };
 
     return (

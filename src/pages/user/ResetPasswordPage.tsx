@@ -2,12 +2,11 @@ import React, { useState, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './style.scss';
-import './SignupPage.scss';
 import { Container, Title, Content } from '../../common/atoms/Container';
 import { LocalImage } from '../../common/atoms/image';
+import { Form, FormItem } from '../../common/atoms/Form';
 import Input from '../../common/atoms/Input';
 import Button from '../../common/atoms/Button';
-// import { validateEmail, validateNumeric } from '../../utils';
 
 const FindPasswordVerifyPage: React.FC = () => {
     const [password, setPassword] = useState('');
@@ -42,10 +41,10 @@ const FindPasswordVerifyPage: React.FC = () => {
                 <h1>비밀번호 찾기</h1>
             </Title>
             <Content>
-                <form className="form_find_password">
+                <Form className="reset_password">
                     <span className="information">비밀번호 재설정</span>
 
-                    <div className="input_item">
+                    <FormItem>
                         <div className="box_input">
                             <Input
                                 type="password"
@@ -55,9 +54,9 @@ const FindPasswordVerifyPage: React.FC = () => {
                                 placeholder="8~16자 영문/숫자 조합으로 입력"
                             />
                         </div>
-                    </div>
+                    </FormItem>
 
-                    <div className="input_item">
+                    <FormItem>
                         <div className="box_input">
                             <Input
                                 type="password"
@@ -67,14 +66,17 @@ const FindPasswordVerifyPage: React.FC = () => {
                                 placeholder="비밀번호 확인"
                             />
                         </div>
-                    </div>
-                    <Button
-                        className="reset_password"
-                        onClick={handleResetPasswordClick}
-                    >
-                        비밀번호 변경
-                    </Button>
-                </form>
+                    </FormItem>
+
+                    <FormItem>
+                        <Button
+                            className="reset_password"
+                            onClick={handleResetPasswordClick}
+                        >
+                            비밀번호 변경
+                        </Button>
+                    </FormItem>
+                </Form>
             </Content>
         </Container>
     );

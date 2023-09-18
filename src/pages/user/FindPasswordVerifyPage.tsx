@@ -2,17 +2,16 @@ import React, { useState, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './style.scss';
-import './SignupPage.scss';
 import { Container, Title, Content } from '../../common/atoms/Container';
 import { LocalImage } from '../../common/atoms/image';
+import { Form, FormItem } from '../../common/atoms/Form';
 import Input from '../../common/atoms/Input';
 import Button from '../../common/atoms/Button';
-// import { validateEmail, validateNumeric } from '../../utils';
 
 const FindPasswordVerifyPage: React.FC = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [verifyCode, setVerifyCode] = useState('');
+    const [verificationCode, setVerificationCode] = useState('');
 
     const navigate = useNavigate();
 
@@ -24,11 +23,13 @@ const FindPasswordVerifyPage: React.FC = () => {
         setEmail(event.target.value);
     };
 
-    const handleVerifyCodeChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setVerifyCode(event.target.value);
+    const handleVerificationCodeChange = (
+        event: ChangeEvent<HTMLInputElement>,
+    ) => {
+        setVerificationCode(event.target.value);
     };
 
-    const handleSendVerifyCodeClick = () => {};
+    const handleSendVerificationCodeClick = () => {};
 
     const handleConfirmCodeClick = () => {};
 
@@ -49,11 +50,11 @@ const FindPasswordVerifyPage: React.FC = () => {
                 <h1>비밀번호 찾기</h1>
             </Title>
             <Content>
-                <form className="form_find_password">
+                <Form className="find_password">
                     <span className="information">
-                        가입하신 아이디로 비밀번호를 찾을 수 있습니다.
+                        가입하신 아이디와 이메일을 입력해주세요.
                     </span>
-                    <div className="input_item">
+                    <FormItem>
                         <div className="box_input">
                             <Input
                                 type="text"
@@ -63,54 +64,57 @@ const FindPasswordVerifyPage: React.FC = () => {
                                 placeholder="아이디 입력"
                             />
                         </div>
-                    </div>
-                    <div className="input_item">
-                        <div className="duplicate">
-                            <div className="box_input duplicate">
+                    </FormItem>
+
+                    <FormItem>
+                        <div className="box_input_with_btn send_verification_code">
+                            <div className="box_input with_btn email">
                                 <Input
                                     type="email"
-                                    className="input_email"
+                                    className="email"
                                     value={email}
                                     onChange={handleEmailChange}
                                     placeholder="이메일 입력"
                                 />
                             </div>
                             <Button
-                                className="duplicate send_verification"
-                                onClick={handleSendVerifyCodeClick}
+                                className="with_input send_verification_code"
+                                onClick={handleSendVerificationCodeClick}
                             >
                                 인증번호 전송
                             </Button>
                         </div>
-                    </div>
+                    </FormItem>
 
-                    <div className="input_item">
-                        <div className="duplicate">
-                            <div className="box_input duplicate">
+                    <FormItem>
+                        <div className="box_input_with_btn confirm_code">
+                            <div className="box_input with_btn verification_code">
                                 <Input
                                     type="text"
-                                    className="input_verify_code"
-                                    value={verifyCode}
-                                    onChange={handleVerifyCodeChange}
+                                    className="verification_code"
+                                    value={verificationCode}
+                                    onChange={handleVerificationCodeChange}
                                     placeholder="000000"
                                 />
                             </div>
                             <Button
-                                className="duplicate confirm_code"
+                                className="with_input confirm_code"
                                 onClick={handleConfirmCodeClick}
                             >
                                 인증번호 확인
                             </Button>
                         </div>
-                    </div>
+                    </FormItem>
 
-                    <Button
-                        className="reset_password"
-                        onClick={handleResetPasswordClick}
-                    >
-                        비밀번호 변경
-                    </Button>
-                </form>
+                    <FormItem>
+                        <Button
+                            className="reset_password"
+                            onClick={handleResetPasswordClick}
+                        >
+                            비밀번호 변경
+                        </Button>
+                    </FormItem>
+                </Form>
             </Content>
         </Container>
     );
