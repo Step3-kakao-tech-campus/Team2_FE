@@ -1,0 +1,27 @@
+.challenge {
+    width: 350px;
+    height: 100px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    position: relative;
+    &.behind {
+        position: absolute;
+        background-color: grey;
+        opacity: 0.5;
+    }
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+.col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
