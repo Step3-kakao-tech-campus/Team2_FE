@@ -78,7 +78,7 @@ const LoginPage: React.FC = () => {
                             <Link to="/find-password">비밀번호 찾기</Link>
                         </li>
                         <li className="list_item">
-                            <Link to="/verification">회원가입</Link>
+                            <Link to="/signup/verify">회원가입</Link>
                         </li>
                     </ul>
 
