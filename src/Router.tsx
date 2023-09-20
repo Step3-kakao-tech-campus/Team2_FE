@@ -4,7 +4,7 @@ import LoginPage from './pages/user/LoginPage';
 import VerificationPage from './pages/user/VerificationPage';
 import SignupPage from './pages/user/SignupPage';
 import FindUsernameVerifyPage from './pages/user/FindUsernameVerifyPage';
-import FindUsernameResultPage from './pages/user/FindUsernameResult';
+import FindUsernameResultPage from './pages/user/FindUsernameResultPage';
 import FindPasswordVerifyPage from './pages/user/FindPasswordVerifyPage';
 import ResetPasswordPage from './pages/user/ResetPasswordPage';
 
