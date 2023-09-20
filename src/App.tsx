@@ -6,7 +6,9 @@ import Router from './Route';
 
 const queryClient = new QueryClient();
 
-function App() {
+import Router from './Router';
+
+const App = () => {
     return (
         <QueryClientProvider client={queryClient}>
             <RecoilRoot>
@@ -14,6 +16,6 @@ function App() {
             </RecoilRoot>
         </QueryClientProvider>
     );
-}
+};
 
 export default App;

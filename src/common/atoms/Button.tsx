@@ -1,21 +1,46 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 interface ButtonProps {
-  	className: string;
-  	style: {
-    	width: string | number;
-    	height: string | number;
-  	};
-  	children: string;
-  	onClick: () => void; 
+    className: string;
+    style?: CSSProperties;
+    children: string;
+    onClick: () => void;
+    imageSrc?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ className, style, onClick, children }) => {
-  	return <button className={className} style={{...style}}
-  	onClick={(event) => {
-    	event.preventDefault();
-    	onClick();
-  	}}>{children}</button>;
-}
+const Button: React.FC<ButtonProps> = ({
+    className,
+    style,
+    onClick,
+    children,
+    imageSrc,
+}) => {
+    const btnName = `btn ${className || ''}`;
+    const alt = `${className}_logo`;
+
+    return (
+        <button
+            className={btnName}
+            style={style}
+            onClick={event => {
+                event.preventDefault();
+                onClick();
+            }}
+        >
+            {imageSrc && (
+                <img
+                    src={process.env.PUBLIC_URL + '/assets/' + imageSrc}
+                    alt={alt}
+                    style={{
+                        marginRight: '8px',
+                        width: '20px',
+                        height: '20px',
+                    }}
+                />
+            )}
+            {children}
+        </button>
+    );
+};
 
 export default Button;
