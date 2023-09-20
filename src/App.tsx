@@ -1,12 +1,20 @@
-import { BrowserRouter } from 'react-router-dom';
+import React from 'react';
+import './App.css';
+import { RecoilRoot } from 'recoil';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import Router from './Route';
+
+const queryClient = new QueryClient();
 
 import Router from './Router';
 
 const App = () => {
     return (
-        <BrowserRouter>
-            <Router />
-        </BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+            <RecoilRoot>
+                <Router />
+            </RecoilRoot>
+        </QueryClientProvider>
     );
 };
 
