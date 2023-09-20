@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './style.scss';
-import { Container, Title, Content } from '../../common/atoms/Container';
+import { Container, Title, Content } from '../../common/atoms/Contain';
 import { LocalImage } from '../../common/atoms/image';
 import { Form, FormItem } from '../../common/atoms/Form';
 import Input from '../../common/atoms/Input';

@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './style.scss';
-import { Container, Title, Content } from '../../common/atoms/Container';
+import { Container, Title, Content } from '../../common/atoms/Contain';
 import { LocalImage } from '../../common/atoms/image';
 import Button from '../../common/atoms/Button';
 
