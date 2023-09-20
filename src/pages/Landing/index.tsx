@@ -3,7 +3,7 @@ import {
     Container,
     DescriptionContainer,
     IntroContainer,
-} from '../../common/atoms/container';
+} from '../../common/atoms/container1';
 import { ChallengeLandingBox, IconDescContainer } from './components/box';
 import React from 'react';
 
