@@ -9,6 +9,7 @@ import FindPasswordVerifyPage from './pages/user/FindPasswordVerifyPage';
 import ResetPasswordPage from './pages/user/ResetPasswordPage';
 import Layout from './common/templates/Layout';
 import LandingPage from './pages/Landing';
+import Canvas from './pages/canvas';
 
 const Router = () => (
     <BrowserRouter>
@@ -26,6 +27,7 @@ const Router = () => (
             />
             <Route path="find-password" element={<FindPasswordVerifyPage />} />
             <Route path="reset-password" element={<ResetPasswordPage />} />
+            <Route path="canvas" element={<Canvas />} />
         </Routes>
     </BrowserRouter>
 );
