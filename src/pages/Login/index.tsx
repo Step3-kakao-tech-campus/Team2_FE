@@ -1,6 +1,6 @@
-import React, { useState, ChangeEvent } from 'react';
+import React from 'react';
 
-import './style.scss';
+import './Login.scss';
 import { MainContainer } from '../../common/atoms/Container';
 import { LocalImage } from '../../common/atoms/image';
 import { Form, FormItem } from '../../common/atoms/Form';
