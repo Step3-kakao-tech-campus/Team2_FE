@@ -10,7 +10,7 @@ export const doc = new Y.Doc();
 export const roomID = `my-room-${VERSION}`;
 
 // Create a websocket provider
-export const provider = new WebsocketProvider(
+export const wsProvider = new WebsocketProvider(
     'ws://localhost:1234',
     roomID,
     doc,
@@ -20,7 +20,7 @@ export const provider = new WebsocketProvider(
 );
 
 // Export the provider's awareness API
-export const awareness = provider.awareness;
+export const awareness = wsProvider.awareness;
 
 export const yShapes: Y.Map<TDShape> = doc.getMap('shapes');
 export const yBindings: Y.Map<TDBinding> = doc.getMap('bindings');

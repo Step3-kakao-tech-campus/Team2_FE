@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import {
     awareness,
     doc,
-    provider,
+    wsProvider,
     undoManager,
     yBindings,
     yShapes,
@@ -41,6 +41,7 @@ export function useMultiplayerState(roomId: string) {
                     if (!shape) {
                         yShapes.delete(id);
                     } else {
+                        console.log('shape', shape);
                         yShapes.set(shape.id, shape);
                     }
                 });
@@ -48,6 +49,7 @@ export function useMultiplayerState(roomId: string) {
                     if (!binding) {
                         yBindings.delete(id);
                     } else {
+                        console.log('binding', binding);
                         yBindings.set(binding.id, binding);
                     }
                 });
@@ -55,6 +57,7 @@ export function useMultiplayerState(roomId: string) {
                     if (!asset) {
                         yAssets.delete(id);
                     } else {
+                        console.log('asset', asset);
                         yAssets.set(asset.id, asset);
                     }
                 });
@@ -134,7 +137,7 @@ export function useMultiplayerState(roomId: string) {
 
     useEffect(() => {
         function handleDisconnect() {
-            provider.disconnect();
+            wsProvider.disconnect();
         }
         window.addEventListener('beforeunload', handleDisconnect);
 

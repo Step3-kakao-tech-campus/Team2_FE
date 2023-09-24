@@ -6,7 +6,7 @@ import { useMultiplayerState } from './component/useMultiplayer';
 const Canvas = () => {
     const fileSystemEvents = useFileSystem();
     const { onMount, ...events } = useMultiplayerState(roomID);
-    //event쪽에 yjs연결이랑 이미지 깨지는 이유가 있다..왠지 몰루?
+
     return (
         <div className="tldraw">
             <Info />
