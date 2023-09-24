@@ -1,7 +1,7 @@
 import React from 'react';
 import './box.scss';
 import { LocalImage } from '../../../common/atoms/image';
-import { DescriptionContainer } from '../../../common/atoms/container1';
+import { DescriptionContainer } from '../../../common/atoms/Container';
 
 interface IconDescBoxProps {
     img: string;

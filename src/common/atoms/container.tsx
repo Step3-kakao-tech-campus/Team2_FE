@@ -1,5 +1,11 @@
-import './container.scss';
-import React from 'react';
+import { ReactNode } from 'react';
+import './Container.scss';
+
+interface ContainerProps {
+    className?: string;
+    children: ReactNode;
+}
+
 interface DescriptionContainerProps {
     width?: string;
     height?: string;
@@ -8,12 +14,18 @@ interface DescriptionContainerProps {
     isCenter?: boolean;
 }
 
-export const IntroContainer = ({ children }: { children: React.ReactNode }) => {
-    return <div className="container main">{children}</div>;
+export const MainContainer = ({ className, children }: ContainerProps) => {
+    const containerName = className
+        ? `main_container ${className}`
+        : 'main_container';
+
+    return <div className={containerName}>{children}</div>;
 };
 
-export const Container = ({ children }: { children: React.ReactNode }) => {
-    return <div className="container">{children}</div>;
+export const Container = ({ className, children }: ContainerProps) => {
+    const containerName = className ? `container ${className}` : 'container';
+
+    return <div className={containerName}>{children}</div>;
 };
 
 export const DescriptionContainer = ({

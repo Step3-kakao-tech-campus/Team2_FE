@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 
 import './style.scss';
-import { Container, Title, Content } from '../../common/atoms/Container';
+import { MainContainer } from '../../common/atoms/Container';
 import { LocalImage } from '../../common/atoms/image';
 import { Form, FormItem } from '../../common/atoms/Form';
 import Button from '../../common/atoms/Button';
@@ -12,17 +12,11 @@ const LoginPage: React.FC = () => {
     };
 
     return (
-        <Container>
-            <Title>
-                <div className="logo">
-                    <LocalImage
-                        src="logo_big.png"
-                        width="200px"
-                        height="auto"
-                    />
-                </div>
-            </Title>
-            <Content>
+        <MainContainer className="column">
+            <div className="logo">
+                <LocalImage src="logo_big.png" width="200px" height="auto" />
+            </div>
+            <div className="content">
                 <Form className="login">
                     <FormItem>
                         <Button
@@ -44,8 +38,8 @@ const LoginPage: React.FC = () => {
                         </Button>
                     </FormItem>
                 </Form>
-            </Content>
-        </Container>
+            </div>
+        </MainContainer>
     );
 };
 
