@@ -1,4 +1,4 @@
-import './container.scss';
+import './mainContainer.scss';
 import React from 'react';
 
 interface DescriptionContainerProps {

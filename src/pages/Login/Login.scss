@@ -1,14 +1,4 @@
-.container {
-    width: 100%;
-    height: 100vh;
-    padding: 10px;
-    background-color: #f3f3f4;
-    box-sizing: border-box;
-    align-items: center;
-    justify-content: center;
-}
-
-.title {
+.logo {
     text-align: center;
     margin: 10px;
 }
@@ -24,9 +14,6 @@
 @media (min-width: 768px) {
     .form {
         width: 580px;
-        margin: 20px auto;
-        padding: 55px 70px;
-        border: 1px solid rgba(0, 0, 0, 0.12);
     }
 }
 
@@ -56,37 +43,6 @@
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-}
-
-.btn {
-    cursor: pointer;
-    width: 100%;
-    height: 50px;
-    margin: 10px 0;
-    border: none;
-    color: white;
-    background-color: #545f71;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    
-    &.with_input {
-        margin: 0;
-        margin-left: 5px;
-        width: 120px;
-    }
-
-    &.btn.kakao {
-        background-color: #ffe400;
-        color: black;
-    }
-    
-    &.btn.google {
-        background-color: #ffffff;
-        color: black;
-        border: 1px solid #909090;
-    }
 }
 
 .list_user {
