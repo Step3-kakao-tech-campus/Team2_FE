@@ -9,6 +9,19 @@
     }
 }
 
+.main_container {
+    background-color: #f3f3f4;
+    box-sizing: border-box;
+    justify-content: center;
+
+    &.column {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
 .container {
     display: flex;
     align-items: center;
@@ -22,7 +35,7 @@
         width: 768px;
         margin: 0 auto;
         padding: 130px 0;
-        &.main {
+        &.intro {
             &:nth-child(even) {
                 flex-direction: row-reverse;
             }
