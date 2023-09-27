@@ -1,20 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './Login.scss';
 import { MainContainer } from '../../common/atoms/Container';
 import { LocalImage } from '../../common/atoms/image';
 import { Form, FormItem } from '../../common/atoms/Form';
 import Button from '../../common/atoms/Button';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginPage: React.FC = () => {
+    const navigate = useNavigate();
+
     const handleLoginClick = () => {
         console.log(`Logging in`);
+        navigate('/');
     };
 
     return (
         <MainContainer className="column">
             <div className="logo">
-                <LocalImage src="logo_big.png" width="200px" height="auto" />
+                <Link to="/">
+                    <LocalImage
+                        src="logo_big.png"
+                        width="200px"
+                        height="auto"
+                    />
+                </Link>
             </div>
             <div className="content">
                 <Form className="login">
