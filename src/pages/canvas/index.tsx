@@ -10,12 +10,16 @@ const CustomCanvas = () => {
     return (
         <div className="tldraw">
             <Info />
-            <Tldraw
-                id="tldraw-canvas"
-                onMount={onMount}
-                {...events}
-                {...fileSystemEvents}
-            />
+            <div className="canvas">
+                <Tldraw
+                    id="tldraw-canvas"
+                    onMount={onMount}
+                    {...events}
+                    {...fileSystemEvents}
+                    autofocus={true}
+                />
+            </div>
+            <div>byebye</div>
         </div>
     );
 };
@@ -24,7 +28,7 @@ function Info() {
     const users = useUsers(awareness);
 
     return (
-        <div className="absolute p-md">
+        <div className="info p-md">
             <div className="flex space-between">
                 <span>Number of connected users: {users.size}</span>
             </div>
@@ -32,4 +36,4 @@ function Info() {
     );
 }
 
-export default Canvas;
+export default CustomCanvas;
