@@ -12,6 +12,8 @@ interface DescriptionContainerProps {
     title: string;
     description: string;
     isCenter?: boolean;
+    children?: ReactNode;
+    className?: string;
 }
 
 export const MainContainer = ({ className, children }: ContainerProps) => {
@@ -34,13 +36,18 @@ export const DescriptionContainer = ({
     title,
     description,
     isCenter = false,
+    className,
+    children,
 }: DescriptionContainerProps) => {
     return (
         <div
-            className={`description ${isCenter && 'center'}`}
+            className={`description ${isCenter && 'center'} ${className ?? ''}`}
             style={{ width, height }}
         >
-            <h2>{title}</h2>
+            <div className="head">
+                <h2>{title}</h2>
+                <div>{children}</div>
+            </div>
             <p>{description}</p>
         </div>
     );
