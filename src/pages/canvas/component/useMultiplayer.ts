@@ -18,7 +18,6 @@ export function useMultiplayerState(roomId: string) {
             app.loadRoom(roomId);
             app.pause();
             tldrawRef.current = app;
-
             app.replacePageContent(
                 Object.fromEntries(yShapes.entries()),
                 Object.fromEntries(yBindings.entries()),
@@ -79,6 +78,7 @@ export function useMultiplayerState(roomId: string) {
      */
     const onChangePresence = useCallback((app: TldrawApp, user: TDUser) => {
         awareness.setLocalStateField('tdUser', user);
+        console.log('awareness', awareness);
     }, []);
 
     /**

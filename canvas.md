@@ -44,3 +44,41 @@
     ]
 }
 ```
+
+
+awareness.json
+```angular2html
+{
+    "_observers": {},
+    "doc": {
+        "shapes": {
+            "385ccf71-875d-4bd0-3c6d-81b0c035f26b": {
+                "id": "385ccf71-875d-4bd0-3c6d-81b0c035f26b",
+                "type": "text",
+                "name": "Text",
+                "parentId": "page",
+                "childIndex": 1,
+                "point": [584.5462411146758, 110.97885340001255],
+                "rotation": 0,
+                "text": "hihi byby",
+                "style": {
+                    "color": "black",
+                    "size": "small",
+                    "isFilled": false,
+                    "dash": "draw",
+                    "scale": 1,
+                    "font": "script",
+                    "textAlign": "middle"
+                }
+            }
+        },
+        "bindings": {},
+        "assets": {}
+    },
+    "clientID": 162783978,
+    "states": {},
+    "meta": {},
+    "_checkInterval": 1
+}
+
+```

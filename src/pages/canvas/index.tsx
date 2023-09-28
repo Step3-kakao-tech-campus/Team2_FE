@@ -3,7 +3,7 @@ import './index.scss';
 import { useUsers } from 'y-presence';
 import { awareness, roomID } from './component/store';
 import { useMultiplayerState } from './component/useMultiplayer';
-const Canvas = () => {
+const CustomCanvas = () => {
     const fileSystemEvents = useFileSystem();
     const { onMount, ...events } = useMultiplayerState(roomID);
 
