@@ -1,4 +1,4 @@
-import { LocalImage } from '../../../common/atoms/image';
+import { LocalImage } from '../../../common/atoms/Image';
 import { DescriptionContainer } from '../../../common/atoms/Container';
 import './AlbumCard.scss';
 interface AlbumCardProps {
@@ -13,14 +13,9 @@ export const AlbumCard = ({
     groupName,
     groupDescription,
 }: AlbumCardProps) => {
-    const width = '300px';
     return (
         <div className="album_card">
-            <LocalImage
-                src={'main_ carousel1.png'}
-                height="200px"
-                width="100%"
-            />
+            <LocalImage src={image} height="200px" width="100%" />
             <div className="content">
                 <DescriptionContainer
                     title={groupName}

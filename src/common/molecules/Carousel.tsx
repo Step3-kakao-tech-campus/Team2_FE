@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { LocalImage } from '../atoms/image';
+import { LocalImage } from '../atoms/Image';
 
 interface CarouselProps {
     width?: string;

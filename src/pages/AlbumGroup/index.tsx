@@ -1,6 +1,6 @@
-import { LocalImage } from '../../common/atoms/image';
+import { LocalImage } from '../../common/atoms/Image';
 import React from 'react';
-import { MainContainer, Container } from '../../common/atoms/Container';
+import { MainContainer } from '../../common/atoms/Container';
 import { AlbumCard } from './componenents/AlbumCard';
 import WrapContainer from './componenents/WrapContainer';
 const AlbumGroupPage = () => {
