@@ -1,0 +1,19 @@
+.user_info {
+    span {
+        display: inline-block;
+        width: 60px;
+    }
+
+    .nickname {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    @media (min-width: 768px) {
+        padding-left: 20px;
+
+        .btn.change_nickname {
+            margin-left: 20px;
+        }
+    }
+}
