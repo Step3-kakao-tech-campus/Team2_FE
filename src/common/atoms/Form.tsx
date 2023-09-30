@@ -1,5 +1,7 @@
 import React, { CSSProperties, ReactNode } from 'react';
 
+import './Form.scss';
+
 interface FormProps {
     className?: string;
     style?: CSSProperties;
@@ -8,6 +10,7 @@ interface FormProps {
 
 interface ItemProps {
     className?: string;
+    style?: CSSProperties;
     children: ReactNode;
 }
 
@@ -20,8 +23,12 @@ export const Form: React.FC<FormProps> = ({ className, style, children }) => {
     );
 };
 
-export const FormItem = ({ className, children }: ItemProps) => {
+export const FormItem = ({ className, style, children }: ItemProps) => {
     const itemName = `form_item ${className || ''}`;
 
-    return <div className={itemName}>{children}</div>;
+    return (
+        <div className={itemName} style={{ ...style }}>
+            {children}
+        </div>
+    );
 };
