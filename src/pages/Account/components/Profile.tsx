@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { LocalImage } from '../../../common/atoms/image';
+import { LocalImage } from '../../../common/atoms/Image';
 import './Profile.scss';
 
 interface ProfileProps {
