@@ -21,3 +21,22 @@ export const LocalImage = ({
         </div>
     );
 };
+
+export const ServerImage = ({
+    width = '100%',
+    height,
+    src,
+    alt,
+    ...props
+}: ImageProps) => {
+    return (
+        <div style={{ width, height }}>
+            <img
+                loading="lazy"
+                src={process.env.REACT_APP_API_URL + src}
+                alt={alt}
+                {...props}
+            />
+        </div>
+    );
+};
