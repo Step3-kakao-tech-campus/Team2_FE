@@ -7,9 +7,9 @@ const Layout = () => {
             <header>
                 <NavBar />
             </header>
-            <body>
+            <main>
                 <Outlet />
-            </body>
+            </main>
             <footer>
                 {/*모바일이면서 로그인 상태여야한다*/}
                 {/*  <NavMobile />*/}
