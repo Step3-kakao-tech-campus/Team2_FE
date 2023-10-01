@@ -2,8 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/Login';
 import Layout from './common/templates/Layout';
 import LandingPage from './pages/Landing';
-import AlbumCreationPage from './pages/Album/AlbumCreate';
-import Canvas from './pages/canvas';
+import Canvas from './pages/Canvas';
+import AccountPage from './pages/Account';
 
 const Router = () => (
     <BrowserRouter>
@@ -11,6 +11,7 @@ const Router = () => (
             <Route element={<Layout />}>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="albumcreate" element={<AlbumCreationPage/>}/>
+                <Route path="account" element={<AccountPage />} />
             </Route>
             <Route path="login" element={<LoginPage />} />
             <Route path="canvas" element={<Canvas />} />

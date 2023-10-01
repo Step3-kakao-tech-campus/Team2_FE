@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './Login.scss';
 import { MainContainer } from '../../common/atoms/Container';
@@ -57,7 +57,13 @@ const LoginPage: React.FC = () => {
     return (
         <MainContainer className="column">
             <div className="logo">
-                <LocalImage src="logo_big.png" width="200px" height="auto" />
+                <Link to="/">
+                    <LocalImage
+                        src="logo_big.png"
+                        width="200px"
+                        height="auto"
+                    />
+                </Link>
             </div>
             <div className="content">
                 <Form className="login">
