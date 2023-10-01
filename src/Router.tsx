@@ -4,6 +4,7 @@ import Layout from './common/templates/Layout';
 import LandingPage from './pages/Landing';
 import Canvas from './pages/Canvas';
 import AlbumCreationPage from './pages/AlbumCreate/AlbumCreate';
+import AlbumGroupPage from './pages/AlbumGroup';
 
 const Router = () => (
     <BrowserRouter>
@@ -11,6 +12,7 @@ const Router = () => (
             <Route element={<Layout />}>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="albumcreate" element={<AlbumCreationPage/>}/>
+                <Route path="album" element={<AlbumGroupPage />} />
             </Route>
             <Route path="login" element={<LoginPage />} />
             <Route path="canvas" element={<Canvas />} />

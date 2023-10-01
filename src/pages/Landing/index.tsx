@@ -1,4 +1,4 @@
-import { LocalImage } from '../../common/atoms/image';
+import { LocalImage } from '../../common/atoms/Image';
 import {
     MainContainer,
     Container,
@@ -28,7 +28,7 @@ const LandingPage = () => {
                     description="네컷 사진을 특별하게 꾸미고 여러 사람들에게 공유할 수 있어요."
                 />
             </Container>
-            <Container>
+            <Container className="intro bottom">
                 <h2>열심히 기록한 당신에게</h2>
                 <ChallengeLandingBox />
                 <IconDescContainer />
