@@ -25,21 +25,28 @@
 .container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
     @include mobile {
         width: 100%;
-        padding: 50px 0;
+        flex-direction: column;
     }
     @include desktop {
         width: 768px;
         margin: 0 auto;
-        padding: 130px 0;
-        &.intro {
+        flex-direction: row;
+    }
+    &.intro {
+        justify-content: space-between;
+        @include mobile {
+            padding: 50px 0;
+        }
+        @include desktop {
+            padding: 130px 0;
             &:nth-child(even) {
                 flex-direction: row-reverse;
             }
-            flex-direction: row;
+            &.bottom {
+                flex-direction: column;
+            }
         }
     }
 }
