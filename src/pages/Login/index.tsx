@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Login.scss';
 import { MainContainer } from '../../common/atoms/Container';
-import { LocalImage } from '../../common/atoms/image';
+import { LocalImage } from '../../common/atoms/Image';
 import { Form, FormItem } from '../../common/atoms/Form';
 import Button from '../../common/atoms/Button';
 
