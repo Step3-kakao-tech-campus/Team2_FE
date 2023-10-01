@@ -1,0 +1,12 @@
+div > img {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+    object-position: center center;
+}
+
+body {
+    width: 100%;
+    min-width: 340px;
+    background-color: #f3f3f4;
+}
