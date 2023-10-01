@@ -13,9 +13,9 @@ const NavBar = () => {
                 <a href="#menu3">주간 네컷</a>
                 <a href="#menu4">더보기 리그</a>
             </div>
-            <Link to="/login">
-                <button className="navbar__login-button">Login</button>
-            </Link>
+            <button className="navbar__login-button">
+                <Link to="/login">Login</Link>
+            </button>
             <button className="navbar__signup-button">Sign Up</button>
         </div>
     );
