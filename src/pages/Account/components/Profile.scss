@@ -1,0 +1,35 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .circle {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 1px solid #909090;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .achievement-dropdown {
+        background: transparent;
+        border: none;
+        font-size: inherit;
+        color: #656bff;
+        cursor: pointer;
+        margin: 10px;
+
+        option:checked {
+            font-weight: bold;
+            color: #656bff;
+        }
+
+        option:not(:checked) {
+            color: black;
+        }
+    }
+}
