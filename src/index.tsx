@@ -6,7 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import { worker } from './mocks/browser';
 
 if (process.env.NODE_ENV === 'development') {
-    worker.start();
+    worker.start({
+        onUnhandledRequest: 'bypass',
+    });
 }
 
 const root = ReactDOM.createRoot(
