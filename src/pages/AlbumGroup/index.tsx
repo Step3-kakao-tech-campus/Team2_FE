@@ -13,7 +13,6 @@ const AlbumGroupPage = () => {
         queryFn: albumApi.getAlbumGroup,
     });
 
-    console.log('data', data);
     //이렇게해야 타입도움을 받을수잇는듯?
 
     return (
