@@ -1,0 +1,185 @@
+.group {
+    justify-content: center; 
+    padding-left: 20%;
+    height: 100vh;
+    &_title {
+        padding-bottom: 5%;
+    }
+    &_theme {
+        display: flex;
+        height: 20px;
+        padding-bottom: 80px;
+        &_title {
+            font-size: large;
+            padding-top: 5px;
+            padding-right: 50px;
+        }
+        &_select {
+            height: 20px;
+        }
+    }
+    &_name {
+        display: flex;
+        height: 20px;
+        padding-bottom: 80px;
+        &_title {
+            padding-top: 10px;
+            font-size: large;
+            padding-right: 50px;
+        }
+        &_input {
+            width: 500px;
+            height: 50px;
+            border-color: #D9D9D9;
+            background-color: #D9D9D9;
+        }
+    }
+    &_description {
+        display: flex;
+        height: 20px;
+        padding-bottom: 80px;
+        &_title {
+            padding-top: 10px;
+            font-size: large;
+            padding-right: 50px;
+        }
+        &_input {
+            width: 500px;
+            height: 100px;
+            border-color: #D9D9D9;
+            background-color: #D9D9D9;
+            
+        }
+    }
+    &_photo {
+        display: flex;
+        height: 20px;
+        padding-top: 50px;
+        padding-bottom: 80px;
+        &_modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: '20px 0';
+            &_title {
+                margin-top: 20px;
+                text-align: center;
+                font-weight: bold;
+                font-size: x-large;
+            }
+            &_image {
+                margin-top: 20px;
+                width:50px;
+                height: 50px;
+            }
+            &_description {
+                margin-top: 20px;
+                padding-top: 10px;
+                text-align: center;
+                font-weight:200;
+                font-size: large;
+            }
+            &_button {
+                margin-top: 20px;
+                width: 300px;
+                height: 30px;
+            }
+        }
+        &_title {
+            padding-top: 10px;
+            font-size: large;
+            padding-right: 50px;
+            
+        }
+        &_input {
+            width: 150px;
+            height: 100px;
+            border-color: #D9D9D9;
+            background-color: #f3f3f4;
+            
+        }
+        &_button {
+            text-align: center;
+            font-weight: bold;
+            width: 150px;
+            height: 100px;
+        }
+    }
+    &_invitees {
+        display: flex;
+        height: 20px;
+        padding-top: 50px;
+        padding-bottom: 80px;
+        &_title {
+            padding-top: 10px;
+            font-size: medium;
+            padding-right: 75.32px;
+        }
+        &_button {
+            width: 150px;
+            height: 50px;
+            border-radius: 10px;
+            border-color: #D9D9D9;
+            background-color: #D9D9D9;
+        }
+    }
+    &_button {
+        background-color: #545F71;
+        color: white;
+        width: 616px;
+        height: 50px;
+    }
+    @media (max-width: 768px) {
+        padding-left: 10%;
+
+        &_name, &_description, &_photo, &_invitees {
+            &_title {
+                font-size: medium;
+            }
+
+            &_input {
+                width: 80%;
+            }
+
+            &_button {
+                width: 30%;
+            }
+        }
+        &_invitees {
+            &_button {
+                width: 20%;
+            }
+        }
+        &_button {
+            margin-left: 100px;
+            width: 80%;
+        }
+    }
+    @media (max-width: 480px) {
+        padding-left: 5%;
+
+        &_name, &_description, &_photo, &_invitees {
+            &_title {
+                font-size: medium;
+            }
+
+            &_input {
+                width: 70%;
+            }
+
+            &_button {
+                width: 30%;
+            }
+        }
+        &_invitees {
+            &_button {
+                width: 20%;
+            }
+        }
+        &_button {
+            margin-left: 100px;
+            width: 50%;
+        }
+    }
+
+}
