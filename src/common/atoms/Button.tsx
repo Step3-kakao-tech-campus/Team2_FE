@@ -3,7 +3,7 @@ import React, { CSSProperties } from 'react';
 import './Button.scss';
 
 interface ButtonProps {
-    className: string;
+    className?: string;
     style?: CSSProperties;
     children: string;
     onClick: () => void;
