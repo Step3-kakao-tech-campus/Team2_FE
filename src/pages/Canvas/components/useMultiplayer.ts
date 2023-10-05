@@ -15,6 +15,8 @@ export function useMultiplayerState(roomId: string) {
 
     const onMount = useCallback(
         (app: TldrawApp) => {
+            console.log('onMount');
+            wsProvider.connect();
             app.loadRoom(roomId);
             app.pause();
             tldrawRef.current = app;
