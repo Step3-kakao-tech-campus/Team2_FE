@@ -4,6 +4,7 @@ import Layout from './common/templates/Layout';
 import LandingPage from './pages/Landing';
 import Canvas from './pages/Canvas';
 import AlbumGroupPage from './pages/AlbumGroup';
+import ScannerPage from './pages/QrScan';
 
 const Router = () => (
     <BrowserRouter>
@@ -14,6 +15,7 @@ const Router = () => (
             </Route>
             <Route path="login" element={<LoginPage />} />
             <Route path="canvas" element={<Canvas />} />
+            <Route path="scanner" element={<ScannerPage />} />
         </Routes>
     </BrowserRouter>
 );
