@@ -1,8 +1,8 @@
 import { Tldraw, TldrawApp, useFileSystem } from '@tldraw/tldraw';
 import './index.scss';
 import { useUsers } from 'y-presence';
-import { awareness, roomID } from './component/store';
-import { useMultiplayerState } from './component/useMultiplayer';
+import { awareness, roomID } from './components/store';
+import { useMultiplayerState } from './components/useMultiplayer';
 const Canvas = () => {
     const fileSystemEvents = useFileSystem();
     const { onMount, ...events } = useMultiplayerState(roomID);

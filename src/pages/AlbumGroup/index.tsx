@@ -1,8 +1,8 @@
 import { LocalImage } from '../../common/atoms/Image';
 import React from 'react';
 import { MainContainer } from '../../common/atoms/Container';
-import { AlbumCard } from './componenents/AlbumCard';
-import WrapContainer from './componenents/WrapContainer';
+import { AlbumCard } from './components/AlbumCard';
+import WrapContainer from './components/WrapContainer';
 import { useQuery } from 'react-query';
 import albumApi from '../../service/album';
 import StatusLayOut from '../../common/templates/StatusLayOut';
