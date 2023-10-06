@@ -28,6 +28,37 @@ export function useMultiplayerState(roomId: string) {
         [roomId],
     );
 
+    const onChange = useCallback((app: TldrawApp) => {
+        const { minX, minY, maxX, maxY, height, width } = app.viewport;
+        const allowedArea = {
+            minX: 0,
+            minY: 0,
+            width: 2000,
+            height: 1500,
+        };
+
+        if (minX < allowedArea.minX) {
+            app.setCamera([allowedArea.minX, -minY], app.camera.zoom, '');
+        }
+        if (minY < allowedArea.minY) {
+            app.setCamera([-minX, allowedArea.minY], app.camera.zoom, '');
+        }
+        if (maxX > allowedArea.width) {
+            app.setCamera(
+                [-(allowedArea.width - width), -minY],
+                app.camera.zoom,
+                '',
+            );
+        }
+        if (maxY > allowedArea.height) {
+            app.setCamera(
+                [-minX, -(allowedArea.height - height)],
+                app.camera.zoom,
+                '',
+            );
+        }
+    }, []);
+
     const onChangePage = useCallback(
         (
             app: TldrawApp,
@@ -147,6 +178,7 @@ export function useMultiplayerState(roomId: string) {
 
     return {
         onMount,
+        onChange,
         onChangePage,
         onUndo,
         onRedo,
