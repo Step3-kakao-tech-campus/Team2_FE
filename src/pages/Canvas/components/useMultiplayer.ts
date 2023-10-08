@@ -10,6 +10,9 @@ import {
     yAssets,
 } from './store';
 
+const MAX_ZOOM_LEVEL = 2; // 200%
+const MIN_ZOOM_LEVEL = 0.5; // 50%
+
 export function useMultiplayerState(roomId: string) {
     const tldrawRef = useRef<TldrawApp>();
 
@@ -58,6 +61,14 @@ export function useMultiplayerState(roomId: string) {
                 app.camera.zoom,
                 '',
             );
+        }
+
+        if (app.pageState.camera.zoom > MAX_ZOOM_LEVEL) {
+            app.pageState.camera.zoom = MAX_ZOOM_LEVEL;
+            return;
+        } else if (app.pageState.camera.zoom < MIN_ZOOM_LEVEL) {
+            app.pageState.camera.zoom = MIN_ZOOM_LEVEL;
+            return;
         }
     }, []);
 
