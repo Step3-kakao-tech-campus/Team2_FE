@@ -11,7 +11,7 @@ import {
 } from './store';
 
 const MAX_ZOOM_LEVEL = 2; // 200%
-const MIN_ZOOM_LEVEL = 0.5; // 50%
+const MIN_ZOOM_LEVEL = 1; // 100%
 
 export function useMultiplayerState(roomId: string) {
     const tldrawRef = useRef<TldrawApp>();
