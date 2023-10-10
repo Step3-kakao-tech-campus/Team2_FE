@@ -23,14 +23,28 @@ export function useMultiplayerState(roomId: string) {
             app.loadRoom(roomId);
             app.pause();
             tldrawRef.current = app;
-            app.replacePageContent(
-                Object.fromEntries(yShapes.entries()),
-                Object.fromEntries(yBindings.entries()),
-                Object.fromEntries(yAssets.entries()),
-            );
+            handleChanges();
         },
         [roomId],
     );
+
+    function handleChanges() {
+        const tldraw = tldrawRef.current;
+
+        if (!tldraw) return;
+        const shapes = Object.fromEntries(yShapes.entries());
+        const bindings = Object.fromEntries(yBindings.entries());
+        const assets = Object.fromEntries(yAssets.entries());
+        let filteredShapes: any = {};
+        for (let key in shapes) {
+            if (shapes[key].parentId === tldraw.currentPageId) {
+                filteredShapes[key] = shapes[key];
+            }
+        }
+        console.log('handleChanges', filteredShapes, bindings, assets);
+
+        tldraw.replacePageContent(filteredShapes, bindings, assets);
+    }
 
     const onChange = useCallback((app: TldrawApp) => {
         const { minX, minY, maxX, maxY, height, width } = app.viewport;
@@ -84,7 +98,7 @@ export function useMultiplayerState(roomId: string) {
                     if (!shape) {
                         yShapes.delete(id);
                     } else {
-                        console.log('shape', shape);
+                        // console.log('shape', shape);
                         yShapes.set(shape.id, shape);
                     }
                 });
@@ -92,7 +106,7 @@ export function useMultiplayerState(roomId: string) {
                     if (!binding) {
                         yBindings.delete(id);
                     } else {
-                        console.log('binding', binding);
+                        // console.log('binding', binding);
                         yBindings.set(binding.id, binding);
                     }
                 });
@@ -100,7 +114,7 @@ export function useMultiplayerState(roomId: string) {
                     if (!asset) {
                         yAssets.delete(id);
                     } else {
-                        console.log('asset', asset);
+                        // console.log('asset', asset);
                         yAssets.set(asset.id, asset);
                     }
                 });
@@ -162,18 +176,6 @@ export function useMultiplayerState(roomId: string) {
     }, []);
 
     useEffect(() => {
-        function handleChanges() {
-            const tldraw = tldrawRef.current;
-
-            if (!tldraw) return;
-
-            tldraw.replacePageContent(
-                Object.fromEntries(yShapes.entries()),
-                Object.fromEntries(yBindings.entries()),
-                Object.fromEntries(yAssets.entries()),
-            );
-        }
-
         yShapes.observeDeep(handleChanges);
 
         return () => yShapes.unobserveDeep(handleChanges);
