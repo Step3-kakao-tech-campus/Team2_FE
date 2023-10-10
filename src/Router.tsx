@@ -13,8 +13,11 @@ const Router = () => (
             <Route element={<Layout />}>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="account" element={<AccountPage />} />
-                <Route path="albumcreate" element={<AlbumCreationPage/>}/>
-                <Route path="album" element={<AlbumGroupPage />} />
+
+                <Route path="album">
+                    <Route index element={<AlbumGroupPage />} />
+                    <Route path="create" element={<AlbumCreationPage />} />
+                </Route>
             </Route>
             <Route path="login" element={<LoginPage />} />
             <Route path="canvas" element={<Canvas />} />
