@@ -10,11 +10,16 @@ import {
     yAssets,
 } from './store';
 
+const MAX_ZOOM_LEVEL = 2; // 200%
+const MIN_ZOOM_LEVEL = 1; // 100%
+
 export function useMultiplayerState(roomId: string) {
     const tldrawRef = useRef<TldrawApp>();
 
     const onMount = useCallback(
         (app: TldrawApp) => {
+            console.log('onMount');
+            wsProvider.connect();
             app.loadRoom(roomId);
             app.pause();
             tldrawRef.current = app;
@@ -26,6 +31,45 @@ export function useMultiplayerState(roomId: string) {
         },
         [roomId],
     );
+
+    const onChange = useCallback((app: TldrawApp) => {
+        const { minX, minY, maxX, maxY, height, width } = app.viewport;
+        const allowedArea = {
+            minX: 0,
+            minY: 0,
+            width: 2000,
+            height: 1500,
+        };
+
+        if (minX < allowedArea.minX) {
+            app.setCamera([allowedArea.minX, -minY], app.camera.zoom, '');
+        }
+        if (minY < allowedArea.minY) {
+            app.setCamera([-minX, allowedArea.minY], app.camera.zoom, '');
+        }
+        if (maxX > allowedArea.width) {
+            app.setCamera(
+                [-(allowedArea.width - width), -minY],
+                app.camera.zoom,
+                '',
+            );
+        }
+        if (maxY > allowedArea.height) {
+            app.setCamera(
+                [-minX, -(allowedArea.height - height)],
+                app.camera.zoom,
+                '',
+            );
+        }
+
+        if (app.pageState.camera.zoom > MAX_ZOOM_LEVEL) {
+            app.pageState.camera.zoom = MAX_ZOOM_LEVEL;
+            return;
+        } else if (app.pageState.camera.zoom < MIN_ZOOM_LEVEL) {
+            app.pageState.camera.zoom = MIN_ZOOM_LEVEL;
+            return;
+        }
+    }, []);
 
     const onChangePage = useCallback(
         (
@@ -147,6 +191,7 @@ export function useMultiplayerState(roomId: string) {
 
     return {
         onMount,
+        onChange,
         onChangePage,
         onUndo,
         onRedo,

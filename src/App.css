@@ -7,4 +7,6 @@ div > img {
 
 body {
     width: 100%;
+    min-width: 340px;
+    background-color: #f3f3f4;
 }
