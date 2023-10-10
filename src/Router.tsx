@@ -6,6 +6,7 @@ import AccountPage from './pages/Account';
 import Canvas from './pages/Canvas';
 import AlbumCreationPage from './pages/AlbumCreate/AlbumCreate';
 import AlbumGroupPage from './pages/AlbumGroup';
+import ScannerPage from './pages/QrScan';
 
 const Router = () => (
     <BrowserRouter>
@@ -18,6 +19,7 @@ const Router = () => (
             </Route>
             <Route path="login" element={<LoginPage />} />
             <Route path="canvas" element={<Canvas />} />
+            <Route path="scanner" element={<ScannerPage />} />
         </Routes>
     </BrowserRouter>
 );
