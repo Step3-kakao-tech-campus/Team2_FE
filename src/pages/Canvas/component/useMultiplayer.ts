@@ -57,6 +57,14 @@ export function useMultiplayerState(roomId: string) {
                 '',
             );
         }
+        if (app.pageState.camera.zoom > 2.0) {
+            app.pageState.camera.zoom = 2.0;
+            return ;
+        }
+        else if (app.pageState.camera.zoom < 0.5) {
+            app.pageState.camera.zoom = 0.5;
+            return ;
+        }
     }, []);
 
     const onChangePage = useCallback(
