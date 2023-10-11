@@ -15,6 +15,23 @@ const MIN_ZOOM_LEVEL = 1; // 100%
 
 export function useMultiplayerState(roomId: string) {
     const tldrawRef = useRef<TldrawApp>();
+    function handleChanges() {
+        const tldraw = tldrawRef.current;
+
+        if (!tldraw) return;
+        const shapes = Object.fromEntries(yShapes.entries());
+        const bindings = Object.fromEntries(yBindings.entries());
+        const assets = Object.fromEntries(yAssets.entries());
+        let filteredShapes: any = {};
+        for (let key in shapes) {
+            if (shapes[key].parentId === tldraw.currentPageId) {
+                filteredShapes[key] = shapes[key];
+            }
+        }
+        console.log('handleChanges', filteredShapes, bindings, assets);
+
+        tldraw.replacePageContent(filteredShapes, bindings, assets);
+    }
 
     const onMount = useCallback(
         (app: TldrawApp) => {
@@ -22,13 +39,7 @@ export function useMultiplayerState(roomId: string) {
             wsProvider.connect();
             app.loadRoom(roomId);
             app.pause();
-            tldrawRef.current = app;
-
-            app.replacePageContent(
-                Object.fromEntries(yShapes.entries()),
-                Object.fromEntries(yBindings.entries()),
-                Object.fromEntries(yAssets.entries()),
-            );
+            handleChanges();
         },
         [roomId],
     );
@@ -162,18 +173,6 @@ export function useMultiplayerState(roomId: string) {
     }, []);
 
     useEffect(() => {
-        function handleChanges() {
-            const tldraw = tldrawRef.current;
-
-            if (!tldraw) return;
-
-            tldraw.replacePageContent(
-                Object.fromEntries(yShapes.entries()),
-                Object.fromEntries(yBindings.entries()),
-                Object.fromEntries(yAssets.entries()),
-            );
-        }
-
         yShapes.observeDeep(handleChanges);
 
         return () => yShapes.unobserveDeep(handleChanges);
