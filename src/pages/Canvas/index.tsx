@@ -1,15 +1,16 @@
-import { Tldraw, TldrawApp, useFileSystem, TDUserStatus } from '@tldraw/tldraw';
-import { TLPageState } from '@tldraw/core';
+import { Tldraw, useFileSystem } from '@tldraw/tldraw';
 import './index.scss';
 import { useUsers } from 'y-presence';
-import { awareness, roomID } from './component/store';
-import { useMultiplayerState } from './component/useMultiplayer';
-import React, { useRef, useEffect } from 'react';
+import { awareness, roomID, wsProvider } from './components/store';
+import { useMultiplayerState } from './components/useMultiplayer';
+import { useState } from 'react';
+
+type YStatus = 'disconnected' | 'connecting' | 'connected';
 
 const Canvas = () => {
     const fileSystemEvents = useFileSystem();
     const { onMount, ...events } = useMultiplayerState(roomID);
-      
+
     return (
         <div className="tldraw">
             <Info />
@@ -25,11 +26,16 @@ const Canvas = () => {
 
 function Info() {
     const users = useUsers(awareness);
+    const [yStatus, setYStatus] = useState<YStatus>('disconnected');
+    wsProvider.on('status', ({ status }: { status: YStatus }) => {
+        setYStatus(status);
+    });
 
     return (
         <div className="absolute p-md">
             <div className="flex space-between">
                 <span>Number of connected users: {users.size}</span>
+                <span>Yjs status: {yStatus}</span>
             </div>
         </div>
     );

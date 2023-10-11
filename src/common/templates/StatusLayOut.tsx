@@ -17,7 +17,7 @@ const StatusLayOut = ({
     if (isError) {
         return <div>{error ? error : 'error...'}</div>;
     }
-    return <>{children}</>;
+    return <div>{children}</div>;
 };
 
 export default StatusLayOut;
