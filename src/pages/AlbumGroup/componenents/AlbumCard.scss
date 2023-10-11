@@ -1,0 +1,39 @@
+.album_btn_group {
+    //btn 스타일 초기화
+    background-color: white;
+    padding: 4px;
+    border-radius: 4px;
+
+    button {
+        border: none;
+        background-color: transparent;
+        padding: 4px;
+        cursor: pointer;
+        &:nth-child(n + 2) {
+            position: relative;
+            margin-left: 5px;
+            padding-left: 10px;
+            &::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                width: 1px;
+                height: 12px;
+                background-color: #909090;
+            }
+        }
+    }
+}
+
+.album_card {
+    margin: 10px;
+    padding: 10px;
+    &:hover {
+        background-color: #e5e5e5;
+    }
+    .content {
+        margin-top: 10px;
+    }
+}
