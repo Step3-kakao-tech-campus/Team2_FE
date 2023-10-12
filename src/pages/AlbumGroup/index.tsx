@@ -1,8 +1,8 @@
 import { LocalImage } from '../../common/atoms/Image';
 import React from 'react';
 import { MainContainer } from '../../common/atoms/Container';
-import { AlbumCard } from './componenents/AlbumCard';
-import WrapContainer from './componenents/WrapContainer';
+import { AlbumCard } from './components/AlbumCard';
+import { TipBox, TitleContainer, WrapContainer } from './components/Containers';
 import { useQuery } from 'react-query';
 import albumApi from '../../service/album';
 import StatusLayOut from '../../common/templates/StatusLayOut';
@@ -19,7 +19,9 @@ const AlbumGroupPage = () => {
         <MainContainer>
             <LocalImage src="main_ carousel1.png" height="300px" />
             <StatusLayOut isLoading={isLoading} isError={isError} error={error}>
+                <TipBox />
                 <WrapContainer>
+                    <TitleContainer />
                     {data?.albums.map(albumGroup => (
                         <AlbumCard
                             key={albumGroup.id}

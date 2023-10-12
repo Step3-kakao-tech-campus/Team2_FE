@@ -22,15 +22,17 @@ const LoginPage: React.FC = () => {
     }, []);
 
     const loginWithKakao = () => {
-        window.Kakao.Auth.login({
+        window.Kakao.Auth.authorize({
+            redirectUri: 'http://localhost:3000',
             success: function (authObj: any) {
-                console.log(JSON.stringify(authObj)); //인증 완료 토큰
+                alert(JSON.stringify(authObj)); 
             },
             fail: function (err: any) {
                 alert(JSON.stringify(err));
             },
         });
     };
+
 
     const buttonRef = useRef<HTMLDivElement>(null); // Specify the type of the ref
 
