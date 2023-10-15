@@ -1,0 +1,28 @@
+.album_info {
+    display: flex;
+    justify-content: space-between;
+
+    .album_image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .album_details {
+        flex-grow: 1;
+        padding: 10px;
+
+        .album_title {
+            display: flex;
+            align-items: center;
+            height: 50%;
+
+            .album_name {
+                padding-right: 10px;
+            }
+
+            .album_members {
+                display: flex;
+            }
+        }
+    }
+}

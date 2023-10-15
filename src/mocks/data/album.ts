@@ -30,3 +30,15 @@ export const albumList = {
     },
     error: null,
 };
+
+export const albumInfo = {
+    success: true,
+    response: {
+        id: 1,
+        image: 'album_image.png',
+        name: '또 너야 지석진',
+        description: '수용이와 석진이의 프라이빗한 공간',
+        members: 2,
+    },
+    error: null,
+};
