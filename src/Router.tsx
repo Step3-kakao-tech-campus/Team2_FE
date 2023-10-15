@@ -4,8 +4,8 @@ import Layout from './common/templates/Layout';
 import LandingPage from './pages/Landing';
 import AccountPage from './pages/Account';
 import Canvas from './pages/Canvas';
-import AlbumCreationPage from './pages/AlbumCreate/AlbumCreate';
-import AlbumGroupPage from './pages/AlbumGroup';
+import AlbumCreationPage from './pages/Album/Create/AlbumCreate';
+import AlbumGroupPage from './pages/Album/Group';
 import ScannerPage from './pages/QrScan';
 
 const Router = () => (
