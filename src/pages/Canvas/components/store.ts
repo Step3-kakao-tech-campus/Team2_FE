@@ -15,7 +15,7 @@ export const wsProvider = new WebsocketProvider(
     roomID,
     doc,
     {
-        connect: true,
+        connect: false,
     },
 );
 
