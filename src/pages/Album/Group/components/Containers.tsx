@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import './Containers.scss';
-import Button from '../../../common/atoms/Button';
+import Button from '../../../../common/atoms/Button';
 interface ComponentProps {
     children: ReactNode;
 }

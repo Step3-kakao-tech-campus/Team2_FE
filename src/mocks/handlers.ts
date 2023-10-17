@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { albumList } from './data/album';
+import { albumInfo, albumList, canvasExample } from './data/album';
 import { rewards } from './data/rewards';
 import { titles } from './data/titles';
 
@@ -10,6 +10,12 @@ export const handlers = [
     rest.get('/groups', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(albumList));
     }),
+    rest.get('/album-info', (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json(albumInfo));
+    }),
+    rest.get('/canvas-example', (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json(canvasExample));
+    }),
     rest.get('/rewards', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(rewards));
     }),
@@ -17,5 +23,3 @@ export const handlers = [
         return res(ctx.status(200), ctx.json(titles));
     }),
 ];
-
-
