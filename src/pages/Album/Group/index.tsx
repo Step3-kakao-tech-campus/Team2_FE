@@ -1,11 +1,11 @@
-import { LocalImage } from '../../common/atoms/Image';
+import { LocalImage } from '../../../common/atoms/Image';
 import React from 'react';
-import { MainContainer } from '../../common/atoms/Container';
+import { MainContainer } from '../../../common/atoms/Container';
 import { AlbumCard } from './components/AlbumCard';
 import { TipBox, TitleContainer, WrapContainer } from './components/Containers';
 import { useQuery } from 'react-query';
-import albumApi from '../../service/album';
-import StatusLayOut from '../../common/templates/StatusLayOut';
+import albumApi from '../../../service/album';
+import StatusLayOut from '../../../common/templates/StatusLayOut';
 const AlbumGroupPage = () => {
     const userId = '1';
     const { isLoading, isError, data, error } = useQuery({

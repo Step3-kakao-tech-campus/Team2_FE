@@ -1,5 +1,7 @@
 import { rest } from 'msw';
-import { albumList } from './data/album';
+import { albumInfo, albumList, canvasExample } from './data/album';
+import { rewards } from './data/rewards';
+import { titles } from './data/titles';
 
 // req: 매칭되는 요청에 대한 정보
 // res: 모의 응답을 만들 수 있는 유틸리티
@@ -7,5 +9,17 @@ import { albumList } from './data/album';
 export const handlers = [
     rest.get('/groups', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(albumList));
+    }),
+    rest.get('/album-info', (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json(albumInfo));
+    }),
+    rest.get('/canvas-example', (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json(canvasExample));
+    }),
+    rest.get('/rewards', (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json(rewards));
+    }),
+    rest.get('/titles', (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json(titles));
     }),
 ];
