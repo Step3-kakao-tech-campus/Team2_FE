@@ -1,0 +1,61 @@
+.titlehold_card {
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    width: 80%;
+    height: 150px;
+    display: flex;
+
+    overflow: hidden;
+    &_image {
+        margin-top: 50px;
+        margin-left: 10px;
+        width: 50px;
+        height: 50px;
+    }
+    &_image2 {
+        margin-top: 15px;
+        width: 30px;
+        height: 30px;
+    }
+    &_title {
+        margin-left : 30px ;
+        display :flex ;
+        flex-direction :column ; // title 안의 요소들을 수직으로 배치합니다.
+        &_line {
+            margin-top :10px ;
+            display:flex ;
+
+            > h3 { // h3 태그에 대해서만
+                flex-grow :1 ; // 가능한 한 많은 공간을 차지하도록 설정
+             }
+         }
+
+         &_select {
+             width: 120px;
+             height: 50px;
+             display:flex ; 
+             justify-content:flex-end ; 
+         }
+    }
+
+    &_description {
+        display :flex ; 
+         justify-content :space-between ;
+
+        > * { 
+             margin-right :10px ; 
+         }
+        > p {
+            margin-top: 20px;
+        }
+    }
+    @media (max-width: 600px) { // 화면 크기가 600px 이하일 때
+        &_title_select{
+            margin-top: 10px;
+            width: 120px;
+            height: 20px;
+        }
+        font-size: 14px; // 원하는 글자 크기로 설정합니다.
+    }
+}
