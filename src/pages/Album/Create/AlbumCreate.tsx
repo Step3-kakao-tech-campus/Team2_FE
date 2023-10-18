@@ -111,6 +111,16 @@ const AlbumCreationPage: React.FC = () => {
           <button className="group_photo_button" 
             onClick={openModal}>+ <br/>사진 업로드</button>
         )}
+        {uploadedPhoto && (
+          <div>
+          <button className="group_photo_button_change" onClick={openModal}>
+            사진 변경
+          </button>
+          <button className='group_photo_button_remove' onClick={()=>{setUploadedPhoto('');}}>
+            삭제
+            </button>
+            </div>
+        )}
       </div>
       <Modal
       isOpen={modalIsOpen}
