@@ -1,4 +1,7 @@
-import { Tldraw, useFileSystem } from '@tldraw/tldraw';
+import { useQuery } from 'react-query';
+import albumApi from '../../service/album';
+
+import { Tldraw, useFileSystem, TDDocument, TDFile } from '@tldraw/tldraw';
 import './index.scss';
 import { useUsers } from 'y-presence';
 import { awareness, roomID, wsProvider } from './components/store';
@@ -11,17 +14,28 @@ const Canvas = () => {
     const fileSystemEvents = useFileSystem();
     const { onMount, ...events } = useMultiplayerState(roomID);
 
-    return (
-        <div className="tldraw">
-            <Info />
-            <Tldraw
-                id="tldraw-canvas"
-                onMount={onMount}
-                {...events}
-                {...fileSystemEvents}
-            />
-        </div>
-    );
+    const userId = '1';
+    const { isLoading, isError, data, error } = useQuery({
+        queryKey: ['albumGroup', userId],
+        queryFn: albumApi.getCanvasExample,
+    });
+
+    if (data) {
+        return (
+            <div className="tldraw">
+                <Info />
+                <Tldraw
+                    // id="tldraw-canvas"
+                    document={initialDocument(data)}
+                    onMount={onMount}
+                    {...events}
+                    {...fileSystemEvents}
+                />
+            </div>
+        );
+    }
+
+    return <div>Loading...</div>;
 };
 
 function Info() {
@@ -40,5 +54,19 @@ function Info() {
         </div>
     );
 }
+
+// json으로 불러온 객체의 타입을 지정해줘야하는데 어케해야할지 잘 모르겠어서 any로 함
+const initialDocument = (doc: any): TDDocument => {
+    // const json = require('./NewDocument.json');
+    console.log('doc', doc);
+    const tdFile: TDFile = {
+        name: doc.name,
+        fileHandle: null,
+        document: doc.document,
+    };
+    console.log('document', tdFile.document);
+    // console.log("type", document.type);
+    return tdFile.document;
+};
 
 export default Canvas;
