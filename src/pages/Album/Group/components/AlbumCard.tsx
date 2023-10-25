@@ -1,5 +1,5 @@
-import { LocalImage } from '../../../common/atoms/Image';
-import { DescriptionContainer } from '../../../common/atoms/Container';
+import { LocalImage } from '../../../../common/atoms/Image';
+import { DescriptionContainer } from '../../../../common/atoms/Container';
 import './AlbumCard.scss';
 interface AlbumCardProps {
     image: string;

@@ -4,9 +4,11 @@ import Layout from './common/templates/Layout';
 import LandingPage from './pages/Landing';
 import AccountPage from './pages/Account';
 import Canvas from './pages/Canvas';
-import AlbumCreationPage from './pages/AlbumCreate/AlbumCreate';
-import AlbumGroupPage from './pages/AlbumGroup';
+import AlbumCreationPage from './pages/Album/Create/AlbumCreate';
+import AlbumGroupPage from './pages/Album/Group';
 import ScannerPage from './pages/QrScan';
+import ChallengePage from './pages/Challenge';
+import AlbumViewPage from './pages/Album/View';
 import RedirectPage from './pages/Login/redirect';
 import ErrorPage from './pages/Common/Error';
 
@@ -16,9 +18,11 @@ const Router = () => (
             <Route element={<Layout />}>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="account" element={<AccountPage />} />
+                <Route path="challenge" element={<ChallengePage />} />
                 <Route path="album">
                     <Route index element={<AlbumGroupPage />} />
                     <Route path="create" element={<AlbumCreationPage />} />
+                    <Route path="view" element={<AlbumViewPage />} />
                 </Route>
             </Route>
             <Route path="login">
