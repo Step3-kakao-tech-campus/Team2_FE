@@ -28,6 +28,8 @@ const Router = () => (
 
             <Route path="canvas" element={<Canvas />} />
             <Route path="scanner" element={<ScannerPage />} />
+            <Route path="error" element={<ErrorPage />} />
+            <Route path="*" element={<ErrorPage />} />
         </Routes>
     </BrowserRouter>
 );
