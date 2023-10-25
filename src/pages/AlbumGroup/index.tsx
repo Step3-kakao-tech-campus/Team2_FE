@@ -11,6 +11,7 @@ const AlbumGroupPage = () => {
     const { isLoading, isError, data, error } = useQuery({
         queryKey: ['albumGroup', userId],
         queryFn: albumApi.getAlbumGroup,
+        retry: 3,
     });
 
     //이렇게해야 타입도움을 받을수잇는듯?
