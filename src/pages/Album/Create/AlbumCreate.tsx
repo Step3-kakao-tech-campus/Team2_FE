@@ -49,12 +49,25 @@ const AlbumCreationPage: React.FC = () => {
       alert('그룹 주제 선택 필수');
     else if (groupName === '')
       alert('그룹 이름 선택 필수');
+    else if (groupName.length < 20)
+    {
+      alert('그룹 이름은 20자 이내로 설정해주세요.');
+      setGroupName('');
+    }
     else if (groupDescription === '')
       alert('그룹 설명 선택 필수');
+    else if (groupDescription.length < 200)
+      {
+        alert('그룹 설명은 200자 이내로 설정해주세요.');
+        setGroupDescription('');
+      }
     else if (uploadedPhoto === '')
       alert('대표 사진 선택 필수');
     else if (uploadedPhoto.length > 2000000)
-      alert('사진은 2mb 미만으로 선택해주세요.');
+    {
+        alert('사진은 2mb 미만으로 선택해주세요.');
+        setUploadedPhoto('');
+    }
     console.log('Creating group with data:', { selectedTheme, groupName, groupDescription, uploadedPhoto });
   };
 
@@ -110,6 +123,16 @@ const AlbumCreationPage: React.FC = () => {
         ) : (
           <button className="group_photo_button" 
             onClick={openModal}>+ <br/>사진 업로드</button>
+        )}
+        {uploadedPhoto && (
+          <div>
+          <button className="group_photo_button_change" onClick={openModal}>
+            사진 변경
+          </button>
+          <button className='group_photo_button_remove' onClick={()=>{setUploadedPhoto('');}}>
+            삭제
+            </button>
+            </div>
         )}
       </div>
       <Modal
