@@ -1,18 +1,17 @@
-import React, { useState, ChangeEvent, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-
-import './Login.scss';
-import { MainContainer } from '../../common/atoms/Container';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { LocalImage } from '../../common/atoms/Image';
 import { Form, FormItem } from '../../common/atoms/Form';
 import Button from '../../common/atoms/Button';
+import { MainContainer } from '../../common/atoms/Container';
+import './index.scss';
 
 declare const window: Window & { Kakao: any; google: any };
 
-const LoginPage: React.FC = () => {
-    const navigate = useNavigate();
+const googleUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.REACT_APP_GOOGLE_CLIENT_KEY}&redirect_uri=http://localhost:3000/login/google&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile`;
 
-    React.useEffect(() => {
+const LoginPage = () => {
+    useEffect(() => {
         if (window.Kakao) {
             const kakao = window.Kakao;
             if (!kakao.isInitialized()) {
@@ -23,45 +22,14 @@ const LoginPage: React.FC = () => {
 
     const loginWithKakao = () => {
         window.Kakao.Auth.authorize({
-            redirectUri: 'http://localhost:3000',
-            success: function (authObj: any) {
-                alert(JSON.stringify(authObj)); 
-            },
-            fail: function (err: any) {
-                alert(JSON.stringify(err));
-            },
+            redirectUri: 'http://localhost:3000/login/kakao',
         });
     };
 
-
-    const buttonRef = useRef<HTMLDivElement>(null); // Specify the type of the ref
-
-    React.useEffect(() => {
-        if (buttonRef.current) {
-            // Make sure the ref is not null
-            window.google.accounts.id.initialize({
-                client_id: process.env.REACT_APP_GOOGLE_CLIENT_KEY,
-                callback: handleCredentialResponse,
-            });
-
-            window.google.accounts.id.renderButton(
-                buttonRef.current,
-                { theme: 'outline', size: 'large' }, // Customize the button appearance here.
-            );
-
-            // Add an event listener to the Google login button.
-            buttonRef.current.addEventListener('click', handleClickGoogle);
-        }
-    }, []);
-
-    function handleCredentialResponse(response: any) {
-        // Specify a type for the response
-        console.log(response);
-    }
-
-    function handleClickGoogle() {
-        window.google.accounts.id.prompt(); // Will prompt the user to select their account when the button is clicked.
-    }
+    const loginWithGoogle = () => {
+        //link to google login page
+        window.location.href = googleUrl;
+    };
 
     return (
         <MainContainer className="column">
@@ -87,7 +55,13 @@ const LoginPage: React.FC = () => {
                     </FormItem>
 
                     <FormItem>
-                        <div ref={buttonRef} className="google_login"></div>
+                        <Button
+                            className="login google"
+                            onClick={loginWithGoogle}
+                            imageSrc="logo_google.svg"
+                        >
+                            구글 계정으로 로그인
+                        </Button>
                     </FormItem>
                 </Form>
             </div>

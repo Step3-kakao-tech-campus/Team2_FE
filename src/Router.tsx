@@ -9,6 +9,8 @@ import AlbumGroupPage from './pages/Album/Group';
 import ScannerPage from './pages/QrScan';
 import ChallengePage from './pages/Challenge';
 import AlbumViewPage from './pages/Album/View';
+import RedirectPage from './pages/Login/redirect';
+import ErrorPage from './pages/Common/Error';
 import Flip from './pages/Flip';
 
 const Router = () => (
@@ -24,10 +26,16 @@ const Router = () => (
                     <Route path="view" element={<AlbumViewPage />} />
                 </Route>
             </Route>
+            <Route path="login">
+                <Route index element={<LoginPage />} />
+                <Route path=":vendor" element={<RedirectPage />} />
+            </Route>
             <Route path="flip" element={<Flip />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="canvas" element={<Canvas />} />
             <Route path="scanner" element={<ScannerPage />} />
+            <Route path="error" element={<ErrorPage />} />
+            <Route path="*" element={<ErrorPage />} />
         </Routes>
     </BrowserRouter>
 );
