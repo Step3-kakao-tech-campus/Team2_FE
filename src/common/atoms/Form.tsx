@@ -15,19 +15,16 @@ interface ItemProps {
 }
 
 export const Form: React.FC<FormProps> = ({ className, style, children }) => {
-    const formName = `form ${className || ''}`;
     return (
-        <form className={formName} style={style}>
+        <form className={`form_Name ${className}` || ''} style={style}>
             {children}
         </form>
     );
 };
 
 export const FormItem = ({ className, style, children }: ItemProps) => {
-    const itemName = `form_item ${className || ''}`;
-
     return (
-        <div className={itemName} style={{ ...style }}>
+        <div className={`form_item ${className}` || ''} style={{ ...style }}>
             {children}
         </div>
     );
