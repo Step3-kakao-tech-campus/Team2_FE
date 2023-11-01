@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './index.scss';
 
 const STATES = {
@@ -9,13 +9,7 @@ const STATES = {
     END_NEXT: 'end next',
 };
 
-const pages = Array.from({ length: 9 }, (_, i) => (
-    <div className="page-content" key={i}>
-        {`Page ${i} Content`}
-    </div>
-));
-
-const Flip = () => {
+const Flip = ({ pages }: { pages: React.ReactNode[] }) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [flippedPage, setFlippedPage] = useState(currentPage);
     const [currentState, setCurrentState] = useState(STATES.READ);
