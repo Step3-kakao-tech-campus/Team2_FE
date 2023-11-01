@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import './index.scss';
 
+const STATES = {
+    READ: 'read',
+    START_PREV: 'start prev',
+    END_PREV: 'end prev',
+    START_NEXT: 'start next',
+    END_NEXT: 'end next',
+};
+
 const pages = Array.from({ length: 9 }, (_, i) => (
     <div className="page-content" key={i}>
         {`Page ${i} Content`}
@@ -10,40 +18,46 @@ const pages = Array.from({ length: 9 }, (_, i) => (
 const Flip = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [flippedPage, setFlippedPage] = useState(currentPage);
-    const [currentState, setCurrentState] = useState('read');
+    const [currentState, setCurrentState] = useState(STATES.READ);
 
     const transitionTime = 600;
     const transitionTimeStr = (transitionTime / 1000).toString() + 's';
 
     const LeftPage = () => {
-        if (currentState === 'start prev' || currentState === 'end prev') {
+        if (
+            currentState === STATES.START_PREV ||
+            currentState === STATES.END_PREV
+        ) {
             return pages[currentPage - 2];
         }
         return pages[currentPage];
     };
 
     const RightPage = () => {
-        if (currentState === 'start next' || currentState === 'end next') {
+        if (
+            currentState === STATES.START_NEXT ||
+            currentState === STATES.END_NEXT
+        ) {
             return pages[currentPage + 3];
         }
         return pages[currentPage + 1];
     };
 
     const LeftFlip = () => {
-        if (currentState === 'start prev') {
+        if (currentState === STATES.START_PREV) {
             return pages[currentPage];
         }
-        if (currentState === 'end next') {
+        if (currentState === STATES.END_NEXT) {
             return pages[currentPage + 2];
         }
         return null;
     };
 
     const RightFlip = () => {
-        if (currentState === 'start next') {
+        if (currentState === STATES.START_NEXT) {
             return pages[currentPage + 1];
         }
-        if (currentState === 'end prev') {
+        if (currentState === STATES.END_PREV) {
             return pages[currentPage - 1];
         }
         return null;
@@ -52,12 +66,12 @@ const Flip = () => {
     const flipToPrevPage = () => {
         if (flippedPage > 1) {
             setFlippedPage(prev => prev - 2);
-            setCurrentState('start prev');
+            setCurrentState(STATES.START_PREV);
             setTimeout(() => {
-                setCurrentState('end prev');
+                setCurrentState(STATES.END_PREV);
             }, transitionTime);
             setTimeout(() => {
-                setCurrentState('read');
+                setCurrentState(STATES.READ);
                 setCurrentPage(prev => prev - 2);
             }, transitionTime * 2);
         }
@@ -66,12 +80,12 @@ const Flip = () => {
     const flipToNextPage = () => {
         if (flippedPage < pages.length - 2) {
             setFlippedPage(prev => prev + 2);
-            setCurrentState('start next');
+            setCurrentState(STATES.START_NEXT);
             setTimeout(() => {
-                setCurrentState('end next');
+                setCurrentState(STATES.END_NEXT);
             }, transitionTime);
             setTimeout(() => {
-                setCurrentState('read');
+                setCurrentState(STATES.READ);
                 setCurrentPage(prevPage => prevPage + 2);
             }, transitionTime * 2);
         }
@@ -79,7 +93,10 @@ const Flip = () => {
 
     const leftFlipStyle = () => {
         const style = { transform: 'none', transition: transitionTimeStr };
-        if (currentState === 'start next' || currentState === 'start prev') {
+        if (
+            currentState === STATES.START_NEXT ||
+            currentState === STATES.START_PREV
+        ) {
             style.transform = 'rotateY(90deg)';
         }
         return style;
@@ -87,7 +104,10 @@ const Flip = () => {
 
     const rightFlipStyle = () => {
         const style = { transform: 'none', transition: transitionTimeStr };
-        if (currentState === 'start next' || currentState === 'start prev') {
+        if (
+            currentState === STATES.START_NEXT ||
+            currentState === STATES.START_PREV
+        ) {
             style.transform = 'rotateY(-90deg)';
         }
         return style;
