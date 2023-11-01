@@ -9,7 +9,7 @@ const STATES = {
     END_NEXT: 'end next',
 };
 
-const Flip = ({ pages }: { pages: React.ReactNode[] }) => {
+const Book = ({ pages }: { pages: React.ReactNode[] }) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [flippedPage, setFlippedPage] = useState(currentPage);
     const [currentState, setCurrentState] = useState(STATES.READ);
@@ -111,9 +111,6 @@ const Flip = ({ pages }: { pages: React.ReactNode[] }) => {
         <div className="container">
             <div>current page: {currentPage}</div>
             <div>flipped page: {flippedPage}</div>
-            <div>
-                state: {currentState}, bool: {currentState === 'read'}
-            </div>
             <button onClick={flipToPrevPage}>prev</button>
             <button onClick={flipToNextPage}>next</button>
             <div className="book">
@@ -136,4 +133,4 @@ const Flip = ({ pages }: { pages: React.ReactNode[] }) => {
     );
 };
 
-export default Flip;
+export default Book;
