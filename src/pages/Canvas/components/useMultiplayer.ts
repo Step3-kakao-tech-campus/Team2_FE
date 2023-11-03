@@ -39,7 +39,19 @@ export function useMultiplayerState(roomId: string) {
             wsProvider.connect();
             app.loadRoom(roomId);
             app.pause();
-            handleChanges();
+            tldrawRef.current = app;
+            console.log('onMount', app.getPageState());
+            const { shapes, bindings, assets } = canvasExample2;
+            console.log('onMountshapes', shapes);
+            console.log('onMountbindings', bindings);
+            console.log('onMountassets', assets);
+
+            onChangePage(
+                app,
+                shapes as Record<string, TDShape | undefined>,
+                bindings as Record<string, TDBinding | undefined>,
+                assets as Record<string, TDAsset | undefined>,
+            );
         },
         [roomId],
     );
