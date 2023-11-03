@@ -9,33 +9,32 @@ import {
     yShapes,
     yAssets,
 } from './store';
+import { canvasExample2 } from '../../../mocks/data/album';
 
 const MAX_ZOOM_LEVEL = 2; // 200%
 const MIN_ZOOM_LEVEL = 1; // 100%
 
 export function useMultiplayerState(roomId: string) {
     const tldrawRef = useRef<TldrawApp>();
+
     function handleChanges() {
         const tldraw = tldrawRef.current;
 
         if (!tldraw) return;
+        console.log('page', tldraw.page);
+
         const shapes = Object.fromEntries(yShapes.entries());
         const bindings = Object.fromEntries(yBindings.entries());
         const assets = Object.fromEntries(yAssets.entries());
-        let filteredShapes: any = {};
-        for (let key in shapes) {
-            if (shapes[key].parentId === tldraw.currentPageId) {
-                filteredShapes[key] = shapes[key];
-            }
-        }
-        console.log('handleChanges', filteredShapes, bindings, assets);
+        // console.log('handleChangesshapes', shapes);
+        // console.log('handleChangesbindings', bindings);
+        // console.log('handleChangesassets', assets);
 
-        tldraw.replacePageContent(filteredShapes, bindings, assets);
+        tldraw.replacePageContent(shapes, bindings, assets);
     }
 
     const onMount = useCallback(
         (app: TldrawApp) => {
-            console.log('onMount');
             wsProvider.connect();
             app.loadRoom(roomId);
             app.pause();
@@ -102,13 +101,15 @@ export function useMultiplayerState(roomId: string) {
             bindings: Record<string, TDBinding | undefined>,
             assets: Record<string, TDAsset | undefined>,
         ) => {
+            console.log('page', app.pageState);
+            console.log('onChangePageshapesdasdf', shapes);
             undoManager.stopCapturing();
             doc.transact(() => {
                 Object.entries(shapes).forEach(([id, shape]) => {
                     if (!shape) {
                         yShapes.delete(id);
                     } else {
-                        console.log('shape', shape);
+                        console.log('onChangePageshape', shape);
                         yShapes.set(shape.id, shape);
                     }
                 });
@@ -116,7 +117,7 @@ export function useMultiplayerState(roomId: string) {
                     if (!binding) {
                         yBindings.delete(id);
                     } else {
-                        console.log('binding', binding);
+                        console.log('onChangePagebinding', binding);
                         yBindings.set(binding.id, binding);
                     }
                 });
@@ -124,7 +125,7 @@ export function useMultiplayerState(roomId: string) {
                     if (!asset) {
                         yAssets.delete(id);
                     } else {
-                        console.log('asset', asset);
+                        console.log('onChangePageasset', asset);
                         yAssets.set(asset.id, asset);
                     }
                 });
