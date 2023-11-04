@@ -1,5 +1,6 @@
 import { rest } from 'msw';
 import { albumInfo, albumList, canvasExample } from './data/album';
+import { CreateAlbumData } from '../service/album';
 import { rewards } from './data/rewards';
 import { titles } from './data/titles';
 
@@ -21,5 +22,19 @@ export const handlers = [
     }),
     rest.get('/titles', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(titles));
+    }),
+    rest.post<CreateAlbumData>('/albums/creation', (req, res, ctx) => {
+        const { albumName } = req.body as CreateAlbumData;
+        return res(
+            ctx.status(200), // 성공 상태 코드
+            ctx.json({
+                success: true,
+                response: {
+                    albumId: '123',
+                    albumName: albumName,
+                },
+                error: null,
+            }),
+        );
     }),
 ];
