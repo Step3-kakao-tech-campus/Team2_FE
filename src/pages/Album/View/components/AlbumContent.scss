@@ -1,0 +1,55 @@
+.album_content {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+
+    .page_info {
+        display: flex;
+    }
+
+    .book {
+        margin: 10px 0;
+        position: relative;
+        display: flex;
+        width: 840px;
+        perspective: 1000px;
+
+        .left {
+            left: 10px;
+            &.flip {
+                background: red;
+                transform-origin: 100% 0%;
+            }
+        }
+        .right {
+            left: 405px;
+            &.flip {
+                background: blue;
+                transform-origin: 0% 100%;
+            }
+        }
+        .page {
+            position: absolute;
+            top: 10px;
+        }
+        .flip {
+            z-index: 1;
+            backface-visibility: hidden;
+            transition: transform linear;
+        }
+    }
+
+    .left_cover,
+    .right_cover {
+        width: 400px;
+        height: 600px;
+        background-color: #ffebd8;
+        border: 10px solid #d27c2c;
+        border-radius: 10px;
+    }
+
+    .page_content {
+        width: 385px;
+        height: 580px;
+    }
+}
