@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
-import { authApi } from '../../service/user';
+import { userApi } from '../../service/user';
+import { User, userState } from '../../recoil/user';
+import { useRecoilState } from 'recoil';
+import { CustomError } from '../../service';
 
 type Vendor = 'kakao' | 'google';
 const RedirectPage = () => {
@@ -8,22 +11,40 @@ const RedirectPage = () => {
     const navigate = useNavigate();
     const authCode = searchParams.get('code'); //인가코드
     const { vendor } = useParams<{ vendor: Vendor }>();
+    const [, setUser] = useRecoilState(userState);
     useEffect(() => {
         console.log(authCode);
-        // 백에게 api 요청 post /login/kakao {authCode}
-        // 성공시 로그인됨, + 앨범리스트페이지로 리다이랙트
-        // 실패시 에러페이지.
-        if (authCode && vendor) {
-            // authApi.oauthLogin({ vendor, authCode }).then(res => {
-            //     // console.log(res);
-            //     if (res.status === 200) {
-            //         navigate('/album');
-            //     }
-            // });
-        } else {
-            navigate('/login');
-        }
+        login();
     }, [authCode]);
+
+    const login = async () => {
+        if (!authCode || !vendor) {
+            navigate('/error', {
+                state: {
+                    errorCode: 400,
+                    errorMsg: '잘못된 접근입니다',
+                },
+            });
+            return;
+        }
+        try {
+            // console.log(vendor, authCode);
+            const token = await userApi.oauthLogin({ vendor, authCode });
+            await localStorage.setItem('accessToken', token);
+            const userData = await userApi.getUserInfo();
+            setUser(userData as User);
+            navigate('/album');
+        } catch (e) {
+            console.log(e);
+            const error = e as CustomError;
+            navigate('/error', {
+                state: {
+                    errorCode: error.status,
+                    errorMsg: error.message,
+                },
+            });
+        }
+    };
 
     return (
         <div>
