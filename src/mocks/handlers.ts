@@ -23,7 +23,7 @@ export const handlers = [
     rest.get('/titles', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(titles));
     }),
-    rest.get('/auth/login/kakao', (req, res, ctx) => {
+    rest.post('/auth/login/kakao', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(loginResponse));
     }),
     rest.get('/user', (req, res, ctx) => {
