@@ -31,7 +31,7 @@ export const AlbumCard = ({
 };
 
 const ButtonGroup = ({ id }: { id: String }) => {
-    const invitationLink = `https://example.com/invite?albumId=${id}`;
+    const invitationLink = `http://localhost:3000/album/invite?id=${id}`;
 
     const copyToClipboard = async () => {
         try {
