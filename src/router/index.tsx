@@ -18,7 +18,11 @@ const Router = () => (
     <BrowserRouter>
         <Routes>
             <Route element={<Layout />}>
-                <Route path="/" element={<LandingPage />} />
+                <Route index path="/" element={<LandingPage />} />
+                <Route path="login">
+                    <Route index element={<LoginPage />} />
+                    <Route path=":vendor" element={<RedirectPage />} />
+                </Route>
                 <Route element={<PrivateRoute />}>
                     <Route path="account" element={<AccountPage />} />
                     <Route path="challenge" element={<ChallengePage />} />
@@ -28,10 +32,6 @@ const Router = () => (
                         <Route path="view" element={<AlbumViewPage />} />
                     </Route>
                 </Route>
-            </Route>
-            <Route path="login">
-                <Route index element={<LoginPage />} />
-                <Route path=":vendor" element={<RedirectPage />} />
             </Route>
             <Route path="flip" element={<Flip />} />
             <Route path="login" element={<LoginPage />} />
