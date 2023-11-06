@@ -11,6 +11,7 @@ import ChallengePage from './pages/Challenge';
 import AlbumViewPage from './pages/Album/View';
 import RedirectPage from './pages/Login/redirect';
 import ErrorPage from './pages/Common/Error';
+import AlbumInvitePage from './pages/Album/Invite';
 
 const Router = () => (
     <BrowserRouter>
@@ -23,6 +24,7 @@ const Router = () => (
                     <Route index element={<AlbumGroupPage />} />
                     <Route path="create" element={<AlbumCreationPage />} />
                     <Route path="view" element={<AlbumViewPage />} />
+                    <Route path="invite" element={<AlbumInvitePage />} />
                 </Route>
             </Route>
             <Route path="login">
