@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { albumInfo, albumList, canvasExample } from './data/album';
+import { albumInfo, albumList, canvasExample2 } from './data/album';
 import { rewards } from './data/rewards';
 import { titles } from './data/titles';
 
@@ -13,8 +13,8 @@ export const handlers = [
     rest.get('/album-info', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(albumInfo));
     }),
-    rest.get('/canvas-example', (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(canvasExample));
+    rest.get('/canvas', (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json(canvasExample2));
     }),
     rest.get('/rewards', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(rewards));

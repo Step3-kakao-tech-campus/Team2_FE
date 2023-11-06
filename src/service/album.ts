@@ -1,4 +1,5 @@
 import httpClient from './index';
+import { TDShape } from '@tldraw/tldraw';
 
 interface AlbumsResponse {
     albums: [
@@ -19,17 +20,17 @@ interface AlbumInfoResponse {
     members: number;
 }
 
-interface CanvasExampleResponse {
-    name: string;
-    fileHandle: object;
-    document: object;
+interface CanvasResponse {
+    assets: Record<string, TDShape | undefined>;
+    bindings: Record<string, TDShape | undefined>;
+    shapes: Record<string, TDShape | undefined>;
 }
+
 const albumApi = {
     getAlbumGroup: (): Promise<AlbumsResponse> => httpClient.get('/groups'),
     getAlbumInfo: (): Promise<AlbumInfoResponse> =>
         httpClient.get('/album-info'),
-    getCanvasExample: (): Promise<CanvasExampleResponse> =>
-        httpClient.get('/canvas-example'),
+    getCanvas: (): Promise<CanvasResponse> => httpClient.get('/canvas'),
 };
 
 export default albumApi;
