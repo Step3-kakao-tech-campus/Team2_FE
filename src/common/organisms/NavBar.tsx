@@ -14,9 +14,9 @@ const NavBar = () => {
                 <Link to="challenge">도전 과제</Link>
                 <Link to="account">내 정보</Link>
             </div>
-            <button className="navbar__login-button">
-                <Link to="/login">로그인</Link>
-            </button>
+            <Link className="btn navbar__login-button" to="/login">
+                로그인
+            </Link>
         </div>
     );
 };
