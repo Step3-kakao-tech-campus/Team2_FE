@@ -31,6 +31,19 @@ export interface CreateAlbumData {
     description: string;
     image: string;
 }
+interface PageDetail {
+    pageId: number;
+    image: string;
+    createAt: string;
+}
+
+export interface AlbumDetailResponse {
+    albumId: number;
+    albumName: string;
+    description: string;
+    people: number;
+    pages: PageDetail[];
+}
 
 const albumApi = {
     getAlbumGroup: (): Promise<AlbumsResponse> => httpClient.get('/groups'),
@@ -38,6 +51,8 @@ const albumApi = {
         httpClient.get('/album-info'),
     getCanvasExample: (): Promise<CanvasExampleResponse> =>
         httpClient.get('/canvas-example'),
+    getAlbumById: (albumId: String | null): Promise<AlbumDetailResponse> =>
+        httpClient.get(`/albums/${albumId}`),
 };
 
 const createAlbum = async (albumData: CreateAlbumData) => {
@@ -47,6 +62,44 @@ const createAlbum = async (albumData: CreateAlbumData) => {
         },
     });
     return response.data;
+};
+
+async function acceptInvite(albumId: string, authToken: string) {
+    console.log(albumId);
+    try {
+        // HTTP 요청을 보내고 응답을 기다림
+        const response = await httpClient.post(
+            `/albums/${albumId}/members/join`,
+            {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                },
+            },
+        );
+        // 응답 유효성 검사
+        if (response) {
+            return response; // 유효한 데이터 반환
+        }
+    } catch (error) {
+        // 오류 발생 시 처리
+        console.error('Error accepting the invite:', error);
+        throw error; // 에러를 다시 던져 useMutation의 onError에서 처리하도록 함
+    }
+}
+export const useInviteAlbumUser = (albumId: string, authToken: string) => {
+    return useMutation(() => acceptInvite(albumId, authToken), {
+        onSuccess: () => {
+            // Mutation 성공 시 처리
+            alert('Invitation accepted successfully!');
+        },
+        onError: error => {
+            // Mutation 실패 시 처리
+            // error는 mutation을 통해 발생한 에러 객체입니다.
+            console.error('Error accepting the invite:', error);
+            // 여기서 alert나 사용자에게 표시할 메시지를 설정할 수 있습니다.
+            alert('Failed to accept the invitation. Please try again later.');
+        },
+    });
 };
 
 export const useCreateAlbum = () => {
