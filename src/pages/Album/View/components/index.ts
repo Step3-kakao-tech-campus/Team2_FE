@@ -1,2 +1,2 @@
 export { default as AlbumInfo } from './AlbumInfo';
-export { default as DiaryPage } from './DiaryPage';
+export { default as AlbumContent } from './AlbumContent';
