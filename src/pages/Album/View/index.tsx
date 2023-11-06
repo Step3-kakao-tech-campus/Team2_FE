@@ -1,8 +1,17 @@
 import { useQuery } from 'react-query';
+import { useState } from 'react';
+import { Tldraw } from '@tldraw/tldraw';
 
 import albumApi from '../../../service/album';
 import { MainContainer } from '../../../common/atoms/Container';
-import { AlbumInfo, DiaryPage } from './components';
+import { AlbumInfo, AlbumContent } from './components';
+
+const pages = Array.from({ length: 9 }, (_, i) => (
+    <div key={i}>
+        <Tldraw id="tldraw-canvas" showUI={false} readOnly={true} />
+    </div>
+    // <div key={i}>{`Page ${i} Content`}</div>
+));
 
 const AlbumViewPage = () => {
     const userId = '1';
@@ -10,6 +19,8 @@ const AlbumViewPage = () => {
         queryKey: ['albumGroup', userId],
         queryFn: albumApi.getAlbumInfo,
     });
+
+    const [flippedPage, setFlippedPage] = useState(0);
 
     const handleDeleteAlbum = () => {};
 
@@ -25,7 +36,11 @@ const AlbumViewPage = () => {
                 onManageAlbum={handleDeleteAlbum}
                 onManageRecycleBin={handleManageRecycleBin}
             />
-            <DiaryPage></DiaryPage>
+            <AlbumContent
+                pages={pages}
+                flippedPage={flippedPage}
+                setFlippedPage={setFlippedPage}
+            ></AlbumContent>
         </MainContainer>
     );
 };

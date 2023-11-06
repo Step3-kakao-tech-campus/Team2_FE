@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 const NavBar = () => {
     return (
         <div className="navbar">
-            <img src="tabbar.png" alt="Tabbar" className="navbar__tabbar" />
-            <img src="logo.png" alt="Logo" className="navbar__logo" />
+            <img src="/tabbar.png" alt="Tabbar" className="navbar__tabbar" />
+            <img src="/logo.png" alt="Logo" className="navbar__logo" />
             <div className="navbar__menu">
                 <a href="#menu1">네컷 앨범</a>
                 <a href="#menu2">명예의 전당</a>
