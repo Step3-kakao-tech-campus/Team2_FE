@@ -42,29 +42,27 @@ const LoginPage = () => {
                     />
                 </Link>
             </div>
-            <div className="content">
-                <Form className="login">
-                    <FormItem>
-                        <Button
-                            className="login kakao"
-                            onClick={loginWithKakao}
-                            imageSrc="logo_kakao.png"
-                        >
-                            카카오톡 계정으로 로그인
-                        </Button>
-                    </FormItem>
+            <Form className="login">
+                <FormItem>
+                    <Button
+                        className="kakao"
+                        onClick={loginWithKakao}
+                        imageSrc="logo_kakao.png"
+                    >
+                        카카오톡 계정으로 로그인
+                    </Button>
+                </FormItem>
 
-                    <FormItem>
-                        <Button
-                            className="login google"
-                            onClick={loginWithGoogle}
-                            imageSrc="logo_google.svg"
-                        >
-                            구글 계정으로 로그인
-                        </Button>
-                    </FormItem>
-                </Form>
-            </div>
+                <FormItem>
+                    <Button
+                        className="google"
+                        onClick={loginWithGoogle}
+                        imageSrc="logo_google.svg"
+                    >
+                        구글 계정으로 로그인
+                    </Button>
+                </FormItem>
+            </Form>
         </MainContainer>
     );
 };
