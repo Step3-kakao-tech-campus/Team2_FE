@@ -8,15 +8,13 @@ const NavBar = () => {
             <img src="tabbar.png" alt="Tabbar" className="navbar__tabbar" />
             <img src="logo.png" alt="Logo" className="navbar__logo" />
             <div className="navbar__menu">
-                <a href="#menu1">네컷 앨범</a>
-                <a href="#menu2">명예의 전당</a>
-                <a href="#menu3">주간 네컷</a>
-                <a href="#menu4">더보기 리그</a>
+                <Link to="/album">네컷 앨범</Link>
+                <Link to="/challenge">도전 과제</Link>
+                <Link to="/account">내 정보</Link>
             </div>
             <button className="navbar__login-button">
-                <Link to="/login">Login</Link>
+                <Link to="/login">로그인</Link>
             </button>
-            <button className="navbar__signup-button">Sign Up</button>
         </div>
     );
 };
