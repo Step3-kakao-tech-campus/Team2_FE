@@ -1,6 +1,7 @@
 import React, { CSSProperties } from 'react';
 
 import './Button.scss';
+import { LocalImage } from './Image';
 
 interface ButtonProps {
     className?: string;
@@ -30,8 +31,8 @@ const Button: React.FC<ButtonProps> = ({
             }}
         >
             {imageSrc && (
-                <img
-                    src={process.env.PUBLIC_URL + '/assets/' + imageSrc}
+                <LocalImage
+                    src={imageSrc}
                     alt={alt}
                     style={{
                         marginRight: '8px',
