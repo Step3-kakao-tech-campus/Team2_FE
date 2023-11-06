@@ -1,4 +1,5 @@
 interface ImageProps {
+    className?: string;
     src: string;
     width?: string;
     height?: string;
@@ -6,6 +7,7 @@ interface ImageProps {
     onClick?: () => void;
 }
 export const LocalImage = ({
+    className,
     width = '100%',
     height,
     src,
@@ -14,7 +16,7 @@ export const LocalImage = ({
     ...props
 }: ImageProps) => {
     return (
-        <div style={{ width, height }}>
+        <div className={className} style={{ width, height }}>
             <img
                 src={process.env.PUBLIC_URL + '/assets/' + src}
                 alt={alt}
@@ -26,6 +28,7 @@ export const LocalImage = ({
 };
 
 export const ServerImage = ({
+    className,
     width = '100%',
     height,
     src,
@@ -34,7 +37,7 @@ export const ServerImage = ({
     ...props
 }: ImageProps) => {
     return (
-        <div style={{ width, height }}>
+        <div className={className} style={{ width, height }}>
             <img
                 loading="lazy"
                 src={process.env.REACT_APP_API_URL + src}
