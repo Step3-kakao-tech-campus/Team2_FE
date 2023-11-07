@@ -37,7 +37,7 @@ function SelectToolButton({
 
     // App.useStore is the same as a Zustand store's useStore hook!
     const isActive = app.useStore(app => {
-        return app.appState.activeTool;
+        return app.appState.activeTool === type;
     });
 
     return (
