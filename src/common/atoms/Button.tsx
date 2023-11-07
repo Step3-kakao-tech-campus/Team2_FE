@@ -7,7 +7,7 @@ interface ButtonProps {
     className?: string;
     style?: CSSProperties;
     imageStyle?: CSSProperties;
-    children: string;
+    children?: string;
     onClick: () => void;
     imageSrc?: string;
 }

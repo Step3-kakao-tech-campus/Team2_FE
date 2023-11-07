@@ -26,4 +26,10 @@
         background-color: #ffffff;
         color: black;
     }
+    &.logout {
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        padding: 10px;
+    }
 }
