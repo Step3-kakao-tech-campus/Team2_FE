@@ -122,29 +122,50 @@ const Canvas = () => {
         onMount(app);
     }, []);
     const userId = '1';
+    // width: 1500,
+    //   height: 2000,
+    const handlePageView = () => {
+        if (app) {
+            const appWidth = app.viewport.width;
+            const appHeight = app.viewport.height;
+            if (appHeight / appWidth < 4 / 3) {
+                //높이기준 넓이계산
+            } else {
+                //넓이기준 높이계산
+            }
+        }
+    };
 
     return (
         <div className="tldraw">
-            <Info />
-            <Tldraw
-                // id="tldraw-canvas"
-                onMount={handleMount}
-                showPages={false}
-                showMenu={false}
-                showTools={false}
-                {...events}
-                {...fileSystemEvents}
-            />
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Info />
+                <div>-10-</div>
+                <div>
+                    <button>페이지 전체보기</button>
+                    <button>저장</button>
+                </div>
+            </div>
+            <div className="canvas">
+                <Tldraw
+                    // id="tldraw-canvas"
+                    onMount={handleMount}
+                    showPages={false}
+                    showMenu={false}
+                    showTools={false}
+                    {...events}
+                    {...fileSystemEvents}
+                />
+            </div>
             {app && (
                 <AppContext.Provider value={app}>
                     <div
                         style={{
-                            position: 'absolute',
                             display: 'flex',
                             gap: '1em',
                             zIndex: 100,
-                            bottom: '1em',
-                            left: '1em',
+                            margin: '10px auto',
+                            marginBottom: '1em',
                         }}
                     >
                         <SelectToolButton type="select">
@@ -162,6 +183,9 @@ const Canvas = () => {
                         </SelectToolButton>
                         <SelectToolButton type={TDShapeType.Line}>
                             Line
+                        </SelectToolButton>
+                        <SelectToolButton type={TDShapeType.Text}>
+                            Text
                         </SelectToolButton>
                         {/*imagebtn*/}
                         <SelectImageButton>Image</SelectImageButton>
@@ -183,11 +207,9 @@ function Info() {
     });
 
     return (
-        <div className="absolute p-md">
-            <div className="flex space-between">
-                <span>Number of connected users: {users.size}</span>
-                <span>Yjs status: {yStatus}</span>
-            </div>
+        <div>
+            <span>접속 유저 수: {users.size}</span>
+            <span>연결 상태: {yStatus}</span>
         </div>
     );
 }
