@@ -11,9 +11,6 @@ import {
 } from './store';
 import { canvasExample2 } from '../../../mocks/data/album';
 
-const MAX_ZOOM_LEVEL = 2; // 200%
-const MIN_ZOOM_LEVEL = 1; // 100%
-
 export function useMultiplayerState(roomId: string) {
     const tldrawRef = useRef<TldrawApp>();
 
@@ -44,7 +41,6 @@ export function useMultiplayerState(roomId: string) {
             console.log('onMountshapes', shapes);
             console.log('onMountbindings', bindings);
             console.log('onMountassets', assets);
-
             onChangePage(
                 app,
                 shapes as Record<string, TDShape | undefined>,
@@ -60,9 +56,22 @@ export function useMultiplayerState(roomId: string) {
         const allowedArea = {
             minX: 0,
             minY: 0,
-            width: 2000,
-            height: 1500,
+            width: 1500,
+            height: 2000,
         };
+        let minZoom = Math.max(
+            width / allowedArea.width,
+            height / allowedArea.height,
+        );
+        console.log('minZoom', minZoom, width);
+        // if (app.pageState.camera.zoom > MAX_ZOOM_LEVEL) {
+        //     app.pageState.camera.zoom = MAX_ZOOM_LEVEL;
+        //     return;
+        // } else
+        if (app.pageState.camera.zoom < minZoom) {
+            app.pageState.camera.zoom = minZoom;
+            return;
+        }
 
         if (minX < allowedArea.minX) {
             app.setCamera([allowedArea.minX, -minY], app.camera.zoom, '');
@@ -83,14 +92,6 @@ export function useMultiplayerState(roomId: string) {
                 app.camera.zoom,
                 '',
             );
-        }
-
-        if (app.pageState.camera.zoom > MAX_ZOOM_LEVEL) {
-            app.pageState.camera.zoom = MAX_ZOOM_LEVEL;
-            return;
-        } else if (app.pageState.camera.zoom < MIN_ZOOM_LEVEL) {
-            app.pageState.camera.zoom = MIN_ZOOM_LEVEL;
-            return;
         }
     }, []);
 
