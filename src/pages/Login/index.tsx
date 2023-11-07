@@ -48,6 +48,7 @@ const LoginPage = () => {
                         className="kakao"
                         onClick={loginWithKakao}
                         imageSrc="logo_kakao.png"
+                        imageStyle={{ width: '23px', height: '20px' }}
                     >
                         카카오톡 계정으로 로그인
                     </Button>
