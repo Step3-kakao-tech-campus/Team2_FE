@@ -31,6 +31,29 @@ export const albumList = {
     error: null,
 };
 
+export const albumDetailInfo = {
+    success: true,
+    response: {
+        albumId: 1, //앨범 그룹 id
+        albumName: '또 너야 지석진',
+        description: '수용이와 석진이의 프라이빗한 공간',
+        people: 2,
+        pages: [
+            {
+                pageId: 1,
+                image: '링크',
+                createAt: '2023.09.12',
+            },
+            {
+                pageId: 2,
+                image: '링크',
+                createAt: '2023.09.13',
+            },
+        ],
+    },
+    error: null,
+};
+
 export const albumInfo = {
     success: true,
     response: {

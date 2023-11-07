@@ -1,8 +1,7 @@
 import { rest } from 'msw';
-import { albumInfo, albumList, canvasExample2 } from './data/album';
+import { albumInfo, albumList, canvasExample } from './data/album';
 import { rewards } from './data/rewards';
 import { titles } from './data/titles';
-import { loginResponse, unauthorizedResponse, userResponse } from './data/user';
 
 // req: 매칭되는 요청에 대한 정보
 // res: 모의 응답을 만들 수 있는 유틸리티
@@ -32,5 +31,34 @@ export const handlers = [
         } else {
             return res(ctx.status(401), ctx.json(unauthorizedResponse));
         }
+    }),
+    rest.get('/albums/1', (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json(albumDetailInfo));
+    }),
+    rest.post<CreateAlbumData>('/albums/creation', (req, res, ctx) => {
+        const { albumName } = req.body as CreateAlbumData;
+        return res(
+            ctx.status(200), // 성공 상태 코드
+            ctx.json({
+                success: true,
+                response: {
+                    albumId: '123',
+                    albumName: albumName,
+                },
+                error: null,
+            }),
+        );
+    }),
+    rest.post('/albums/:albumId/members/join', (req, res, ctx) => {
+        const { albumId } = req.params;
+        const authToken = req.headers.get('Authorization');
+        return res(
+            ctx.status(200),
+            ctx.json({
+                success: true,
+                response: null,
+                error: null,
+            }),
+        );
     }),
 ];
