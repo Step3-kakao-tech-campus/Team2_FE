@@ -1,7 +1,14 @@
 import { rest } from 'msw';
-import { albumInfo, albumList, canvasExample } from './data/album';
+import { CreateAlbumData } from '../service/album';
+import {
+    albumInfo,
+    albumList,
+    canvasExample2,
+    albumDetailInfo,
+} from './data/album';
 import { rewards } from './data/rewards';
 import { titles } from './data/titles';
+import { userResponse, unauthorizedResponse } from './data/user';
 
 // req: 매칭되는 요청에 대한 정보
 // res: 모의 응답을 만들 수 있는 유틸리티
@@ -23,7 +30,7 @@ export const handlers = [
         return res(ctx.status(200), ctx.json(titles));
     }),
     rest.post('/auth/kakao/login', (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(loginResponse));
+        return res(ctx.status(200), ctx.json(userResponse));
     }),
     rest.get('/user', (req, res, ctx) => {
         if (req.headers.get('Authorization') === 'Bearer token') {
