@@ -3,12 +3,14 @@ interface ImageProps {
     width?: string;
     height?: string;
     alt?: string;
+    onClick?: () => void;
 }
 export const LocalImage = ({
     width = '100%',
     height,
     src,
     alt,
+    onClick,
     ...props
 }: ImageProps) => {
     return (
@@ -16,6 +18,7 @@ export const LocalImage = ({
             <img
                 src={process.env.PUBLIC_URL + '/assets/' + src}
                 alt={alt}
+                onClick={onClick}
                 {...props}
             />
         </div>
@@ -27,6 +30,7 @@ export const ServerImage = ({
     height,
     src,
     alt,
+    onClick,
     ...props
 }: ImageProps) => {
     return (
@@ -35,6 +39,7 @@ export const ServerImage = ({
                 loading="lazy"
                 src={process.env.REACT_APP_API_URL + src}
                 alt={alt}
+                onClick={onClick}
                 {...props}
             />
         </div>

@@ -6,6 +6,10 @@ const VERSION = 1;
 
 // Create the doc
 export const doc = new Y.Doc();
+doc.on('update', () => {
+    // Handle the updated data here
+    console.log('Yjs document updated:', doc.toJSON());
+});
 
 export const roomID = `my-room-${VERSION}`;
 

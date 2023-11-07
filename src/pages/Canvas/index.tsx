@@ -26,8 +26,8 @@ const Canvas = () => {
                 <Info />
                 <Tldraw
                     // id="tldraw-canvas"
-                    document={initialDocument(data)}
                     onMount={onMount}
+                    showPages={false}
                     {...events}
                     {...fileSystemEvents}
                 />
@@ -58,7 +58,7 @@ function Info() {
 // json으로 불러온 객체의 타입을 지정해줘야하는데 어케해야할지 잘 모르겠어서 any로 함
 const initialDocument = (doc: any): TDDocument => {
     // const json = require('./NewDocument.json');
-    console.log('doc', doc);
+    // console.log('doc', doc);
     const tdFile: TDFile = {
         name: doc.name,
         fileHandle: null,
