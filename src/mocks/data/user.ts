@@ -31,3 +31,9 @@ export const loginResponse = {
     response: 'Bearer token',
     error: null,
 };
+
+export const logoutResponse = {
+    success: true,
+    response: null,
+    error: null,
+};

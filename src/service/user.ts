@@ -11,4 +11,5 @@ export const userApi = {
     oauthLogin: ({ vendor, authCode }: OauthLoginRequest): Promise<string> =>
         httpClient.post(`/auth/${vendor}/login`, authCode),
     getUserInfo: (): Promise<User> => httpClient.get('/user'),
+    logout: (): Promise<void> => httpClient.post('/auth/logout'),
 };

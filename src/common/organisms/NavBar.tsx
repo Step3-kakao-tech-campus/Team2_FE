@@ -1,12 +1,25 @@
 import React from 'react';
 import './NavBar.scss';
 import { Link } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil/user';
 import { LocalImage } from '../atoms/Image';
+import Button from '../atoms/Button';
+import { userApi } from '../../service/user';
 
 const NavBar = () => {
-    const user = useRecoilValue(userState);
+    const [user, setUser] = useRecoilState(userState);
+
+    const handleLogout = async () => {
+        try {
+            await userApi.logout();
+            localStorage.removeItem('accessToken');
+            setUser(null);
+        } catch (e) {
+            console.log('error', e);
+            alert('로그아웃에 실패했습니다');
+        }
+    };
 
     return (
         <div className="navbar">
@@ -48,14 +61,16 @@ const NavBar = () => {
                             />
                         </Link>
                         <div className="navbar__username">{user.nickname}</div>
-                        <Link to="logout">
-                            <LocalImage
-                                src="logout.png"
-                                width="25px"
-                                height="25px"
-                                alt="logout"
-                            />
-                        </Link>
+                        <Button
+                            imageSrc="logout.png"
+                            className="logout"
+                            imageStyle={{
+                                width: '25px',
+                                height: '25px',
+                                margin: '10px',
+                            }}
+                            onClick={handleLogout}
+                        />
                     </>
                 ) : (
                     <Link className="btn navbar__login-button" to="/login">
