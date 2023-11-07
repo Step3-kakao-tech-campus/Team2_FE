@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react';
+
 interface ImageProps {
     src: string;
     width?: string;
@@ -17,7 +19,7 @@ export const LocalImage = ({
     className = '',
 }: ImageProps) => {
     return (
-        <div style={{ width, height }}>
+        <div style={{ width, height, ...style }} className={className}>
             <img
                 src={process.env.PUBLIC_URL + '/assets/' + src}
                 alt={alt}
