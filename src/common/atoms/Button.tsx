@@ -6,6 +6,7 @@ import { LocalImage } from './Image';
 interface ButtonProps {
     className?: string;
     style?: CSSProperties;
+    imageStyle?: CSSProperties;
     children: string;
     onClick: () => void;
     imageSrc?: string;
@@ -17,6 +18,7 @@ const Button: React.FC<ButtonProps> = ({
     onClick,
     children,
     imageSrc,
+    imageStyle,
 }) => {
     const btnName = `btn ${className || ''}`;
     const alt = `${className}_logo`;
@@ -38,6 +40,7 @@ const Button: React.FC<ButtonProps> = ({
                         marginRight: '8px',
                         width: '20px',
                         height: '20px',
+                        ...imageStyle,
                     }}
                 />
             )}
