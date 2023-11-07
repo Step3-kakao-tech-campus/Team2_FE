@@ -27,7 +27,6 @@ interface CanvasResponse {
     shapes: Record<string, TDShape | undefined>;
 }
 
-
 export interface CreateAlbumData {
     category: string;
     albumName: string | null;
@@ -53,8 +52,6 @@ const albumApi = {
     getAlbumInfo: (): Promise<AlbumInfoResponse> =>
         httpClient.get('/album-info'),
     getCanvas: (): Promise<CanvasResponse> => httpClient.get('/canvas'),
-    getCanvasExample: (): Promise<CanvasExampleResponse> =>
-        httpClient.get('/canvas-example'),
     getAlbumById: (albumId: String | null): Promise<AlbumDetailResponse> =>
         httpClient.get(`/albums/${albumId}`),
 };
