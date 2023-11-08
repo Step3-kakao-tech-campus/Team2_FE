@@ -56,7 +56,7 @@ const albumApi = {
     getAlbumGroup: (): Promise<AlbumsResponse> => httpClient.get('/groups'),
     getAlbumInfo: (): Promise<AlbumInfoResponse> =>
         httpClient.get('/album-info'),
-    getAlbumPageById: ({ albumId, pageId }: any): Promise<any> =>
+    getAlbumCanvasById: (albumId: string, pageId: string): Promise<any> =>
         httpClient.get(`/albums/${albumId}/pages/${pageId}`),
     getAlbumById: (albumId: String | null): Promise<AlbumDetailResponse> =>
         httpClient.get(`/albums/${albumId}`),

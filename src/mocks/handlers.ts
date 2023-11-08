@@ -27,6 +27,8 @@ export const handlers = [
     }),
     rest.get('/api/albums/1/pages/1', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(canvasExample2));
+
+        // return res(ctx.status(200), ctx.json(rewards));
     }),
     rest.get('/api/rewards', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(rewards));
