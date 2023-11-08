@@ -1,6 +1,14 @@
 import { TDShapeType, TDToolType, TldrawApp } from '@tldraw/tldraw';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import Button from '../../common/atoms/Button';
+import Modal from '../../common/molecules/Modal';
+import ScannerPage from '../QrScan';
+
+const imageStyle = {
+    width: '20px',
+    height: '20px',
+    margin: '0.5em',
+};
 
 const ToolBar = ({ app }: { app: TldrawApp }) => {
     return (
@@ -13,6 +21,7 @@ const ToolBar = ({ app }: { app: TldrawApp }) => {
             <SelectToolButton type={TDShapeType.Line} app={app} />
             <SelectToolButton type={TDShapeType.Text} app={app} />
             <SelectImageButton app={app} />
+            <SelectQrButton app={app} />
         </div>
     );
 };
@@ -37,11 +46,7 @@ function SelectToolButton({
             style={{
                 background: isActive ? 'papayawhip' : 'transparent',
             }}
-            imageStyle={{
-                width: '20px',
-                height: '20px',
-                margin: '0.5em',
-            }}
+            imageStyle={imageStyle}
         />
     );
 }
@@ -64,11 +69,46 @@ function SelectImageButton({
             style={{
                 background: 'transparent',
             }}
-            imageStyle={{ width: '20px', height: '20px', margin: '0.5em' }}
+            imageStyle={imageStyle}
         />
     );
 }
 
+function SelectQrButton({
+    app,
+}: PropsWithChildren<{
+    app: TldrawApp;
+    tldrawApp?: TldrawApp;
+}>) {
+    // App.useStore is the same as a Zustand store's useStore hook!
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [scanData, setScanData] = useState<String | null>(null);
+
+    useEffect(() => {
+        console.log(scanData);
+    }, [scanData]);
+
+    return (
+        <>
+            <Button
+                onClick={() => {
+                    setModalOpen(true);
+                }}
+                imageSrc={`tools/qr.png`}
+                className="icon"
+                style={{
+                    background: 'transparent',
+                }}
+                imageStyle={imageStyle}
+            />
+            {isModalOpen && (
+                <Modal setModalOpen={setModalOpen} className="qrModal">
+                    <ScannerPage />
+                </Modal>
+            )}
+        </>
+    );
+}
 function StickerButton({
     app,
 }: PropsWithChildren<{
