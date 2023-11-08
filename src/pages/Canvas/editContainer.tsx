@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Canvas from './canvas';
 import ToolBar from './toolbar';
 import { CanvasResponse } from '../../service/album';
+import Button from '../../common/atoms/Button';
 
 export type YStatus = 'disconnected' | 'connecting' | 'connected';
 
@@ -35,12 +36,16 @@ const CanvasEditContainer = ({
 
     return (
         <div className="tldraw">
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div className="info">
                 <Info userNum={userNum} yStatus={yStatus} />
                 <div>-{pageId}-</div>
-                <div>
-                    <button>페이지 전체보기</button>
-                    <button>저장</button>
+                <div className="actions">
+                    <Button onClick={() => {}} className="view_ctrl">
+                        전체보기
+                    </Button>
+                    <Button onClick={() => {}} className="save">
+                        저장
+                    </Button>
                 </div>
             </div>
             <Canvas
@@ -58,9 +63,11 @@ const CanvasEditContainer = ({
 
 function Info({ userNum, yStatus }: { userNum: number; yStatus: YStatus }) {
     return (
-        <div>
-            <span>접속 유저 수: {userNum}</span>
-            <span>연결 상태: {yStatus}</span>
+        <div className="actions">
+            <div style={{ marginRight: '10px' }}>접속 유저 수: {userNum}</div>
+            <div>
+                소켓 연결: {yStatus === 'connected' ? '연결됨' : '연결안됨'}
+            </div>
         </div>
     );
 }

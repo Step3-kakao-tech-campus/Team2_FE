@@ -28,4 +28,27 @@ a {
         z-index: 100;
         margin: 10px auto 1em;
     }
+    .info {
+        margin: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .actions {
+            display: flex;
+
+            .btn {
+                height: 40px;
+
+                &.view_ctrl {
+                    margin-right: 10px;
+                    background-color: #818898;
+                }
+
+                &.save {
+                    min-width: 60px;
+                }
+            }
+        }
+    }
 }
