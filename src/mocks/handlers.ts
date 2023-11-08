@@ -19,39 +19,39 @@ import {
 // res: 모의 응답을 만들 수 있는 유틸리티
 // ctx: 모의 응답의 HTTP 상태 코드, 헤더, 바디 등을 만들 수 있는 함수들
 export const handlers = [
-    rest.get('/groups', (req, res, ctx) => {
+    rest.get('/api/groups', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(albumList));
     }),
-    rest.get('/album-info', (req, res, ctx) => {
+    rest.get('/api/album-info', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(albumInfo));
     }),
-    rest.get('/canvas', (req, res, ctx) => {
+    rest.get('/api/albums/1/pages/1', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(canvasExample2));
     }),
-    rest.get('/rewards', (req, res, ctx) => {
+    rest.get('/api/rewards', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(rewards));
     }),
-    rest.get('/titles', (req, res, ctx) => {
+    rest.get('/api/titles', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(titles));
     }),
-    rest.post('/auth/kakao/login', (req, res, ctx) => {
+    rest.post('/api/auth/kakao/login', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(loginResponse));
     }),
-    rest.get('/user', (req, res, ctx) => {
+    rest.get('/api/user', (req, res, ctx) => {
         if (req.headers.get('Authorization') === 'Bearer token') {
             return res(ctx.status(200), ctx.json(userResponse));
         } else {
             return res(ctx.status(401), ctx.json(unauthorizedResponse));
         }
     }),
-    rest.post('/auth/logout', (req, res, ctx) => {
+    rest.post('/api/auth/logout', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(logoutResponse));
     }),
 
-    rest.get('/albums/1', (req, res, ctx) => {
+    rest.get('/api/albums/1', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(albumDetailInfo));
     }),
-    rest.post<CreateAlbumData>('/albums/creation', (req, res, ctx) => {
+    rest.post<CreateAlbumData>('/api/albums/creation', (req, res, ctx) => {
         const { albumName } = req.body as CreateAlbumData;
         return res(
             ctx.status(200), // 성공 상태 코드
@@ -65,7 +65,7 @@ export const handlers = [
             }),
         );
     }),
-    rest.post('/albums/:albumId/members/join', (req, res, ctx) => {
+    rest.post('/api/albums/:albumId/members/join', (req, res, ctx) => {
         const { albumId } = req.params;
         const authToken = req.headers.get('Authorization');
         return res(

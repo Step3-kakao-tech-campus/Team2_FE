@@ -1,12 +1,14 @@
 import axios from 'axios';
 
+const prodUrl = 'https://k2afb0ef4e3c8a.user-app.krampoline.com';
+
 export interface CustomError {
     status: number;
     message: string;
 }
 
 const httpClient = axios.create({
-    baseURL: '',
+    baseURL: '/api',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
@@ -42,8 +44,8 @@ httpClient.interceptors.response.use(
     error => {
         console.error('Api error', error);
         return Promise.reject<Error>({
-            status: error.response.status,
-            message: error.response.data.message,
+            status: error?.response?.status,
+            message: error?.response?.data?.message,
         });
     },
 );
