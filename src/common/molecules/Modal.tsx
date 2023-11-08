@@ -30,8 +30,8 @@ const Modal: FC<ModalProps> = ({ setModalOpen, className, children }) => {
     }, [setModalOpen]);
 
     return (
-        <div className={`modal_background ${className}`}>
-            <div ref={modalRef} className="modal_dialog">
+        <div className="modal_background">
+            <div ref={modalRef} className={`modal_dialog ${className}`}>
                 {children}
             </div>
         </div>
