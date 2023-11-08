@@ -6,6 +6,7 @@ import Modal from 'react-modal';
 import './AlbumCreate.scss';
 import { customStyles } from './modalStyle';
 import { useCreateAlbum } from '../../../service/album';
+import { useNavigate } from 'react-router-dom';
 
 const AlbumCreationPage: React.FC = () => {
     const [selectedTheme, setSelectedTheme] = useState(null);
@@ -14,6 +15,7 @@ const AlbumCreationPage: React.FC = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [uploadedPhoto, setUploadedPhoto] = useState<string>('');
     const createAlbumMutation = useCreateAlbum();
+    const navigation = useNavigate();
 
     const themeOptions = [
         { value: '연인', label: '연인' },
@@ -72,6 +74,7 @@ const AlbumCreationPage: React.FC = () => {
                     onSuccess: data => {
                         // 성공 처리 로직
                         console.log('Album created successfully:', data);
+                        navigation('/album');
                     },
                     onError: error => {
                         // 에러 처리 로직
