@@ -9,10 +9,11 @@
     align-items: center;
     justify-content: center;
     border-radius: 8px;
+    word-break: keep-all;
+    font-weight: bold;
 
     &.with_input {
-        margin: 0;
-        margin-left: 5px;
+        margin: 0 0 0 5px;
         width: 120px;
     }
 
