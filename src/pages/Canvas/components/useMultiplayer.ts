@@ -1,18 +1,25 @@
 import { TDAsset, TDBinding, TDShape, TDUser, TldrawApp } from '@tldraw/tldraw';
 import { useCallback, useEffect, useRef } from 'react';
-import {
-    awareness,
-    doc,
-    wsProvider,
-    undoManager,
-    yBindings,
-    yShapes,
-    yAssets,
-} from './store';
-import { canvasExample2 } from '../../../mocks/data/album';
+import useYjsStore from './store';
+import { YStatus } from '../editContainer';
+import { CanvasResponse } from '../../../service/album';
 
-export function useMultiplayerState(roomId: string) {
+export function useMultiplayerState(
+    roomId: string,
+    albumId: string,
+    data: CanvasResponse,
+    setYStatus: (status: YStatus) => void,
+    setUserNum: (num: number) => void,
+) {
     const tldrawRef = useRef<TldrawApp>();
+    const { doc, wsProvider, yShapes, yBindings, yAssets, undoManager } =
+        useYjsStore(roomId, albumId);
+
+    const awareness = wsProvider.awareness;
+
+    wsProvider.on('status', ({ status }: { status: YStatus }) => {
+        setYStatus(status);
+    });
 
     function handleChanges() {
         const tldraw = tldrawRef.current;
@@ -37,10 +44,13 @@ export function useMultiplayerState(roomId: string) {
             app.pause();
             tldrawRef.current = app;
             console.log('onMount', app.getPageState());
-            const { shapes, bindings, assets } = canvasExample2;
+            const { shapes, bindings, assets } = data;
             console.log('onMountshapes', shapes);
             console.log('onMountbindings', bindings);
             console.log('onMountassets', assets);
+            console.log('onMountuser', app.room?.users);
+            // app.updateUsers([app.pageState]);
+
             onChangePage(
                 app,
                 shapes as Record<string, TDShape | undefined>,
@@ -63,7 +73,7 @@ export function useMultiplayerState(roomId: string) {
             width / allowedArea.width,
             height / allowedArea.height,
         );
-        console.log('minZoom', minZoom, width);
+        // console.log('minZoom', minZoom, width);
         // if (app.pageState.camera.zoom > MAX_ZOOM_LEVEL) {
         //     app.pageState.camera.zoom = MAX_ZOOM_LEVEL;
         //     return;
@@ -179,6 +189,7 @@ export function useMultiplayerState(roomId: string) {
             tldraw.updateUsers(
                 others.map(other => other.tdUser).filter(Boolean),
             );
+            setUserNum(Object.keys(tldraw.room.users).length);
         };
 
         awareness.on('change', onChangeAwareness);

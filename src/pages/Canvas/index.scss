@@ -13,36 +13,19 @@ a {
     flex-direction: column;
     height: 100vh;
     width: 100%;
-}
-
-.canvas {
-    position: relative;
-    max-width: 1500px;
-    max-height: 2000px;
-    flex-grow: 2;
-    background-color: #545f71;
-}
-
-.p-md {
-    padding: 12px;
-}
-
-.flex {
-    display: flex;
-}
-
-.space-between {
-    justify-content: space-between;
-}
-
-.color-dodgerblue {
-    color: dodgerblue;
-}
-
-.absolute {
-    position: absolute;
-    z-index: 100;
-    left: 0;
-    right: 0;
-    top: 40px;
+    .canvas {
+        position: relative;
+        max-width: 1500px;
+        max-height: 2000px;
+        flex-grow: 2;
+        background-color: #545f71;
+    }
+    .toolbox {
+        display: flex;
+        background-color: white;
+        border-radius: 10px;
+        border: 1px solid #333;
+        z-index: 100;
+        margin: 10px auto 1em;
+    }
 }
