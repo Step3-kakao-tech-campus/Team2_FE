@@ -63,7 +63,7 @@ const NavBar = () => {
                         <div className="navbar__username">{user.nickname}</div>
                         <Button
                             imageSrc="logout.png"
-                            className="logout"
+                            className="icon"
                             imageStyle={{
                                 width: '25px',
                                 height: '25px',
