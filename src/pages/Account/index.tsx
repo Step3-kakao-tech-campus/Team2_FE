@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, FC } from 'react';
 
 import { MainContainer } from '../../common/atoms/Container';
 import Profile from './components/Profile';
@@ -8,12 +8,16 @@ import ChangeNicknameModal from './components/ChangeNicknameModal';
 
 import './Account.scss';
 
-const AccountPage: React.FC = () => {
+const AccountPage: FC = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [currentNickname, setCurrentNickname] = useState('수용이');
 
     const handleChangeNicknameClick = () => {
         setModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
     };
 
     const handleVerifyNickname = (newNickname: string) => {
@@ -25,9 +29,9 @@ const AccountPage: React.FC = () => {
         setCurrentNickname(newNickname);
     };
 
-    const ModalProps = {
-        setModalOpen: setModalOpen,
+    const modalProps = {
         currentNickname: currentNickname,
+        onClose: handleCloseModal,
         onVerify: handleVerifyNickname,
         onChangeNickname: handleChangeNicknameComfirmClick,
     };
@@ -75,7 +79,7 @@ const AccountPage: React.FC = () => {
                 onNoticeClick={handleNoticeClick}
                 onInfoClick={handleInfoClick}
             />
-            {isModalOpen && <ChangeNicknameModal {...ModalProps} />}
+            {isModalOpen && <ChangeNicknameModal {...modalProps} />}
         </MainContainer>
     );
 };
