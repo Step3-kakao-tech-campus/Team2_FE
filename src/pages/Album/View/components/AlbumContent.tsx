@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, ReactNode, Dispatch, SetStateAction, FC } from 'react';
 
 import { LocalImage } from '../../../../common/atoms/Image';
 import './AlbumContent.scss';
@@ -11,17 +11,20 @@ const STATES = {
     END_NEXT: 'end next',
 };
 
-const PageContent = (child: React.ReactNode) =>
-    child && <div className="page_content">{child}</div>;
+interface contentProps {
+    pages: ReactNode[];
+    flippedPage: number;
+    setFlippedPage: Dispatch<SetStateAction<number>>;
+    handleDelete: (pageIdx: number) => void;
+    handleEdit: (pageIdx: number) => void;
+}
 
-const AlbumContent = ({
+const AlbumContent: FC<contentProps> = ({
     pages,
     flippedPage,
     setFlippedPage,
-}: {
-    pages: React.ReactNode[];
-    flippedPage: number;
-    setFlippedPage: React.Dispatch<React.SetStateAction<number>>;
+    handleDelete,
+    handleEdit,
 }) => {
     const [currentPage, setCurrentPage] = useState(0);
     const [currentState, setCurrentState] = useState(STATES.READ);
@@ -29,14 +32,43 @@ const AlbumContent = ({
     const transitionTime = 700;
     const transitionTimeStr = (transitionTime / 1000).toString() + 's';
 
+    const PageContent = (pageIdx: number) => (
+        <>
+            {pages[pageIdx] && (
+                <div className="page_content">
+                    {pages[pageIdx]}
+
+                    <div className="page_menu">
+                        <div className="icon">
+                            <LocalImage
+                                className="delete"
+                                src="trash_bin.png"
+                                style={{ height: '30px' }}
+                                onClick={() => handleDelete(pageIdx)}
+                            />
+                        </div>
+                        <div className="icon">
+                            <LocalImage
+                                className="edit"
+                                src="edit.png"
+                                style={{ height: '30px' }}
+                                onClick={() => handleEdit(pageIdx)}
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
+        </>
+    );
+
     const LeftPage = () => {
         if (
             currentState === STATES.START_PREV ||
             currentState === STATES.END_PREV
         ) {
-            return PageContent(pages[currentPage - 2]);
+            return PageContent(currentPage - 2);
         }
-        return PageContent(pages[currentPage]);
+        return PageContent(currentPage);
     };
 
     const RightPage = () => {
@@ -44,27 +76,27 @@ const AlbumContent = ({
             currentState === STATES.START_NEXT ||
             currentState === STATES.END_NEXT
         ) {
-            return PageContent(pages[currentPage + 3]);
+            return PageContent(currentPage + 3);
         }
-        return PageContent(pages[currentPage + 1]);
+        return PageContent(currentPage + 1);
     };
 
     const LeftFlip = () => {
         if (currentState === STATES.START_PREV) {
-            return PageContent(pages[currentPage]);
+            return PageContent(currentPage);
         }
         if (currentState === STATES.END_NEXT) {
-            return PageContent(pages[currentPage + 2]);
+            return PageContent(currentPage + 2);
         }
         return null;
     };
 
     const RightFlip = () => {
         if (currentState === STATES.START_NEXT) {
-            return PageContent(pages[currentPage + 1]);
+            return PageContent(currentPage + 1);
         }
         if (currentState === STATES.END_PREV) {
-            return PageContent(pages[currentPage - 1]);
+            return PageContent(currentPage - 1);
         }
         return null;
     };

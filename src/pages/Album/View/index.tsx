@@ -22,9 +22,14 @@ const AlbumViewPage = () => {
 
     const [flippedPage, setFlippedPage] = useState(0);
 
-    const handleDeleteAlbum = () => {};
-
+    const handleManageAlbum = () => {};
     const handleManageRecycleBin = () => {};
+    const handleDeletePage = (pageIdx: number) => {
+        console.log(pageIdx);
+    };
+    const handleEditPage = (pageIdx: number) => {
+        console.log(pageIdx);
+    };
 
     return (
         <MainContainer className="album_view">
@@ -33,13 +38,15 @@ const AlbumViewPage = () => {
                 albumName={data?.name}
                 albumDescription={data?.description}
                 albumMembers={data?.members}
-                onManageAlbum={handleDeleteAlbum}
+                onManageAlbum={handleManageAlbum}
                 onManageRecycleBin={handleManageRecycleBin}
             />
             <AlbumContent
                 pages={pages}
                 flippedPage={flippedPage}
                 setFlippedPage={setFlippedPage}
+                handleDelete={handleDeletePage}
+                handleEdit={handleEditPage}
             ></AlbumContent>
         </MainContainer>
     );
