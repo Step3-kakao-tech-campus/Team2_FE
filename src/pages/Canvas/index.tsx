@@ -7,12 +7,13 @@ import { useUsers } from 'y-presence';
 import { awareness, roomID, wsProvider } from './components/store';
 import { useMultiplayerState } from './components/useMultiplayer';
 import { useState } from 'react';
+import Button from '../../common/atoms/Button';
 
 type YStatus = 'disconnected' | 'connecting' | 'connected';
 
 const Canvas = () => {
     const fileSystemEvents = useFileSystem();
-    const { onMount, ...events } = useMultiplayerState(roomID);
+    const { onMount, getImg, ...events } = useMultiplayerState(roomID);
 
     const userId = '1';
     const { isLoading, isError, data, error } = useQuery({
@@ -20,10 +21,19 @@ const Canvas = () => {
         queryFn: albumApi.getCanvasExample,
     });
 
+    const handleGetImg = async () => {
+        const img = await getImg();
+        console.log(img)
+        // POST 메서드 구현해야됨
+    };
+
     if (data) {
         return (
             <div className="tldraw">
                 <Info />
+                <Button className="save_canvas" onClick={handleGetImg}>
+                    저장하기
+                </Button>
                 <Tldraw
                     // id="tldraw-canvas"
                     onMount={onMount}
