@@ -26,12 +26,27 @@ interface ChangeTitleData {
     titleId: number;
 }
 
-
+interface ChangeNicknameData {
+    userId: number;
+    nickname: string;
+}
 const changeTitle = async ({ userId, titleId }: ChangeTitleData) => {
     const response = await httpClient.put(`/users/${userId}/titles/${titleId}`);
-    if (response?.data)
-        alert(response.data.message);
+
+    if (response) alert(response.data.message);
     return response;
+};
+const changeNickname = async ({ userId, nickname }: ChangeNicknameData) => {
+    const response = await httpClient.put(`/users/${userId}`, {
+        newNickname: nickname,
+    });
+
+    if (response) alert(response.data.message);
+    return response;
+};
+
+export const useChangeNickname = () => {
+    return useMutation(changeNickname);
 };
 
 export const useChangeTitle = () => {
@@ -43,7 +58,8 @@ export const titleApi = {
 };
 
 export const titleSearchApi = {
-    getUserTitles: (userId: string | Number): Promise<TitleSearchResponse> => httpClient.get(`/users/${userId}/rewards`),
+    getUserTitles: (userId: string | Number): Promise<TitleSearchResponse> =>
+        httpClient.get(`/users/${userId}/rewards`),
 };
 
 export default titleApi;

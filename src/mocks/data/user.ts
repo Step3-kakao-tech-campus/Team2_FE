@@ -37,3 +37,9 @@ export const logoutResponse = {
     response: null,
     error: null,
 };
+
+export const userInfoModifiedResponse = {
+    success: true,
+    response: null,
+    error: null,
+};
