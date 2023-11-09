@@ -1,72 +1,49 @@
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import albumApi, { CanvasResponse } from '../../service/album';
+import StatusLayOut from '../../common/templates/StatusLayOut';
+import CanvasEditContainer from './editContainer';
+import ErrorPage from '../Common/Error';
+import album from '../../service/album';
 import { useQuery } from 'react-query';
-import albumApi from '../../service/album';
+import { canvasExample2 } from '../../mocks/data/album';
+import { TDAsset, TDBinding, TDShape } from '@tldraw/tldraw';
+import { useRecoilState } from 'recoil';
+import Album from '../../service/album';
+import { userApi } from '../../service/user';
 
-import { Tldraw, useFileSystem, TDDocument, TDFile } from '@tldraw/tldraw';
-import './index.scss';
-import { useUsers } from 'y-presence';
-import { awareness, roomID, wsProvider } from './components/store';
-import { useMultiplayerState } from './components/useMultiplayer';
-import { useState } from 'react';
+type HttpStatus = 'loading' | 'error' | 'success';
+const CanvasEditPage = () => {
+    const { pageId, albumId } = useParams();
+    // const { isLoading, isError, data, error } = useQuery({
+    //     queryKey: ['albumCanvasPage', pageId],
+    //     queryFn: () => albumApi.getAlbumCanvasById(albumId!, pageId!),
+    //     enabled: !!pageId && !!albumId,
+    // });
+    const { shapes, bindings, assets } = canvasExample2;
 
-type YStatus = 'disconnected' | 'connecting' | 'connected';
-
-const Canvas = () => {
-    const fileSystemEvents = useFileSystem();
-    const { onMount, ...events } = useMultiplayerState(roomID);
-
-    const userId = '1';
-    const { isLoading, isError, data, error } = useQuery({
-        queryKey: ['albumGroup', userId],
-        queryFn: albumApi.getCanvasExample,
-    });
-
-    if (data) {
-        return (
-            <div className="tldraw">
-                <Info />
-                <Tldraw
-                    // id="tldraw-canvas"
-                    onMount={onMount}
-                    showPages={false}
-                    {...events}
-                    {...fileSystemEvents}
-                />
-            </div>
-        );
+    const myData = {
+        shapes: shapes as Record<string, TDShape | undefined>,
+        bindings: bindings as Record<string, TDBinding | undefined>,
+        assets: assets as Record<string, TDAsset | undefined>,
+    };
+    // const navigate = useNavigate();
+    //
+    if (pageId === undefined || albumId === undefined) {
+        return <ErrorPage />;
     }
-
-    return <div>Loading...</div>;
-};
-
-function Info() {
-    const users = useUsers(awareness);
-    const [yStatus, setYStatus] = useState<YStatus>('disconnected');
-    wsProvider.on('status', ({ status }: { status: YStatus }) => {
-        setYStatus(status);
-    });
+    //
 
     return (
-        <div className="absolute p-md">
-            <div className="flex space-between">
-                <span>Number of connected users: {users.size}</span>
-                <span>Yjs status: {yStatus}</span>
-            </div>
-        </div>
+        <CanvasEditContainer
+            pageId={pageId as string}
+            albumId={albumId as string}
+            data={myData as CanvasResponse}
+        />
+        // <StatusLayOut isLoading={isLoading} isError={isError} error={error}>
+        //
+        // </StatusLayOut>
     );
-}
-
-// json으로 불러온 객체의 타입을 지정해줘야하는데 어케해야할지 잘 모르겠어서 any로 함
-const initialDocument = (doc: any): TDDocument => {
-    // const json = require('./NewDocument.json');
-    // console.log('doc', doc);
-    const tdFile: TDFile = {
-        name: doc.name,
-        fileHandle: null,
-        document: doc.document,
-    };
-    console.log('document', tdFile.document);
-    // console.log("type", document.type);
-    return tdFile.document;
 };
 
-export default Canvas;
+export default CanvasEditPage;

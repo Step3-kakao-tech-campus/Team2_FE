@@ -1,18 +1,74 @@
+@mixin mobile {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+@mixin desktop_s {
+    @media (min-width: 768px) and (max-width: 1240px) {
+        @content;
+    }
+}
+@mixin desktop_l {
+    @media (min-width: 1240px) {
+        @content;
+    }
+}
+$transition_time: 0.3s;
+
 .album_content {
     display: flex;
     flex-direction: column;
-    margin: 10px;
+    align-items: center;
+    margin: 4px;
 
     .page_info {
         display: flex;
+        transition: all $transition_time linear;
+
+        @include mobile {
+            width: 360px;
+        }
+        @include desktop_s {
+            width: 750px;
+        }
+        @include desktop_l {
+            width: 1230px;
+        }
+
+        .btn_prev,
+        .btn_next {
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        .page_date {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            box-shadow: 2px 2px;
+            border-radius: 5px;
+            padding: 0 15px;
+            cursor: default;
+        }
     }
 
     .book {
         margin: 10px 0;
         position: relative;
         display: flex;
-        width: 840px;
-        perspective: 1000px;
+        transition: all $transition_time linear;
+
+        @include mobile {
+            width: 360px;
+            perspective: 1000px;
+        }
+        @include desktop_s {
+            width: 750px;
+            perspective: 1500px;
+        }
+        @include desktop_l {
+            width: 1230px;
+            perspective: 2000px;
+        }
 
         .left {
             left: 10px;
@@ -22,7 +78,17 @@
             }
         }
         .right {
-            left: 405px;
+            transition: all $transition_time linear;
+            @include mobile {
+                display: none;
+            }
+            @include desktop_s {
+                left: 380px;
+            }
+            @include desktop_l {
+                left: 620px;
+            }
+
             &.flip {
                 background: blue;
                 transform-origin: 0% 100%;
@@ -41,15 +107,43 @@
 
     .left_cover,
     .right_cover {
-        width: 400px;
-        height: 600px;
         background-color: #ffebd8;
         border: 10px solid #d27c2c;
         border-radius: 10px;
+        transition: all $transition_time linear;
+
+        @include mobile {
+            width: 360px;
+            height: 428px;
+        }
+        @include desktop_s {
+            width: 375px;
+            height: 452px;
+        }
+        @include desktop_l {
+            width: 615px;
+            height: 740px;
+        }
+    }
+    .right_cover {
+        @include mobile {
+            display: none;
+        }
     }
 
     .page_content {
-        width: 385px;
-        height: 580px;
+        transition: all $transition_time linear;
+        @include mobile {
+            width: 340px;
+            height: 408px;
+        }
+        @include desktop_s {
+            width: 360px;
+            height: 432px;
+        }
+        @include desktop_l {
+            width: 600px;
+            height: 720px;
+        }
     }
 }

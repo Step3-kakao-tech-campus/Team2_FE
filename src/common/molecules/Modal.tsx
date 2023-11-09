@@ -1,24 +1,41 @@
-import React, { Children } from 'react';
-import Button from '../atoms/Button';
-
+import { useEffect, useRef, ReactNode, FC } from 'react';
+import './Modal.scss';
 interface ModalProps {
-  style?: React.CSSProperties; 
-  text: string;
-  ButtonText: string;
-  ButtonStyle: {
-    width: string | number;
-    height: string | number;
-  };
-  handleClick: () => void;
+    setModalOpen: (isOpen: boolean) => void;
+    className: string;
+    children: ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ style, text, ButtonStyle, ButtonText, handleClick}) => {
+const Modal: FC<ModalProps> = ({ setModalOpen, className, children }) => {
+    const modalRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        // mousedown 이벤트가 발생한 영역이 모달창이 아닐 때, 모달창 제거 처리
+        const handler = (event: MouseEvent | TouchEvent) => {
+            if (
+                modalRef.current &&
+                !modalRef.current.contains(event.target as Node)
+            ) {
+                setModalOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handler);
+        document.addEventListener('touchstart', handler);
+
+        return () => {
+            document.removeEventListener('mousedown', handler);
+            document.removeEventListener('touchstart', handler);
+        };
+    }, [setModalOpen]);
 
     return (
-        <div style={{...style}}>
-            <p>{text}</p>
-            <Button className={`Modal Button`} style={ButtonStyle} onClick={handleClick}>{ButtonText}</Button>
+        <div className="modal_background">
+            <div ref={modalRef} className={`modal_dialog ${className}`}>
+                {children}
+            </div>
         </div>
-    )}
+    );
+};
 
 export default Modal;
