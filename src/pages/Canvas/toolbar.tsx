@@ -3,6 +3,8 @@ import { PropsWithChildren, useEffect, useState } from 'react';
 import Button from '../../common/atoms/Button';
 import Modal from '../../common/molecules/Modal';
 import Scanner from './components/Scanner';
+import axios from 'axios';
+import uuid from 'react-uuid';
 
 const imageStyle = {
     width: '20px',
@@ -57,8 +59,6 @@ function SelectImageButton({
     app: TldrawApp;
     tldrawApp?: TldrawApp;
 }>) {
-    // App.useStore is the same as a Zustand store's useStore hook!
-
     return (
         <Button
             onClick={async () => {
@@ -80,13 +80,42 @@ function SelectQrButton({
     app: TldrawApp;
     tldrawApp?: TldrawApp;
 }>) {
-    // App.useStore is the same as a Zustand store's useStore hook!
     const [isModalOpen, setModalOpen] = useState(false);
-    const [scanData, setScanData] = useState<String | null>(null);
+    const [scanData, setScanData] = useState<string | null>(null);
+    const [imgStatus, setImgStatus] = useState('이미지 로딩 중');
 
     useEffect(() => {
-        console.log(scanData);
+        if (scanData && scanData.includes('http')) {
+            getImgSrcFromUrl(scanData);
+        }
     }, [scanData]);
+
+    const getImgSrcFromUrl = async (url: string) => {
+        try {
+            const headResponse = await axios.head(url);
+            const contentType = headResponse.headers['content-type'];
+            const isImage = contentType.includes('image');
+            if (isImage) {
+                const extension = contentType.split('/')[1];
+                const response = await axios.get(url, {
+                    responseType: 'blob',
+                });
+                const blob = response.data;
+                const fileName = uuid();
+                console.log(fileName, extension);
+                const file = new File([blob], fileName + '.' + extension, {
+                    type: contentType,
+                });
+                await app.addMediaFromFiles([file], app.centerPoint);
+                setModalOpen(false);
+            } else {
+                setImgStatus('이미지가 아닙니다.');
+            }
+        } catch (e) {
+            console.log('getImgSrcFromUrl', e);
+            setImgStatus('이미지 로딩 실패');
+        }
+    };
 
     return (
         <>
@@ -112,6 +141,7 @@ function SelectQrButton({
                             }}
                         >
                             {scanData}
+                            <div>{imgStatus}</div>
                         </div>
                     )}
                 </Modal>

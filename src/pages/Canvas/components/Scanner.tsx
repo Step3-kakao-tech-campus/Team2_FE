@@ -2,7 +2,7 @@ import { Html5Qrcode } from 'html5-qrcode';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 interface ScannerProps {
-    setScanData: Dispatch<SetStateAction<String | null>>;
+    setScanData: Dispatch<SetStateAction<string | null>>;
 }
 
 const Scanner = ({ setScanData }: ScannerProps) => {
@@ -24,9 +24,11 @@ const Scanner = ({ setScanData }: ScannerProps) => {
     }, []);
 
     const handleClickAdvanced = () => {
-        const qrCodeSuccessCallback = (decodedText: String) => {
+        const qrCodeSuccessCallback = (decodedText: string) => {
             console.log(decodedText);
-            setScanData(decodedText);
+            setScanData(
+                'https://pbs.twimg.com/media/FM99gV8VEAAblLM?format=jpg&name=large',
+            );
             handleStop();
         };
         html5QrCode.start(
