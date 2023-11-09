@@ -1,209 +1,49 @@
-import {
-    Tldraw,
-    useFileSystem,
-    TDDocument,
-    TDFile,
-    TldrawApp,
-    TDToolType,
-    TDShapeType,
-} from '@tldraw/tldraw';
-import './index.scss';
-import { useUsers } from 'y-presence';
-import { awareness, roomID, wsProvider } from './components/store';
-import { useMultiplayerState } from './components/useMultiplayer';
-import { useState } from 'react';
-import {
-    createContext,
-    useContext,
-    useCallback,
-    PropsWithChildren,
-} from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import albumApi, { CanvasResponse } from '../../service/album';
+import StatusLayOut from '../../common/templates/StatusLayOut';
+import CanvasEditContainer from './editContainer';
+import ErrorPage from '../Common/Error';
+import album from '../../service/album';
+import { useQuery } from 'react-query';
+import { canvasExample2 } from '../../mocks/data/album';
+import { TDAsset, TDBinding, TDShape } from '@tldraw/tldraw';
+import { useRecoilState } from 'recoil';
+import Album from '../../service/album';
+import { userApi } from '../../service/user';
 
-const AppContext = createContext<TldrawApp>({} as any);
-type YStatus = 'disconnected' | 'connecting' | 'connected';
+type HttpStatus = 'loading' | 'error' | 'success';
+const CanvasEditPage = () => {
+    const { pageId, albumId } = useParams();
+    // const { isLoading, isError, data, error } = useQuery({
+    //     queryKey: ['albumCanvasPage', pageId],
+    //     queryFn: () => albumApi.getAlbumCanvasById(albumId!, pageId!),
+    //     enabled: !!pageId && !!albumId,
+    // });
+    const { shapes, bindings, assets } = canvasExample2;
 
-function useApp() {
-    return useContext(AppContext);
-}
-
-function SelectToolButton({
-    type,
-    children,
-}: PropsWithChildren<{
-    type: TDToolType;
-    tldrawApp?: TldrawApp;
-}>) {
-    const app = useApp();
-
-    // App.useStore is the same as a Zustand store's useStore hook!
-    const isActive = app.useStore(app => {
-        return app.appState.activeTool;
-    });
-
-    return (
-        <button
-            onClick={() => app.selectTool(type)}
-            style={{
-                border: '1px solid #333',
-                background: isActive ? 'papayawhip' : 'transparent',
-                fontSize: '1.5rem',
-                padding: '0.3em 0.8em',
-                borderRadius: '0.15em',
-            }}
-        >
-            {children}
-        </button>
-    );
-}
-
-function SelectImageButton({
-    children,
-}: PropsWithChildren<{
-    tldrawApp?: TldrawApp;
-}>) {
-    const app = useApp();
-
-    // App.useStore is the same as a Zustand store's useStore hook!
-
-    return (
-        <button
-            onClick={async () => {
-                await app.openAsset();
-            }}
-            style={{
-                border: '1px solid #333',
-                background: 'transparent',
-                fontSize: '1.5rem',
-                padding: '0.3em 0.8em',
-                borderRadius: '0.15em',
-            }}
-        >
-            {children}
-        </button>
-    );
-}
-
-function StickerButton({
-    children,
-}: PropsWithChildren<{
-    tldrawApp?: TldrawApp;
-}>) {
-    const app = useApp();
-    // let file=
-    // const file =
-    //     'https://cdn.mobalytics.gg/assets/lol/images/dd/summoner-icons/4559.png?1';
-    // App.useStore is the same as a Zustand store's useStore hook!
-
-    return (
-        <button
-            onClick={() => {
-                // app.addMediaFromFiles(file, app.centerPoint);
-            }}
-            style={{
-                border: '1px solid #333',
-                background: 'transparent',
-                fontSize: '1.5rem',
-                padding: '0.3em 0.8em',
-                borderRadius: '0.15em',
-            }}
-        >
-            {children}
-        </button>
-    );
-}
-
-const Canvas = () => {
-    const fileSystemEvents = useFileSystem();
-    const { onMount, ...events } = useMultiplayerState(roomID);
-    const [app, setApp] = useState<TldrawApp>();
-
-    const handleMount = useCallback((app: TldrawApp) => {
-        setApp(app);
-        onMount(app);
-    }, []);
-    const userId = '1';
-
-    return (
-        <div className="tldraw">
-            <Info />
-            <Tldraw
-                // id="tldraw-canvas"
-                onMount={handleMount}
-                showPages={false}
-                showMenu={false}
-                showTools={false}
-                {...events}
-                {...fileSystemEvents}
-            />
-            {app && (
-                <AppContext.Provider value={app}>
-                    <div
-                        style={{
-                            position: 'absolute',
-                            display: 'flex',
-                            gap: '1em',
-                            zIndex: 100,
-                            bottom: '1em',
-                            left: '1em',
-                        }}
-                    >
-                        <SelectToolButton type="select">
-                            Select
-                        </SelectToolButton>
-                        <SelectToolButton type="erase">Erase</SelectToolButton>
-                        <SelectToolButton type={TDShapeType.Rectangle}>
-                            Rectangle
-                        </SelectToolButton>
-                        <SelectToolButton type={TDShapeType.Ellipse}>
-                            Ellipse
-                        </SelectToolButton>
-                        <SelectToolButton type={TDShapeType.Sticky}>
-                            Card
-                        </SelectToolButton>
-                        <SelectToolButton type={TDShapeType.Line}>
-                            Line
-                        </SelectToolButton>
-                        {/*imagebtn*/}
-                        <SelectImageButton>Image</SelectImageButton>
-                    </div>
-                </AppContext.Provider>
-            )}
-        </div>
-    );
-};
-
-function Info() {
-    const users = useUsers(awareness);
-
-    // console.log('users', users.get);
-
-    const [yStatus, setYStatus] = useState<YStatus>('disconnected');
-    wsProvider.on('status', ({ status }: { status: YStatus }) => {
-        setYStatus(status);
-    });
-
-    return (
-        <div className="absolute p-md">
-            <div className="flex space-between">
-                <span>Number of connected users: {users.size}</span>
-                <span>Yjs status: {yStatus}</span>
-            </div>
-        </div>
-    );
-}
-
-// json으로 불러온 객체의 타입을 지정해줘야하는데 어케해야할지 잘 모르겠어서 any로 함
-const initialDocument = (doc: any): TDDocument => {
-    // const json = require('./NewDocument.json');
-    // console.log('doc', doc);
-    const tdFile: TDFile = {
-        name: doc.name,
-        fileHandle: null,
-        document: doc.document,
+    const myData = {
+        shapes: shapes as Record<string, TDShape | undefined>,
+        bindings: bindings as Record<string, TDBinding | undefined>,
+        assets: assets as Record<string, TDAsset | undefined>,
     };
-    console.log('document', tdFile.document);
-    // console.log("type", document.type);
-    return tdFile.document;
+    // const navigate = useNavigate();
+    //
+    if (pageId === undefined || albumId === undefined) {
+        return <ErrorPage />;
+    }
+    //
+
+    return (
+        <CanvasEditContainer
+            pageId={pageId as string}
+            albumId={albumId as string}
+            data={myData as CanvasResponse}
+        />
+        // <StatusLayOut isLoading={isLoading} isError={isError} error={error}>
+        //
+        // </StatusLayOut>
+    );
 };
 
-export default Canvas;
+export default CanvasEditPage;
