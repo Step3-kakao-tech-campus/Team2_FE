@@ -2,7 +2,7 @@ import { TDShapeType, TDToolType, TldrawApp } from '@tldraw/tldraw';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import Button from '../../common/atoms/Button';
 import Modal from '../../common/molecules/Modal';
-import ScannerPage from '../QrScan';
+import Scanner from './components/Scanner';
 
 const imageStyle = {
     width: '20px',
@@ -103,7 +103,17 @@ function SelectQrButton({
             />
             {isModalOpen && (
                 <Modal setModalOpen={setModalOpen} className="qrModal">
-                    <ScannerPage />
+                    <Scanner setScanData={setScanData} />
+                    {scanData && (
+                        <div
+                            style={{
+                                display: 'inline-block',
+                                margin: '0 auto',
+                            }}
+                        >
+                            {scanData}
+                        </div>
+                    )}
                 </Modal>
             )}
         </>

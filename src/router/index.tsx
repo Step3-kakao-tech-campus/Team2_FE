@@ -6,7 +6,6 @@ import AccountPage from '../pages/Account';
 import CanvasEditPage from '../pages/Canvas';
 import AlbumCreationPage from '../pages/Album/Create/AlbumCreate';
 import AlbumGroupPage from '../pages/Album/Group';
-import ScannerPage from '../pages/QrScan';
 import ChallengePage from '../pages/Challenge';
 import AlbumViewPage from '../pages/Album/View';
 import RedirectPage from '../pages/Login/redirect';
@@ -75,7 +74,6 @@ const Router = () => {
                     </Route>
                 </Route>
                 <Route path="login" element={<LoginPage />} />
-                <Route path="scanner" element={<ScannerPage />} />
                 <Route path="error" element={<ErrorPage />} />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>

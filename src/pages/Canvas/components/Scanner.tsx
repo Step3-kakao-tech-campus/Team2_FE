@@ -1,5 +1,5 @@
 import { Html5Qrcode } from 'html5-qrcode';
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 interface ScannerProps {
     setScanData: Dispatch<SetStateAction<String | null>>;
@@ -7,11 +7,17 @@ interface ScannerProps {
 
 const Scanner = ({ setScanData }: ScannerProps) => {
     const qrConfig = { fps: 10, qrbox: { width: 300, height: 300 } };
+    const [error, setError] = useState(null);
+    let firstTime = true;
 
     let html5QrCode: Html5Qrcode;
 
     useEffect(() => {
-        html5QrCode = new Html5Qrcode('reader', false);
+        if (firstTime) {
+            firstTime = false;
+            html5QrCode = new Html5Qrcode('reader', false);
+            handleClickAdvanced();
+        }
         return () => {
             handleStop();
         };
@@ -48,11 +54,21 @@ const Scanner = ({ setScanData }: ScannerProps) => {
 
     return (
         <div style={{ position: 'relative' }}>
-            <div id="reader" style={{ width: '100%' }} />
-            <button onClick={() => handleClickAdvanced()}>click</button>
-            <button onClick={() => handleStop()}>stop pro</button>
+            <div
+                style={{
+                    position: 'absolute',
+                    top: '70px',
+                    left: '160px',
+                    zIndex: 100,
+                }}
+            >
+                loading
+            </div>
+            <div id="reader" style={{ width: '100%', zIndex: 200 }} />
+            {error && <div> {error} </div>}
         </div>
     );
 };
 
 export default Scanner;
+//
