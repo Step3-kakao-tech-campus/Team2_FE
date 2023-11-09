@@ -24,7 +24,7 @@ export const Form: React.FC<FormProps> = ({ className, style, children }) => {
 
 export const FormItem = ({ className, style, children }: ItemProps) => {
     return (
-        <div className={`form_item ${className}` || ''} style={{ ...style }}>
+        <div className={`form_item ${className || ''}`} style={{ ...style }}>
             {children}
         </div>
     );
