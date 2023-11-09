@@ -3,10 +3,9 @@ import LoginPage from '../pages/Login';
 import Layout from '../common/templates/Layout';
 import LandingPage from '../pages/Landing';
 import AccountPage from '../pages/Account';
-import Canvas from '../pages/Canvas';
+import CanvasEditPage from '../pages/Canvas';
 import AlbumCreationPage from '../pages/Album/Create/AlbumCreate';
 import AlbumGroupPage from '../pages/Album/Group';
-import ScannerPage from '../pages/QrScan';
 import ChallengePage from '../pages/Challenge';
 import AlbumViewPage from '../pages/Album/View';
 import RedirectPage from '../pages/Login/redirect';
@@ -15,11 +14,13 @@ import PrivateRoute from './private';
 import AlbumInvitePage from '../pages/Album/Invite';
 import { useSetRecoilState } from 'recoil';
 import { userState } from '../recoil/user';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { userApi } from '../service/user';
+import Loader from '../common/atoms/Loader';
 
 const Router = () => {
     const setUser = useSetRecoilState(userState);
+    const [isInit, setIsInit] = useState(false);
 
     const initializeUserInfo = async () => {
         const token = await localStorage.getItem('accessToken');
@@ -32,11 +33,14 @@ const Router = () => {
             }
             //이부분 질문 에러 발생시 아무처리안할때 넘기는 방법
         }
+        setIsInit(true);
     };
 
     useEffect(() => {
         initializeUserInfo();
     }, []);
+
+    if (!isInit) return <Loader />;
 
     return (
         <BrowserRouter>
@@ -61,12 +65,15 @@ const Router = () => {
                                 path="invite"
                                 element={<AlbumInvitePage />}
                             />
+
+                            <Route
+                                path=":albumId/page/:pageId"
+                                element={<CanvasEditPage />}
+                            />
                         </Route>
                     </Route>
                 </Route>
                 <Route path="login" element={<LoginPage />} />
-                <Route path="canvas" element={<Canvas />} />
-                <Route path="scanner" element={<ScannerPage />} />
                 <Route path="error" element={<ErrorPage />} />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>

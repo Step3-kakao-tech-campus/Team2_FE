@@ -21,10 +21,15 @@ interface AlbumInfoResponse {
     members: number;
 }
 
-interface CanvasResponse {
-    assets: Record<string, TDShape | undefined>;
-    bindings: Record<string, TDShape | undefined>;
+export interface CanvasResponse {
     shapes: Record<string, TDShape | undefined>;
+    bindings: Record<string, TDShape | undefined>;
+    assets: Record<string, TDShape | undefined>;
+}
+
+interface CanvasRequest {
+    albumId: string;
+    pageId: string;
 }
 
 export interface CreateAlbumData {
@@ -51,7 +56,8 @@ const albumApi = {
     getAlbumGroup: (): Promise<AlbumsResponse> => httpClient.get('/groups'),
     getAlbumInfo: (): Promise<AlbumInfoResponse> =>
         httpClient.get('/album-info'),
-    getCanvas: (): Promise<CanvasResponse> => httpClient.get('/canvas'),
+    getAlbumCanvasById: (albumId: string, pageId: string): Promise<any> =>
+        httpClient.get(`/albums/${albumId}/pages/${pageId}`),
     getAlbumById: (albumId: String | null): Promise<AlbumDetailResponse> =>
         httpClient.get(`/albums/${albumId}`),
 };
