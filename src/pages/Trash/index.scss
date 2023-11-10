@@ -1,0 +1,64 @@
+.trash-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); // 4개의 열을 동일한 크기로 설정
+    gap: 20px; // 간격 설정
+    margin: 0 auto; // 중앙에 위치시키기
+    max-width: 1200px; // 최대 너비 설정 (필요에 따라 조정)
+}
+
+.trash-item {
+    width: 200px; /* 각 항목의 너비를 설정합니다 */
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    button {
+        margin-top: 10px;
+    }
+}
+
+.trash-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.page-info {
+    margin-top: 10px;
+}
+
+.trash-name {
+    text-align: center; // 텍스트를 중앙 정렬합니다.
+    font-size: 24px; // 이름의 글씨 크기를 크게 설정합니다.
+
+    // 너비를 전체 페이지에 맞추고, 수평 중앙에 위치시킵니다.
+    width: 100%;
+    margin: 0 auto;
+
+    // 추가적인 스타일링...
+}
+
+.trash-list-header {
+    text-align: center;
+    margin-bottom: 20px;
+
+    button {
+        margin: 0 10px;
+    }
+}
+
+.buttons-container {
+    display: flex;
+    margin-top: 50px;
+    margin-left: 300px;
+    margin-right: 300px;
+    justify-content: space-between;
+    padding: 0 20px; // `trash-list`와 동일한 패딩으로 여백 설정
+
+    .left-buttons {
+        // 왼쪽 버튼 그룹 스타일링
+    }
+
+    .right-buttons {
+        // 오른쪽 버튼 그룹 스타일링
+    }
+}
