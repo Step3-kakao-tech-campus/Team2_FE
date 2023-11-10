@@ -5,12 +5,13 @@ import { Tldraw } from '@tldraw/tldraw';
 import albumApi from '../../../service/album';
 import { MainContainer } from '../../../common/atoms/Container';
 import { AlbumInfo, AlbumContent } from './components';
+import DeleteAlbumModal from './components/DeleteAlbumModal';
 
 const pages = Array.from({ length: 9 }, (_, i) => (
-    <div key={i}>
-        <Tldraw id="tldraw-canvas" showUI={false} readOnly={true} />
-    </div>
-    // <div key={i}>{`Page ${i} Content`}</div>
+    // <div key={i}>
+    //     <Tldraw id="tldraw-canvas" showUI={false} readOnly={true} />
+    // </div>
+    <div key={i}>{`Page ${i} Content`}</div>
 ));
 
 const AlbumViewPage = () => {
@@ -22,11 +23,31 @@ const AlbumViewPage = () => {
 
     const [flippedPage, setFlippedPage] = useState(0);
 
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [targetIdx, setTargetIdx] = useState(-1);
+    const [targetImage, setTargetImage] = useState(<></>);
+
+    const handleDeleteButtonClick = (pageIdx: number) => {
+        setTargetIdx(pageIdx);
+        setTargetImage(pages[pageIdx]);
+        setDeleteModalOpen(true);
+    };
+    const deleteModalClose = () => {
+        setDeleteModalOpen(false);
+    };
+    const handleDeleteConfirm = () => {
+        deleteModalClose();
+        console.log(`delete page: ${targetIdx}`);
+    };
+
+    const deleteAlbumProps = {
+        albumImage: targetImage,
+        handleClose: deleteModalClose,
+        handleDelete: handleDeleteConfirm,
+    };
+
     const handleManageAlbum = () => {};
     const handleManageRecycleBin = () => {};
-    const handleDeletePage = (pageIdx: number) => {
-        console.log(pageIdx);
-    };
     const handleEditPage = (pageIdx: number) => {
         console.log(pageIdx);
     };
@@ -45,9 +66,10 @@ const AlbumViewPage = () => {
                 pages={pages}
                 flippedPage={flippedPage}
                 setFlippedPage={setFlippedPage}
-                handleDelete={handleDeletePage}
+                handleDelete={handleDeleteButtonClick}
                 handleEdit={handleEditPage}
             ></AlbumContent>
+            {isDeleteModalOpen && <DeleteAlbumModal {...deleteAlbumProps} />}
         </MainContainer>
     );
 };
