@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_fdbad48ebb9e:latest
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_5cdf74c44ad8:latest
           env:
             - name: REACT_APP_API_URL
               value: https://k255e0ec5dd13a.user-app.krampoline.com
