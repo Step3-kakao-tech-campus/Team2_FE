@@ -6,16 +6,24 @@ interface AlbumCardProps {
     groupName: string;
     groupDescription: string;
     groupId: string;
+    onClick: () => void;
 }
 export const AlbumCard = ({
     image,
     groupId,
     groupName,
     groupDescription,
+    onClick,
 }: AlbumCardProps) => {
     return (
         <div className="album_card">
-            <LocalImage src={image} height="200px" width="100%" />
+            <LocalImage
+                className="group_image"
+                src={image}
+                height="200px"
+                width="100%"
+                onClick={onClick}
+            />
             <div className="content">
                 <DescriptionContainer
                     title={groupName}

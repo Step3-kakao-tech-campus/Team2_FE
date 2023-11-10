@@ -60,7 +60,10 @@ const Router = () => {
                                 path="create"
                                 element={<AlbumCreationPage />}
                             />
-                            <Route path="view" element={<AlbumViewPage />} />
+                            <Route
+                                path="view/:albumId"
+                                element={<AlbumViewPage />}
+                            />
                             <Route
                                 path="invite"
                                 element={<AlbumInvitePage />}
