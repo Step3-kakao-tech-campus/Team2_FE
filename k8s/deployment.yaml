@@ -17,8 +17,6 @@ spec:
           env:
             - name: REACT_APP_API_URL
               value: https://k255e0ec5dd13a.user-app.krampoline.com
-            - name: GENERATE_SOURCEMAP
-              value: "false"
             - name: REACT_APP_KAKAO_JS_KEY
               valueFrom:
                 secretKeyRef:
