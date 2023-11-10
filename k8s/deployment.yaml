@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_fdbad48ebb9e:latest
+          env:
+            - name: REACT_APP_API_URL
+              value: https://k255e0ec5dd13a.user-app.krampoline.com
+            - name: GENERATE_SOURCEMAP
+              value: false
+            - name: REACT_APP_KAKAO_JS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+                  key: kakao_key
+            - name: REACT_APP_GOOGLE_CLIENT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+                  key: google_key
+
