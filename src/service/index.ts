@@ -8,7 +8,7 @@ export interface CustomError {
 const httpClient = axios.create({
     baseURL:
         (process.env.NODE_ENV === 'production' &&
-            process.env.REACT_APP_API_URL) + '/api',
+            (process.env.REACT_APP_API_URL || '')) + '/api',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
