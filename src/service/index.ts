@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-const prodUrl = 'https://k2afb0ef4e3c8a.user-app.krampoline.com';
-
 export interface CustomError {
     status: number;
     message: string;
 }
 
 const httpClient = axios.create({
-    baseURL: '/api',
+    baseURL:
+        (process.env.NODE_ENV === 'production' &&
+            process.env.REACT_APP_API_URL) + '/api',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',

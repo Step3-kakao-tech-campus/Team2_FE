@@ -18,6 +18,8 @@ import { useEffect, useState } from 'react';
 import { userApi } from '../service/user';
 import Loader from '../common/atoms/Loader';
 
+const staticServerUri = process.env.REACT_APP_PATH || '';
+
 const Router = () => {
     const setUser = useSetRecoilState(userState);
     const [isInit, setIsInit] = useState(false);
@@ -43,7 +45,7 @@ const Router = () => {
     if (!isInit) return <Loader />;
 
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={staticServerUri}>
             <Routes>
                 <Route element={<Layout />}>
                     <Route index path="/" element={<LandingPage />} />
