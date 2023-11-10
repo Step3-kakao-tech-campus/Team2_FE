@@ -36,10 +36,12 @@ const AlbumContent: FC<contentProps> = ({
     const [currentPage, setCurrentPage] = useState(0);
     const [currentState, setCurrentState] = useState(STATES.READ);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const [flipCount, setFlipCount] = useState(isMobile ? 1 : 2);
 
     const handleResize = () => {
         const newWidth = window.innerWidth;
         setIsMobile(newWidth <= 768);
+        setFlipCount(newWidth <= 768 ? 1 : 2);
     };
 
     useEffect(() => {
@@ -86,9 +88,7 @@ const AlbumContent: FC<contentProps> = ({
             currentState === STATES.START_PREV ||
             currentState === STATES.END_PREV
         ) {
-            return isMobile
-                ? PageContent(currentPage - 1)
-                : PageContent(currentPage - 2);
+            return PageContent(currentPage - flipCount);
         }
         return PageContent(currentPage);
     };
@@ -108,9 +108,7 @@ const AlbumContent: FC<contentProps> = ({
             return PageContent(currentPage);
         }
         if (currentState === STATES.END_NEXT) {
-            return isMobile
-                ? PageContent(currentPage + 1)
-                : PageContent(currentPage + 2);
+            return PageContent(currentPage + flipCount);
         }
         return null;
     };
@@ -119,11 +117,6 @@ const AlbumContent: FC<contentProps> = ({
         if (currentState === STATES.START_NEXT) {
             return PageContent(currentPage + 1);
         }
-        // if (currentState === STATES.END_NEXT) {
-        //     return isMobile
-        //         ? PageContent(currentPage + 1)
-        //         : PageContent(currentPage + 2);
-        // }
         return null;
     };
 
@@ -137,53 +130,39 @@ const AlbumContent: FC<contentProps> = ({
         return null;
     };
 
+    const flipPage = async (
+        newFlippedPage: number,
+        startState: string,
+        endState: string,
+    ) => {
+        setFlippedPage(newFlippedPage);
+        setCurrentState(startState);
+        await new Promise(resolve => setTimeout(resolve, transitionTime));
+        if (!isMobile) {
+            setCurrentState(endState);
+            await new Promise(resolve => setTimeout(resolve, transitionTime));
+        }
+        setCurrentState(STATES.READ);
+        setCurrentPage(newFlippedPage);
+    };
+
     const flipToPrevPage = () => {
-        if (isMobile) {
-            if (flippedPage > 0) {
-                setFlippedPage(prev => prev - 1);
-                setCurrentState(STATES.START_PREV);
-                setTimeout(() => {
-                    setCurrentState(STATES.READ);
-                    setCurrentPage(prev => prev - 1);
-                }, transitionTime);
-            }
-        } else {
-            if (flippedPage > 1) {
-                setFlippedPage(prev => prev - 2);
-                setCurrentState(STATES.START_PREV);
-                setTimeout(() => {
-                    setCurrentState(STATES.END_PREV);
-                }, transitionTime);
-                setTimeout(() => {
-                    setCurrentState(STATES.READ);
-                    setCurrentPage(prev => prev - 2);
-                }, transitionTime * 2);
-            }
+        if (flippedPage >= flipCount) {
+            flipPage(
+                flippedPage - flipCount,
+                STATES.START_PREV,
+                STATES.END_PREV,
+            );
         }
     };
 
     const flipToNextPage = () => {
-        if (isMobile) {
-            if (flippedPage < pages.length - 1) {
-                setFlippedPage(prev => prev + 1);
-                setCurrentState(STATES.START_NEXT);
-                setTimeout(() => {
-                    setCurrentState(STATES.READ);
-                    setCurrentPage(prevPage => prevPage + 1);
-                }, transitionTime);
-            }
-        } else {
-            if (flippedPage < pages.length - 2) {
-                setFlippedPage(prev => prev + 2);
-                setCurrentState(STATES.START_NEXT);
-                setTimeout(() => {
-                    setCurrentState(STATES.END_NEXT);
-                }, transitionTime);
-                setTimeout(() => {
-                    setCurrentState(STATES.READ);
-                    setCurrentPage(prevPage => prevPage + 2);
-                }, transitionTime * 2);
-            }
+        if (flippedPage < pages.length - flipCount) {
+            flipPage(
+                flippedPage + flipCount,
+                STATES.START_NEXT,
+                STATES.END_NEXT,
+            );
         }
     };
 
