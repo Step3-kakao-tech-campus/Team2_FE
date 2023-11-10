@@ -8,7 +8,7 @@ interface ButtonProps {
     style?: CSSProperties;
     imageStyle?: CSSProperties;
     children?: string;
-    onClick: () => void;
+    onClick?: () => void;
     imageSrc?: string;
 }
 
@@ -29,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
             style={style}
             onClick={event => {
                 event.preventDefault();
-                onClick();
+                onClick && onClick();
             }}
         >
             {imageSrc && (
