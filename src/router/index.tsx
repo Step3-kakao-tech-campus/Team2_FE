@@ -22,25 +22,25 @@ const Router = () => {
     const setUser = useSetRecoilState(userState);
     const [isInit, setIsInit] = useState(false);
 
-    const initializeUserInfo = async () => {
-        const token = await localStorage.getItem('accessToken');
-        if (token) {
-            try {
-                const userData = await userApi.getUserInfo();
-                setUser(userData);
-            } catch (e) {
-                console.log(e);
-            }
-            //이부분 질문 에러 발생시 아무처리안할때 넘기는 방법
-        }
-        setIsInit(true);
-    };
+    // const initializeUserInfo = async () => {
+    //     const token = await localStorage.getItem('accessToken');
+    //     if (token) {
+    //         try {
+    //             const userData = await userApi.getUserInfo();
+    //             setUser(userData);
+    //         } catch (e) {
+    //             console.log(e);
+    //         }
+    //         //이부분 질문 에러 발생시 아무처리안할때 넘기는 방법
+    //     }
+    //     setIsInit(true);
+    // };
 
-    useEffect(() => {
-        initializeUserInfo();
-    }, []);
+    // useEffect(() => {
+    //     initializeUserInfo();
+    // }, []);
 
-    if (!isInit) return <Loader />;
+    // if (!isInit) return <Loader />;
 
     return (
         <BrowserRouter>
@@ -51,7 +51,7 @@ const Router = () => {
                         <Route index element={<LoginPage />} />
                         <Route path=":vendor" element={<RedirectPage />} />
                     </Route>
-                    <Route element={<PrivateRoute />}>
+                    {/* <Route element={<PrivateRoute />}> */}
                         <Route path="account" element={<AccountPage />} />
                         <Route path="challenge" element={<ChallengePage />} />
                         <Route path="album">
@@ -71,7 +71,7 @@ const Router = () => {
                                 element={<CanvasEditPage />}
                             />
                         </Route>
-                    </Route>
+                    {/* </Route> */}
                 </Route>
                 <Route path="login" element={<LoginPage />} />
                 <Route path="error" element={<ErrorPage />} />
