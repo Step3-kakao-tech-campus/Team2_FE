@@ -12,6 +12,9 @@ const googleUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${proc
 const staticServerUri = process.env.REACT_APP_PATH || 'http://localhost:3000';
 const LoginPage = () => {
     useEffect(() => {
+		console.log('kakaokey',process.env.REACT_APP_KAKAO_JS_KEY);
+		console.log('type',typeof process.env.REACT_APP_KAKAO_JS_KEY);
+
         if (window.Kakao) {
             const kakao = window.Kakao;
             if (!kakao.isInitialized()) {
