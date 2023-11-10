@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import './AlbumContent.scss';
 import { LocalImage } from '../../../../common/atoms/Image';
+import './AlbumContent.scss';
 
 const STATES = {
     READ: 'read',
@@ -26,7 +26,7 @@ const AlbumContent = ({
     const [currentPage, setCurrentPage] = useState(0);
     const [currentState, setCurrentState] = useState(STATES.READ);
 
-    const transitionTime = 1200;
+    const transitionTime = 700;
     const transitionTimeStr = (transitionTime / 1000).toString() + 's';
 
     const LeftPage = () => {
@@ -123,12 +123,14 @@ const AlbumContent = ({
         <div className="album_content">
             <div className="page_info">
                 <LocalImage
+                    className="btn_prev"
                     width="30px"
                     src="left_arrow.png"
                     alt="앨범 이전 페이지"
                     onClick={flipToPrevPage}
                 />
                 <LocalImage
+                    className="btn_next"
                     width="30px"
                     src="right_arrow.png"
                     alt="앨범 다음 페이지"

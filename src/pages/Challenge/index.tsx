@@ -5,7 +5,7 @@ import TitleHoldCard, { getImage } from './components/titlehold';
 import rewordApi from '../../service/rewards';
 import { useQuery } from 'react-query';
 import { get } from 'http';
-import titleApi from '../../service/titles';
+import { titleApi } from '../../service/titles';
 import RewordCard from './components/reword';
 
 
