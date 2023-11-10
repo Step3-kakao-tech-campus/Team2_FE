@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Tldraw } from '@tldraw/tldraw';
 
 import albumApi from '../../../service/album';
@@ -16,6 +17,8 @@ const pages = Array.from({ length: 9 }, (_, i) => (
 
 const AlbumViewPage = () => {
     const userId = '1';
+    const navigate = useNavigate();
+
     const { isLoading, isError, data, error } = useQuery({
         queryKey: ['albumGroup', userId],
         queryFn: albumApi.getAlbumInfo,
@@ -50,6 +53,7 @@ const AlbumViewPage = () => {
     const handleManageRecycleBin = () => {};
     const handleEditPage = (pageIdx: number) => {
         console.log(pageIdx);
+        navigate('/album/1/page/1');
     };
 
     return (
