@@ -5,6 +5,10 @@
     margin-left: 20%; // 중앙에 위치시키기
     margin-right: 20%;
     max-width: 1200px; // 최대 너비 설정 (필요에 따라 조정)
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr; // 모바일 화면에서는 1개의 열
+        justify-items: center; // 중앙 정렬
+    }
 }
 
 .trash-item {
@@ -61,6 +65,16 @@
 
     .right-buttons {
         // 오른쪽 버튼 그룹 스타일링
+    }
+    @media (max-width: 768px) {
+        flex-direction: column; // 모바일에서는 버튼을 세로로 배치
+        align-items: center; // 버튼을 중앙에 배치
+
+        .left-buttons,
+        .right-buttons {
+            width: 100%; // 버튼의 너비를 컨테이너 전체로 설정
+            margin-bottom: 10px; // 버튼 사이 간격
+        }
     }
 }
 
