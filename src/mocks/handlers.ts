@@ -26,10 +26,10 @@ export const handlers = [
     rest.get('/api/album-info', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(albumInfo));
     }),
-    rest.get('/api/albums/1/pages/1', (req, res, ctx) => {
+    rest.get('/api/albums/:albumId/pages/:pageId', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(canvasExample2));
     }),
-    rest.put('/api/albums/1/pages/1', (req, res, ctx) => {
+    rest.put('/api/albums/:albumId/pages/:pageId', (req, res, ctx) => {
         const requestBody = req.body as any;
         canvasExample2.assets = requestBody.assets;
         canvasExample2.shapes = requestBody.shapes;
