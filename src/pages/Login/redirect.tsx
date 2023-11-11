@@ -29,7 +29,8 @@ const RedirectPage = () => {
         }
         try {
             // console.log(vendor, authCode);
-            const token = await userApi.oauthLogin({ vendor, authCode });
+            // const token = await userApi.oauthLogin({ vendor, authCode });
+            const token = await userApi.adminLogin();
             await localStorage.setItem('accessToken', token);
             const userData = await userApi.getUserInfo();
             setUser(userData as User);
@@ -39,8 +40,8 @@ const RedirectPage = () => {
             const error = e as CustomError;
             navigate('/error', {
                 state: {
-                    errorCode: error.status??500,
-                    errorMsg: error.message??'알 수 없는 오류가 발생했습니다',
+                    errorCode: error.status ?? 500,
+                    errorMsg: error.message ?? '알 수 없는 오류가 발생했습니다',
                 },
             });
         }
