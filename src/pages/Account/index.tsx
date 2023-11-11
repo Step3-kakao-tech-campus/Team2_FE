@@ -20,11 +20,10 @@ const AccountPage: FC = () => {
     const [currentNickname, setCurrentNickname] = useState('수용이');
     const { isLoading, isError, data, error } = useQuery(
         ['userTitles', userId],
-        () =>
-            userId
-                ? titleSearchApi.getUserTitles(userId)
-                : Promise.reject('No user ID provided'),
+        titleSearchApi.getUserTitles,
     );
+    console.log('titleSearchApi', data);
+
     const handleChangeNicknameClick = () => {
         setModalOpen(true);
     };

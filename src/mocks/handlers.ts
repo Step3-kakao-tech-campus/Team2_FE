@@ -60,8 +60,7 @@ export const handlers = [
     rest.get('/api/albums/1', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(albumDetailInfo));
     }),
-    rest.get('/api/users/:userId/rewards', (req, res, ctx) => {
-        const { userId } = req.params;
+    rest.get('/api/users/rewards', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(userTitles));
     }),
     rest.post<CreateAlbumData>('/api/albums/creation', (req, res, ctx) => {
@@ -80,7 +79,6 @@ export const handlers = [
     }),
     rest.post('/api/albums/:albumId/members/join', (req, res, ctx) => {
         const { albumId } = req.params;
-        const authToken = req.headers.get('Authorization');
         return res(
             ctx.status(200),
             ctx.json({
@@ -122,7 +120,6 @@ export const handlers = [
     }),
     rest.put('/api/users/:userId/titles/:titleId', (req, res, ctx) => {
         const { userId, titleId } = req.params;
-        const authToken = req.headers.get('Authorization');
         return res(
             ctx.status(200),
             ctx.json({
@@ -132,8 +129,6 @@ export const handlers = [
         );
     }),
     rest.put('/api/users/:userId', (req, res, ctx) => {
-        const { userId } = req.params;
-        const authToken = req.headers.get('Authorization');
         return res(ctx.status(200), ctx.json(userInfoModifiedResponse));
     }),
 ];

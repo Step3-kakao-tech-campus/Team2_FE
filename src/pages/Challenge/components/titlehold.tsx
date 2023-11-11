@@ -48,10 +48,7 @@ const TitleHoldCard: React.FC<TitleHoldCardProps> = ({
 
     const { isLoading, isError, data, error } = useQuery(
         ['userTitles', userId],
-        () =>
-            userId
-                ? titleSearchApi.getUserTitles(userId)
-                : Promise.reject('No user ID provided'),
+        titleSearchApi.getUserTitles,
     );
 
     const handleTitleChange = (selectedOption: any) => {
