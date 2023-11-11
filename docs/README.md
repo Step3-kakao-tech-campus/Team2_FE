@@ -140,6 +140,11 @@
 
 백 배포 인스턴스 주소 : [백 배포 인스턴스 주소](https://k255e0ec5dd13a.user-app.krampoline.com)
 
+<br>
+
+## 🗂️ 최종 ERD
+
+![image](https://github.com/Step3-kakao-tech-campus/Team2_BE/assets/98508955/0e57681d-1c10-443b-8bbc-a738ecb4005b)
 
 <br>
 
