@@ -3,8 +3,9 @@ import './index.scss';
 import { useCallback, useState } from 'react';
 import Canvas from './canvas';
 import ToolBar from './toolbar';
-import { CanvasResponse } from '../../service/album';
+import albumApi, { CanvasResponse } from '../../service/album';
 import Button from '../../common/atoms/Button';
+import { useNavigate } from 'react-router-dom';
 
 export type YStatus = 'disconnected' | 'connecting' | 'connected';
 
@@ -28,7 +29,7 @@ const CanvasEditContainer = ({
             <div className="info">
                 <Info userNum={userNum} yStatus={yStatus} />
                 <div>-{pageId}-</div>
-                <ActionButtons app={app} />
+                <ActionButtons app={app} pageId={pageId} albumId={albumId} />
             </div>
             <Canvas
                 setApp={setApp}
@@ -54,7 +55,16 @@ function Info({ userNum, yStatus }: { userNum: number; yStatus: YStatus }) {
     );
 }
 
-function ActionButtons({ app }: { app?: TldrawApp }) {
+function ActionButtons({
+    app,
+    pageId,
+    albumId,
+}: {
+    app?: TldrawApp;
+    pageId: string;
+    albumId: string;
+}) {
+    const navigate = useNavigate();
     const handlePageView = () => {
         if (app) {
             const appWidth = app.viewport.width;
@@ -76,7 +86,7 @@ function ActionButtons({ app }: { app?: TldrawApp }) {
             });
         }
     };
-    const getCapturedImg = useCallback(() => {
+    const getCapturedImg = () => {
         return new Promise((resolve, reject) => {
             getCapturedBlob()
                 .then(blob => {
@@ -98,7 +108,7 @@ function ActionButtons({ app }: { app?: TldrawApp }) {
                     reject(error);
                 });
         });
-    }, []);
+    };
     const handleSave = async () => {
         try {
             // if (!app) throw Error('app이 로딩중입니다.');
@@ -123,9 +133,12 @@ function ActionButtons({ app }: { app?: TldrawApp }) {
                     capturePage: capturedImage,
                 };
                 console.log(postData);
+                await albumApi.saveAlbumCanvas(albumId, pageId, postData);
+                alert('저장되었습니다.');
             }
         } catch (e) {
             console.log(e);
+            alert('저장에 실패했습니다.:\n' + e);
         }
     };
 
@@ -135,8 +148,9 @@ function ActionButtons({ app }: { app?: TldrawApp }) {
                 전체보기
             </Button>
             <Button
-                onClick={() => {
-                    handleSave();
+                onClick={async () => {
+                    await handleSave();
+                    navigate(`/album/view/${albumId}`);
                 }}
                 className="save"
             >

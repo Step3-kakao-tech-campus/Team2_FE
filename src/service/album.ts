@@ -69,15 +69,18 @@ const albumApi = {
         httpClient.get('/album-info'),
     getAlbumCanvasById: (albumId: string, pageId: string): Promise<any> =>
         httpClient.get(`/albums/${albumId}/pages/${pageId}`),
-    getAlbumById: (albumId: String | null): Promise<AlbumDetailResponse> =>
+    getAlbumById: (albumId: string | null): Promise<AlbumDetailResponse> =>
         httpClient.get(`/albums/${albumId}`),
     getAlbumTrash: (
         albumId: string | undefined,
     ): Promise<TrashPageResponse> => {
-        return httpClient.get(`/albums/${albumId}/trashs`);
+        return httpClient.get(`/albums/${albumId}/trashes`);
+    },
+    saveAlbumCanvas: (albumId: string, pageId: string, data: any) => {
+        return httpClient.put(`/albums/${albumId}/pages/${pageId}`, data);
     },
     restoreTrashPage: (albumId: string | undefined, trashId: Number) =>
-        httpClient.post(`/albums/${albumId}/trashs/${trashId}`),
+        httpClient.post(`/albums/${albumId}/trashes/${trashId}`),
 };
 
 const createAlbum = async (albumData: CreateAlbumData) => {

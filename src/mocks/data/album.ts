@@ -300,7 +300,7 @@ export const canvasExample = {
     error: null,
 };
 
-export const canvasExample2 = {
+export let canvasExample2 = {
     shapes: {
         '77dabcca-7f96-4751-31fc-33ed597f7567': {
             id: '77dabcca-7f96-4751-31fc-33ed597f7567',

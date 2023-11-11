@@ -28,9 +28,15 @@ export const handlers = [
     }),
     rest.get('/api/albums/1/pages/1', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(canvasExample2));
-
-        // return res(ctx.status(200), ctx.json(rewards));
     }),
+    rest.put('/api/albums/1/pages/1', (req, res, ctx) => {
+        const requestBody = req.body as any;
+        canvasExample2.assets = requestBody.assets;
+        canvasExample2.shapes = requestBody.shapes;
+        canvasExample2.bindings = requestBody.bindings;
+        return res(ctx.status(200), ctx.json(SuccessResponse));
+    }),
+
     rest.get('/api/rewards', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(rewards));
     }),
@@ -84,7 +90,7 @@ export const handlers = [
             }),
         );
     }),
-    rest.get('/api/albums/:albumId/trashs', (req, res, ctx) => {
+    rest.get('/api/albums/:albumId/trashes', (req, res, ctx) => {
         const albumId = req.params.albumId;
         // 실제 애플리케이션에서는 albumId를 사용하여 데이터를 필터링할 수 있습니다.
         return res(
@@ -131,3 +137,9 @@ export const handlers = [
         return res(ctx.status(200), ctx.json(userInfoModifiedResponse));
     }),
 ];
+
+const SuccessResponse = {
+    success: true,
+    response: null,
+    error: null,
+};
