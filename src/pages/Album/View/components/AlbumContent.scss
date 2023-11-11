@@ -21,7 +21,7 @@ $transition_time: 0.3s;
     align-items: center;
     margin: 4px;
 
-    .page_info {
+    .album_menu {
         display: flex;
         transition: all $transition_time linear;
 
@@ -35,19 +35,28 @@ $transition_time: 0.3s;
             width: 1230px;
         }
 
-        .btn_prev,
-        .btn_next {
-            margin: 0 10px;
-            cursor: pointer;
-        }
-        .page_date {
+        .page_info {
             display: flex;
             align-items: center;
-            background-color: white;
-            box-shadow: 2px 2px;
-            border-radius: 5px;
-            padding: 0 15px;
-            cursor: default;
+            width: 100%;
+
+            .btn_prev,
+            .btn_next {
+                margin: 0 10px;
+                cursor: pointer;
+            }
+            .page_date {
+                display: flex;
+                align-items: center;
+                background-color: white;
+                box-shadow: 2px 2px;
+                border-radius: 5px;
+                padding: 0 15px;
+                cursor: default;
+            }
+        }
+        .add_page {
+            width: 100px;
         }
     }
 
@@ -73,7 +82,7 @@ $transition_time: 0.3s;
         .left {
             left: 10px;
             &.flip {
-                background: red;
+                // background: red;
                 transform-origin: 100% 0%;
             }
         }
@@ -90,7 +99,7 @@ $transition_time: 0.3s;
             }
 
             &.flip {
-                background: blue;
+                // background: blue;
                 transform-origin: 0% 100%;
             }
         }
@@ -132,6 +141,7 @@ $transition_time: 0.3s;
     }
 
     .page_content {
+        background: white;
         transition: all $transition_time linear;
         @include mobile {
             width: 340px;
@@ -144,6 +154,24 @@ $transition_time: 0.3s;
         @include desktop_l {
             width: 600px;
             height: 720px;
+        }
+
+        .page_menu {
+            display: none;
+        }
+        &:hover .page_menu {
+            position: absolute;
+            display: flex;
+            right: 10px;
+            top: 10px;
+            z-index: 1;
+
+            .icon {
+                background-color: white;
+                margin: 5px;
+                padding: 5px;
+                border-radius: 100px;
+            }
         }
     }
 }

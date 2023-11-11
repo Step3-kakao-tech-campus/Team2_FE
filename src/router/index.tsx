@@ -17,6 +17,9 @@ import { userState } from '../recoil/user';
 import { useEffect, useState } from 'react';
 import { userApi } from '../service/user';
 import Loader from '../common/atoms/Loader';
+import TrashPage from '../pages/Trash';
+
+const staticServerUri = process.env.REACT_APP_PATH || '';
 
 const Router = () => {
     const setUser = useSetRecoilState(userState);
@@ -43,7 +46,7 @@ const Router = () => {
     if (!isInit) return <Loader />;
 
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={staticServerUri}>
             <Routes>
                 <Route element={<Layout />}>
                     <Route index path="/" element={<LandingPage />} />
@@ -60,7 +63,14 @@ const Router = () => {
                                 path="create"
                                 element={<AlbumCreationPage />}
                             />
-                            <Route path="view" element={<AlbumViewPage />} />
+                            <Route
+                                path="view/:albumId"
+                                element={<AlbumViewPage />}
+                            />
+                            <Route
+                                path="view/:albumId/trash"
+                                element={<TrashPage />}
+                            />
                             <Route
                                 path="invite"
                                 element={<AlbumInvitePage />}

@@ -1,0 +1,13 @@
+.modal_body {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+
+    .preview {
+        width: 250px;
+        height: 300px;
+        background-color: white;
+        border: 5px solid #d27c2c;
+        border-radius: 5px;
+    }
+}

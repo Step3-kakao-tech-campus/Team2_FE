@@ -1,26 +1,21 @@
 import { useState } from 'react';
 
-import Button from '../../../../common/atoms/Button';
-import { LocalImage } from '../../../../common/atoms/Image';
-
-import './AlbumInfo.scss';
+import './AlbumInfomation.scss';
+import Button from '../../../common/atoms/Button';
+import { LocalImage } from '../../../common/atoms/Image';
 
 interface AlbumInfoProps {
     albumImage?: string;
     albumName?: string;
     albumDescription?: string;
     albumMembers?: number;
-    onManageGroup: () => void;
-    onManageRecycleBin: () => void;
 }
 
-const AlbumInfo = ({
+const AlbumInfomation = ({
     albumImage,
     albumName,
     albumDescription,
     albumMembers,
-    onManageGroup,
-    onManageRecycleBin,
 }: AlbumInfoProps) => {
     const [isFolded, setIsFolded] = useState(false);
     const handleChangeFold = () => {
@@ -51,21 +46,10 @@ const AlbumInfo = ({
                     </div>
                     <div className="album_description">{albumDescription}</div>
                 </div>
-                <div className="btns">
-                    <Button className="manage_album" onClick={onManageGroup}>
-                        그룹 관리
-                    </Button>
-                    <Button
-                        className="recycle_bin"
-                        onClick={onManageRecycleBin}
-                    >
-                        휴지통
-                    </Button>
-                </div>
             </div>
             <div className="btn_fold" onClick={handleChangeFold} />
         </div>
     );
 };
 
-export default AlbumInfo;
+export default AlbumInfomation;

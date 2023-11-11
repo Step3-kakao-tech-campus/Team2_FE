@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, FC } from 'react';
 import { useRecoilState } from 'recoil';
 import { MainContainer } from '../../common/atoms/Container';
 import Profile from './components/Profile';
@@ -10,7 +10,7 @@ import './Account.scss';
 import { userState } from '../../recoil/user';
 import { titleSearchApi, useChangeNickname } from '../../service/titles';
 
-const AccountPage: React.FC = () => {
+const AccountPage: FC = () => {
     const [user, setUser] = useRecoilState(userState);
 
     const userId = user?.id ? Number(user?.id) : 0;
@@ -20,13 +20,16 @@ const AccountPage: React.FC = () => {
     const [currentNickname, setCurrentNickname] = useState('수용이');
     const { isLoading, isError, data, error } = useQuery(
         ['userTitles', userId],
-        () =>
-            userId
-                ? titleSearchApi.getUserTitles(userId)
-                : Promise.reject('No user ID provided'),
+        titleSearchApi.getUserTitles,
     );
+    console.log('titleSearchApi', data);
+
     const handleChangeNicknameClick = () => {
         setModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
     };
 
     const handleVerifyNickname = (newNickname: string) => {
@@ -41,9 +44,9 @@ const AccountPage: React.FC = () => {
         changeTitle({ userId, nickname });
     };
 
-    const ModalProps = {
-        setModalOpen: setModalOpen,
+    const modalProps = {
         currentNickname: currentNickname,
+        onClose: handleCloseModal,
         onVerify: handleVerifyNickname,
         onChangeNickname: handleChangeNicknameComfirmClick,
     };
@@ -62,17 +65,21 @@ const AccountPage: React.FC = () => {
         });
     }
 
-    const profileProps = {
-        img: 'user.png',
-        titleIdx: 2,
-        achievementTitle: getTitleNames(data),
-    };
-
     const userInfoProps = {
         name: '최수용',
         nickname: currentNickname,
         email: 'example@gmail.com',
         onNicknameChangeClick: handleChangeNicknameClick,
+    };
+
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>An error has occurred: error message here</div>;
+    if (!data) return <div>No data</div>;
+
+    const profileProps = {
+        img: 'user.png',
+        titleIdx: 2,
+        achievementTitle: getTitleNames(data),
     };
 
     return (
@@ -93,7 +100,7 @@ const AccountPage: React.FC = () => {
                 onNoticeClick={handleNoticeClick}
                 onInfoClick={handleInfoClick}
             />
-            {isModalOpen && <ChangeNicknameModal {...ModalProps} />}
+            {isModalOpen && <ChangeNicknameModal {...modalProps} />}
         </MainContainer>
     );
 };

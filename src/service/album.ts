@@ -1,5 +1,5 @@
 import httpClient from './index';
-import { TDShape } from '@tldraw/tldraw';
+import { TDAsset, TDBinding, TDShape } from '@tldraw/tldraw';
 import { useMutation } from 'react-query';
 
 interface AlbumsResponse {
@@ -12,6 +12,17 @@ interface AlbumsResponse {
         },
     ];
 }
+interface TrashPageResponse {
+    pages: TrashPageInfo[];
+}
+
+interface TrashPageInfo {
+    trashId: number;
+    image: string;
+    deleter: string;
+    createAt: string;
+    deleteAt: string;
+}
 
 interface AlbumInfoResponse {
     id: string;
@@ -23,8 +34,8 @@ interface AlbumInfoResponse {
 
 export interface CanvasResponse {
     shapes: Record<string, TDShape | undefined>;
-    bindings: Record<string, TDShape | undefined>;
-    assets: Record<string, TDShape | undefined>;
+    bindings: Record<string, TDBinding | undefined>;
+    assets: Record<string, TDAsset | undefined>;
 }
 
 interface CanvasRequest {
@@ -38,7 +49,7 @@ export interface CreateAlbumData {
     description: string;
     image: string;
 }
-interface PageDetail {
+export interface PageDetail {
     pageId: number;
     image: string;
     createAt: string;
@@ -46,10 +57,21 @@ interface PageDetail {
 
 export interface AlbumDetailResponse {
     albumId: number;
+    albumImage: string;
     albumName: string;
     description: string;
     people: number;
     pages: PageDetail[];
+}
+
+export interface AlbumMember {
+    memberId: number;
+    nickname: string;
+    image: string;
+}
+
+export interface AlbumMembersResponse {
+    members: AlbumMember[];
 }
 
 const albumApi = {
@@ -58,8 +80,20 @@ const albumApi = {
         httpClient.get('/album-info'),
     getAlbumCanvasById: (albumId: string, pageId: string): Promise<any> =>
         httpClient.get(`/albums/${albumId}/pages/${pageId}`),
-    getAlbumById: (albumId: String | null): Promise<AlbumDetailResponse> =>
+    getAlbumById: (albumId: string | null): Promise<AlbumDetailResponse> =>
         httpClient.get(`/albums/${albumId}`),
+    getAlbumTrash: (
+        albumId: string | undefined,
+    ): Promise<TrashPageResponse> => {
+        return httpClient.get(`/albums/${albumId}/trashes`);
+    },
+    saveAlbumCanvas: (albumId: string, pageId: string, data: any) => {
+        return httpClient.put(`/albums/${albumId}/pages/${pageId}`, data);
+    },
+    restoreTrashPage: (albumId: string | undefined, trashId: Number) =>
+        httpClient.post(`/albums/${albumId}/trashes/${trashId}`),
+    getMembers: (albumId: String): Promise<AlbumMembersResponse> =>
+        httpClient.get(`/albums/${albumId}/members`),
 };
 
 const createAlbum = async (albumData: CreateAlbumData) => {

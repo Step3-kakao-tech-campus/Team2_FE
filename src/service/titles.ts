@@ -58,8 +58,8 @@ export const titleApi = {
 };
 
 export const titleSearchApi = {
-    getUserTitles: (userId: string | Number): Promise<TitleSearchResponse> =>
-        httpClient.get(`/users/${userId}/rewards`),
+    getUserTitles: (): Promise<TitleSearchResponse> =>
+        httpClient.get(`/users/rewards`),
 };
 
 export default titleApi;

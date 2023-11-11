@@ -1,15 +1,12 @@
 import axios from 'axios';
-
-const prodUrl = 'https://k2afb0ef4e3c8a.user-app.krampoline.com';
-
 export interface CustomError {
     status: number;
     message: string;
 }
 
 const httpClient = axios.create({
-    baseURL: '/api',
-    timeout: 10000,
+    baseURL: 'https://k59de1f11b350a.user-app.krampoline.com/api',
+    // timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',

@@ -4,25 +4,25 @@ export const albumList = {
         albums: [
             {
                 id: 1,
-                image: 'main_ carousel1.png',
+                image: 'a.jpeg',
                 albumName: '또 너야 지석진',
                 description: '수용이와 석진이의 프라이빗한 공간',
             },
             {
                 id: 2,
-                image: 'main_ carousel1.png',
+                image: 'b.jpeg',
                 albumName: '우리 우정 스테이^^',
                 description: '이뿌니 6인방 우정 뽀에버',
             },
             {
                 id: 3,
-                image: 'main_ carousel1.png',
+                image: 'c.jpeg',
                 albumName: '또 너야 지석진',
                 description: '수용이와 석진이의 프라이빗한 공간',
             },
             {
                 id: 4,
-                image: 'main_ carousel1.png',
+                image: 'd.jpeg',
                 albumName: '우리 우정 스테이^^',
                 description: '이뿌니 6인방 우정 뽀에버',
             },
@@ -31,23 +31,30 @@ export const albumList = {
     error: null,
 };
 
+// import { albumImage } from './albumExportImage';
 export const albumDetailInfo = {
     success: true,
     response: {
         albumId: 1, //앨범 그룹 id
+        albumImage: 'album_image.png',
         albumName: '또 너야 지석진',
         description: '수용이와 석진이의 프라이빗한 공간',
         people: 2,
         pages: [
             {
                 pageId: 1,
-                image: '링크',
+                image: 'landingImg1.png', //albumImage.img1,
                 createAt: '2023.09.12',
             },
             {
                 pageId: 2,
-                image: '링크',
+                image: 'landingImg1.png', //albumImage.img2,
                 createAt: '2023.09.13',
+            },
+            {
+                pageId: 3,
+                image: 'landingImg1.png', //albumImage.img3,
+                createAt: '2023.09.14',
             },
         ],
     },
@@ -62,6 +69,20 @@ export const albumInfo = {
         name: '또 너야 지석진',
         description: '수용이와 석진이의 프라이빗한 공간',
         members: 2,
+    },
+    error: null,
+};
+
+export const albumMembers = {
+    success: true,
+    response: {
+        members: [
+            {
+                memberId: 1,
+                nickname: '레이스 스타터dddd',
+                image: 'userIcon.png',
+            },
+        ],
     },
     error: null,
 };
@@ -300,7 +321,7 @@ export const canvasExample = {
     error: null,
 };
 
-export const canvasExample2 = {
+export let canvasExample2 = {
     shapes: {
         '77dabcca-7f96-4751-31fc-33ed597f7567': {
             id: '77dabcca-7f96-4751-31fc-33ed597f7567',
