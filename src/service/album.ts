@@ -12,6 +12,17 @@ interface AlbumsResponse {
         },
     ];
 }
+interface TrashPageResponse {
+    pages: TrashPageInfo[];
+}
+
+interface TrashPageInfo {
+    trashId: number;
+    image: string;
+    deleter: string;
+    createAt: string;
+    deleteAt: string;
+}
 
 interface AlbumInfoResponse {
     id: string;
@@ -60,6 +71,13 @@ const albumApi = {
         httpClient.get(`/albums/${albumId}/pages/${pageId}`),
     getAlbumById: (albumId: String | null): Promise<AlbumDetailResponse> =>
         httpClient.get(`/albums/${albumId}`),
+    getAlbumTrash: (
+        albumId: string | undefined,
+    ): Promise<TrashPageResponse> => {
+        return httpClient.get(`/albums/${albumId}/trashs`);
+    },
+    restoreTrashPage: (albumId: string | undefined, trashId: Number) =>
+        httpClient.post(`/albums/${albumId}/trashs/${trashId}`),
 };
 
 const createAlbum = async (albumData: CreateAlbumData) => {

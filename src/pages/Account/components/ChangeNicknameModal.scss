@@ -1,55 +1,17 @@
-.modal_dialog.nickName {
-    width: 300px;
-    height: auto;
-    padding: 10px;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 999;
-
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 30px;
-
+.check_nickname {
     $height: 30px;
 
-    .modal_header {
-        text-align: center;
+    display: flex;
+    .input.nickname {
+        height: $height;
         margin: 10px;
-        .modal_title {
-            font-weight: 800;
-        }
+        background-color: white;
+        border: 1px solid black;
     }
 
-    .modal_body {
-        .check_nickname {
-            display: flex;
-            .input.nickname {
-                height: $height;
-                margin: 10px;
-                background-color: white;
-                border: 1px solid black;
-            }
-
-            .btn.verify_nickname {
-                width: 120px;
-                height: $height;
-                margin: 10px;
-            }
-        }
-
-        .varify_result {
-            margin-left: 10px;
-            margin-bottom: 10px;
-        }
-    }
-    .modal_footer {
-        display: flex;
-        .btn {
-            height: $height;
-            margin: 10px;
-        }
+    .btn.verify_nickname {
+        width: 120px;
+        height: $height;
+        margin: 10px;
     }
 }

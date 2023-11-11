@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, FC } from 'react';
 import { useRecoilState } from 'recoil';
 import { MainContainer } from '../../common/atoms/Container';
 import Profile from './components/Profile';
@@ -10,7 +10,7 @@ import './Account.scss';
 import { userState } from '../../recoil/user';
 import { titleSearchApi, useChangeNickname } from '../../service/titles';
 
-const AccountPage: React.FC = () => {
+const AccountPage: FC = () => {
     const [user, setUser] = useRecoilState(userState);
 
     const userId = user?.id ? Number(user?.id) : 0;
@@ -29,6 +29,10 @@ const AccountPage: React.FC = () => {
         setModalOpen(true);
     };
 
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    };
+
     const handleVerifyNickname = (newNickname: string) => {
         console.log('닉네임 검사');
         console.log(data);
@@ -41,9 +45,9 @@ const AccountPage: React.FC = () => {
         changeTitle({ userId, nickname });
     };
 
-    const ModalProps = {
-        setModalOpen: setModalOpen,
+    const modalProps = {
         currentNickname: currentNickname,
+        onClose: handleCloseModal,
         onVerify: handleVerifyNickname,
         onChangeNickname: handleChangeNicknameComfirmClick,
     };
@@ -93,7 +97,7 @@ const AccountPage: React.FC = () => {
                 onNoticeClick={handleNoticeClick}
                 onInfoClick={handleInfoClick}
             />
-            {isModalOpen && <ChangeNicknameModal {...ModalProps} />}
+            {isModalOpen && <ChangeNicknameModal {...modalProps} />}
         </MainContainer>
     );
 };

@@ -145,5 +145,23 @@ $transition_time: 0.3s;
             width: 600px;
             height: 720px;
         }
+
+        .page_menu {
+            display: none;
+        }
+        &:hover .page_menu {
+            position: absolute;
+            display: flex;
+            right: 10px;
+            top: 10px;
+            z-index: 1;
+
+            .icon {
+                background-color: white;
+                margin: 5px;
+                padding: 5px;
+                border-radius: 100px;
+            }
+        }
     }
 }

@@ -1,7 +1,7 @@
 import { TDShapeType, TDToolType, TldrawApp } from '@tldraw/tldraw';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import Button from '../../common/atoms/Button';
-import Modal from '../../common/molecules/Modal';
+import Modal from '../../common/organisms/Modal';
 import Scanner from './components/Scanner';
 import axios from 'axios';
 import uuid from 'react-uuid';
@@ -84,11 +84,21 @@ function SelectQrButton({
     const [scanData, setScanData] = useState<string | null>(null);
     const [imgStatus, setImgStatus] = useState('이미지 로딩 중');
 
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    };
+
     useEffect(() => {
         if (scanData && scanData.includes('http')) {
             getImgSrcFromUrl(scanData);
         }
     }, [scanData]);
+
+    const modalProps = {
+        className: 'qrModal',
+        contentOnly: true,
+        onClose: handleCloseModal,
+    };
 
     const getImgSrcFromUrl = async (url: string) => {
         try {
@@ -131,7 +141,7 @@ function SelectQrButton({
                 imageStyle={imageStyle}
             />
             {isModalOpen && (
-                <Modal setModalOpen={setModalOpen} className="qrModal">
+                <Modal {...modalProps}>
                     <Scanner setScanData={setScanData} />
                     {scanData && (
                         <div
