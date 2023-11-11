@@ -5,21 +5,21 @@ import './DeleteAlbumModal.scss';
 
 interface DeleteAlbumModalProps {
     albumImage: ReactNode;
-    handleClose: () => void;
-    handleDelete: () => void;
+    closeModal: () => void;
+    deletePage: () => void;
 }
 
 const DeleteAlbumModal: FC<DeleteAlbumModalProps> = ({
     albumImage,
-    handleClose,
-    handleDelete,
+    closeModal,
+    deletePage,
 }) => {
     const modalProps = {
         title: '삭제',
         subTitle: '페이지를 휴지통으로 이동합니다.',
         confirmText: '삭제',
-        onClose: handleClose,
-        onConfirm: handleDelete,
+        onClose: closeModal,
+        onConfirm: deletePage,
     };
 
     return (
