@@ -84,6 +84,36 @@ export const handlers = [
             }),
         );
     }),
+    rest.get('/api/albums/:albumId/trashs', (req, res, ctx) => {
+        const albumId = req.params.albumId;
+        // 실제 애플리케이션에서는 albumId를 사용하여 데이터를 필터링할 수 있습니다.
+        return res(
+            ctx.status(200),
+            ctx.json({
+                success: true,
+                response: {
+                    albumId: albumId,
+                    pages: [
+                        {
+                            trashId: 1,
+                            image: '/honor.png',
+                            deleter: 'tjralsrh',
+                            createAt: '2023.09.12',
+                            deleteAt: '2023.09.13',
+                        },
+                        {
+                            trashId: 2,
+                            image: '/honor.png',
+                            deleter: 'tjralsrh',
+                            createAt: '2023.09.13',
+                            deleteAt: '2023.09.13',
+                        },
+                    ],
+                },
+                error: null,
+            }),
+        );
+    }),
     rest.put('/api/users/:userId/titles/:titleId', (req, res, ctx) => {
         const { userId, titleId } = req.params;
         const authToken = req.headers.get('Authorization');
