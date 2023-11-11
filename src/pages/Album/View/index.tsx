@@ -16,9 +16,7 @@ const AlbumViewPage = () => {
     const [albumId, setAlbumId] = useState('-1');
 
     useEffect(() => {
-        console.log(location);
         const pathSegments = location.pathname.split('/');
-        console.log(pathSegments[pathSegments.length - 1]);
         setAlbumId(pathSegments[pathSegments.length - 1]);
     }, [location]);
 
@@ -98,17 +96,12 @@ const AlbumViewPage = () => {
         deleteGroup: handleDeleteGroupConfirm,
     };
 
-    const handleManageRecycleBin = () => {};
-    const handleEditPage = (pageIdx: number) => {
-        console.log(pageIdx);
-        navigate('/album/1/page/1');
+    const handleManageRecycleBin = () => {
+        navigate(`/album/view/${albumId}/trash`);
     };
-
-    // const pages = () =>  data?.pages.map(page => (
-    //     <div key={page.pageId}>
-    //     <LocalImage src={page.image}/>
-    //     </div>
-    // ))
+    const handleEditPage = (pageIdx: number) => {
+        navigate(`/album/${albumId}/page/${pageIdx}`);
+    };
 
     return (
         <MainContainer className="album_view">
