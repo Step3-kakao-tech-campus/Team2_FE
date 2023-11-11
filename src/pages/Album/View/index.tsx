@@ -35,7 +35,7 @@ const AlbumViewPage = () => {
 
     const handleDeleteButtonClick = (pageIdx: number) => {
         const img = data ? (
-            <LocalImage src={data.pages[targetIdx].image} />
+            <LocalImage src={data.pages[pageIdx].image} />
         ) : (
             <></>
         );
