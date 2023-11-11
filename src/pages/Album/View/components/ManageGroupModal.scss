@@ -1,0 +1,73 @@
+.manage_group {
+    display: flex;
+    flex-direction: column;
+
+    .search_user {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        .nickname {
+        }
+        .search_icon {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+        }
+    }
+
+    .invite_link {
+        display: flex;
+        width: 100%;
+        .link {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            background: #d9d9d9;
+            border-radius: 8px;
+            margin-right: 5px;
+            padding-left: 5px;
+        }
+        .copy_link {
+            width: 100px;
+            height: 30px;
+        }
+    }
+}
+
+.member_list {
+    display: flex;
+    overflow-x: auto;
+    margin: 5px 0;
+    .member_card {
+        position: relative;
+        max-width: 110px;
+        .circle {
+            display: flex;
+            align-items: center;
+            margin: 10px 5px;
+            width: 100px;
+            height: 100px;
+            border-radius: 100px;
+            align-items: center;
+            text-align: center;
+
+            &.invite_user {
+                background: #d9d9d9;
+                overflow: visible;
+            }
+        }
+        .remove_member {
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: default;
+            background: #545f71;
+            color: white;
+            padding: 0 4px;
+            border-radius: 5px;
+        }
+        .user_nickname {
+            font-size: small;
+        }
+    }
+}

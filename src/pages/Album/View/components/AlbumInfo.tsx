@@ -10,7 +10,7 @@ interface AlbumInfoProps {
     albumName?: string;
     albumDescription?: string;
     albumMembers?: number;
-    onManageAlbum: () => void;
+    onManageGroup: () => void;
     onManageRecycleBin: () => void;
 }
 
@@ -19,7 +19,7 @@ const AlbumInfo = ({
     albumName,
     albumDescription,
     albumMembers,
-    onManageAlbum,
+    onManageGroup,
     onManageRecycleBin,
 }: AlbumInfoProps) => {
     const [isFolded, setIsFolded] = useState(false);
@@ -52,15 +52,12 @@ const AlbumInfo = ({
                     <div className="album_description">{albumDescription}</div>
                 </div>
                 <div className="btns">
-                    <Button
-                        className="manage_album"
-                        onClick={() => onManageAlbum}
-                    >
+                    <Button className="manage_album" onClick={onManageGroup}>
                         그룹 관리
                     </Button>
                     <Button
                         className="recycle_bin"
-                        onClick={() => onManageRecycleBin}
+                        onClick={onManageRecycleBin}
                     >
                         휴지통
                     </Button>
