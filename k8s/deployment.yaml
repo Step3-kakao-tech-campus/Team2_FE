@@ -13,12 +13,12 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_fdbad48ebb9e:latest
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_9af46a2610ea:latest
           env:
             - name: REACT_APP_API_URL
               value: https://k255e0ec5dd13a.user-app.krampoline.com
             - name: GENERATE_SOURCEMAP
-              value: false
+              value: "false"
             - name: REACT_APP_KAKAO_JS_KEY
               valueFrom:
                 secretKeyRef:

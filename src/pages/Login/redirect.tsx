@@ -39,8 +39,8 @@ const RedirectPage = () => {
             const error = e as CustomError;
             navigate('/error', {
                 state: {
-                    errorCode: error.status,
-                    errorMsg: error.message,
+                    errorCode: error.status??500,
+                    errorMsg: error.message??'알 수 없는 오류가 발생했습니다',
                 },
             });
         }
