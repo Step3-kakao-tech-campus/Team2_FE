@@ -27,3 +27,20 @@ export const titles = {
     },
     error: null,
 };
+
+export const userTitles = {
+    success: true,
+    response: {
+        titles: [
+            {
+                titleId: 1,
+                titleName: '혼술? 아니 혼컷',
+            },
+            {
+                titleId: 2,
+                titleName: '네컷 인플루언서',
+            },
+        ],
+    },
+    error: null,
+};

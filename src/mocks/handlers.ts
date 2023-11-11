@@ -8,12 +8,13 @@ import {
     albumMembers,
 } from './data/album';
 import { rewards } from './data/rewards';
-import { titles } from './data/titles';
+import { titles, userTitles } from './data/titles';
 import {
     userResponse,
     unauthorizedResponse,
     loginResponse,
     logoutResponse,
+    userInfoModifiedResponse,
 } from './data/user';
 
 // req: 매칭되는 요청에 대한 정보
@@ -54,6 +55,10 @@ export const handlers = [
     rest.get('/api/albums/1', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(albumDetailInfo));
     }),
+    rest.get('/api/users/:userId/rewards', (req, res, ctx) => {
+        const { userId } = req.params;
+        return res(ctx.status(200), ctx.json(userTitles));
+    }),
     rest.post<CreateAlbumData>('/api/albums/creation', (req, res, ctx) => {
         const { albumName } = req.body as CreateAlbumData;
         return res(
@@ -83,5 +88,21 @@ export const handlers = [
                 error: null,
             }),
         );
+    }),
+    rest.put('/api/users/:userId/titles/:titleId', (req, res, ctx) => {
+        const { userId, titleId } = req.params;
+        const authToken = req.headers.get('Authorization');
+        return res(
+            ctx.status(200),
+            ctx.json({
+                success: true,
+                message: `User ${userId} has changed their title to ${titleId}`,
+            }),
+        );
+    }),
+    rest.put('/api/users/:userId', (req, res, ctx) => {
+        const { userId } = req.params;
+        const authToken = req.headers.get('Authorization');
+        return res(ctx.status(200), ctx.json(userInfoModifiedResponse));
     }),
 ];
