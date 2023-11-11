@@ -1,5 +1,5 @@
 import httpClient from './index';
-import { TDShape } from '@tldraw/tldraw';
+import { TDAsset, TDBinding, TDShape } from '@tldraw/tldraw';
 import { useMutation } from 'react-query';
 
 interface AlbumsResponse {
@@ -34,8 +34,8 @@ interface AlbumInfoResponse {
 
 export interface CanvasResponse {
     shapes: Record<string, TDShape | undefined>;
-    bindings: Record<string, TDShape | undefined>;
-    assets: Record<string, TDShape | undefined>;
+    bindings: Record<string, TDBinding | undefined>;
+    assets: Record<string, TDAsset | undefined>;
 }
 
 interface CanvasRequest {

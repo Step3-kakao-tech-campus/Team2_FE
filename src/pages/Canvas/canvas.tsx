@@ -3,7 +3,7 @@ import { useMultiplayerState } from './components/useMultiplayer';
 import { useCallback } from 'react';
 import { YStatus } from './editContainer';
 import { CanvasResponse } from '../../service/album';
-import Button from '../../common/atoms/Button';
+import { CanvasSize } from './const';
 
 const Canvas = ({
     setApp,
@@ -23,7 +23,6 @@ const Canvas = ({
     const fileSystemEvents = useFileSystem();
     const {
         onMount,
-        getImg,
         onChange,
         onChangePage,
         onUndo,
@@ -36,17 +35,14 @@ const Canvas = ({
         onMount(app);
     }, []);
 
-    const handleGetImg = async () => {
-        const img = await getImg();
-        console.log(img);
-        // POST 메서드 구현해야됨
-    };
-
     return (
-        <div className="canvas">
-            <Button className="save_canvas" onClick={handleGetImg}>
-                저장하기
-            </Button>
+        <div
+            className="canvas"
+            style={{
+                maxWidth: CanvasSize.width + 'px',
+                maxHeight: CanvasSize.height + 'px',
+            }}
+        >
             <Tldraw
                 // id="tldraw-canvas"
                 onMount={handleMount}

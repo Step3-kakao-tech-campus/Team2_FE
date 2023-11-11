@@ -15,8 +15,6 @@ a {
     width: 100%;
     .canvas {
         position: relative;
-        max-width: 1500px;
-        max-height: 2000px;
         flex-grow: 2;
         background-color: #545f71;
     }
@@ -45,10 +43,10 @@ a {
 
                 &.view_ctrl {
                     margin-right: 10px;
-                    background-color: #818898;
                 }
 
                 &.save {
+                    background-color: #f94d4d;
                     min-width: 60px;
                 }
             }

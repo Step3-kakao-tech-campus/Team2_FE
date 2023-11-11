@@ -1,15 +1,9 @@
-import {
-    TDAsset,
-    TDBinding,
-    TDShape,
-    TDUser,
-    TldrawApp,
-    TDExportType,
-} from '@tldraw/tldraw';
+import { TDAsset, TDBinding, TDShape, TDUser, TldrawApp } from '@tldraw/tldraw';
 import { useCallback, useEffect, useRef } from 'react';
 import useYjsStore from './store';
 import { YStatus } from '../editContainer';
 import { CanvasResponse } from '../../../service/album';
+import { CanvasSize } from '../const';
 
 export function useMultiplayerState(
     roomId: string,
@@ -68,49 +62,13 @@ export function useMultiplayerState(
         [roomId],
     );
 
-    const getImgData = async () => {
-        const tldraw = tldrawRef.current;
-        return await tldraw?.getImage(TDExportType.PNG, {
-            scale: 1,
-            quality: 1,
-            transparentBackground: true,
-        });
-    };
-
-    const getImg = useCallback(() => {
-        return new Promise((resolve, reject) => {
-            getImgData()
-                .then(blob => {
-                    if (blob) {
-                        const reader = new FileReader();
-
-                        reader.onloadend = function () {
-                            let base64Data = reader.result;
-                            resolve(base64Data);
-                        };
-
-                        reader.onerror = function (error) {
-                            reject(error);
-                        };
-
-                        reader.readAsDataURL(blob);
-                    } else {
-                        reject(new Error('No image data'));
-                    }
-                })
-                .catch(error => {
-                    reject(error);
-                });
-        });
-    }, []);
-
     const onChange = useCallback((app: TldrawApp) => {
         const { minX, minY, maxX, maxY, height, width } = app.viewport;
         const allowedArea = {
             minX: 0,
             minY: 0,
-            width: 1500,
-            height: 2000,
+            width: CanvasSize.width,
+            height: CanvasSize.height,
         };
         let minZoom = Math.max(
             width / allowedArea.width,
@@ -258,7 +216,6 @@ export function useMultiplayerState(
 
     return {
         onMount,
-        getImg,
         onChange,
         onChangePage,
         onUndo,
