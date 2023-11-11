@@ -208,8 +208,8 @@ const AlbumContent: FC<contentProps> = ({
     const addPage = () => {
         const newPage: PageDetail = {
             pageId: -1,
-            image: '',
-            createAt: '2023-11-11',
+            image: 'landingImg1.png',
+            createAt: '2023.11.11',
         };
         pages?.push(newPage);
     };
@@ -232,7 +232,9 @@ const AlbumContent: FC<contentProps> = ({
                         alt="앨범 다음 페이지"
                         onClick={flipToNextPage}
                     ></LocalImage>
-                    <div className="page_date">2023.09.03</div>
+                    <div className="page_date">
+                        {pages ? pages[currentPage].createAt : '2023.09.03'}
+                    </div>
                 </div>
                 <Button className="add_page" onClick={addPage}>
                     페이지 추가
