@@ -12,7 +12,7 @@ const googleUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${proc
 const staticServerUri =
     process.env.NODE_ENV === 'development'
         ? 'http://localhost:3000'
-        : 'https://k5ebddfe59255a.user-app.krampoline.com';
+        : 'https://kff8c580d2bada.user-app.krampoline.com';
 
 const LoginPage = () => {
     useEffect(() => {
