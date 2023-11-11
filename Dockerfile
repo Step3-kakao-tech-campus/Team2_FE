@@ -2,6 +2,10 @@
 FROM krmp-d2hub-idock.9rum.cc/goorm/node:16
 WORKDIR /usr/src/app
 COPY . .
+ENV GENERATE_SOURCEMAP=false
+ENV REACT_APP_API_URL=https://k255e0ec5dd13a.user-app.krampoline.com
+ENV REACT_APP_KAKAO_JS_KEY=9cda45647127425015c22ffcdb2d5c1a
+ENV REACT_APP_GOOGLE_CLIENT_KEY=441856075982-vptu67e222uh2161vdj5b9elcb3l2utc.apps.googleusercontent.com
 RUN npm ci
 RUN npm run build
 RUN npm install -g serve
