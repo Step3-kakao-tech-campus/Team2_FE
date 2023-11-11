@@ -4,6 +4,8 @@ import './Modal.scss';
 
 interface ModalProps {
     className?: string;
+    width?: string;
+    height?: string;
     contentOnly?: boolean;
     title?: string;
     subTitle?: string;
@@ -16,6 +18,8 @@ interface ModalProps {
 
 const Modal: FC<ModalProps> = ({
     className = '',
+    width = '',
+    height = '',
     contentOnly = false,
     title,
     subTitle,
@@ -50,7 +54,11 @@ const Modal: FC<ModalProps> = ({
     return (
         <>
             <div className="modal_background">
-                <div ref={modalRef} className={`modal_dialog ${className}`}>
+                <div
+                    ref={modalRef}
+                    className={`modal_dialog ${className}`}
+                    style={{ width: `${width}`, height: `${height}` }}
+                >
                     {!contentOnly && (
                         <div className="modal_header">
                             <div className="modal_title">{title}</div>
