@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Tldraw } from '@tldraw/tldraw';
 
 import albumApi from '../../../service/album';
@@ -8,22 +8,23 @@ import { MainContainer } from '../../../common/atoms/Container';
 import { AlbumInfo, AlbumContent } from './components';
 import DeleteAlbumModal from './components/DeleteAlbumModal';
 import ManageGroupModal from './components/ManageGroupModal';
-
-const pages = Array.from({ length: 9 }, (_, i) => (
-    // <div key={i}>
-    //     <Tldraw id="tldraw-canvas" showUI={false} readOnly={true} />
-    // </div>
-    <div key={i}>{`Page ${i} Content`}</div>
-));
+import { LocalImage } from '../../../common/atoms/Image';
 
 const AlbumViewPage = () => {
-    const userId = '1';
-    const albumId = '1';
     const navigate = useNavigate();
+    const location = useLocation();
+    const [albumId, setAlbumId] = useState('-1');
+
+    useEffect(() => {
+        console.log(location);
+        const pathSegments = location.pathname.split('/');
+        console.log(pathSegments[pathSegments.length - 1]);
+        setAlbumId(pathSegments[pathSegments.length - 1]);
+    }, [location]);
 
     const { isLoading, isError, data, error } = useQuery({
-        queryKey: ['albumGroup', userId],
-        queryFn: albumApi.getAlbumInfo,
+        queryKey: ['albumDetails', albumId],
+        queryFn: () => albumApi.getAlbumById(albumId),
     });
 
     const [flippedPage, setFlippedPage] = useState(0);
@@ -33,8 +34,14 @@ const AlbumViewPage = () => {
     const [targetImage, setTargetImage] = useState(<></>);
 
     const handleDeleteButtonClick = (pageIdx: number) => {
+        const img = data ? (
+            <LocalImage src={data.pages[targetIdx].image} />
+        ) : (
+            <></>
+        );
+
         setTargetIdx(pageIdx);
-        setTargetImage(pages[pageIdx]);
+        setTargetImage(img);
         setDeleteModalOpen(true);
     };
     const closeDeleteModal = () => {
@@ -96,18 +103,24 @@ const AlbumViewPage = () => {
         navigate('/album/1/page/1');
     };
 
+    // const pages = () =>  data?.pages.map(page => (
+    //     <div key={page.pageId}>
+    //     <LocalImage src={page.image}/>
+    //     </div>
+    // ))
+
     return (
         <MainContainer className="album_view">
             <AlbumInfo
-                albumImage={data?.image}
-                albumName={data?.name}
+                albumImage={data?.albumImage}
+                albumName={data?.albumName}
                 albumDescription={data?.description}
-                albumMembers={data?.members}
+                albumMembers={data?.people}
                 onManageGroup={handleGroupButtonClick}
                 onManageRecycleBin={handleManageRecycleBin}
             />
             <AlbumContent
-                pages={pages}
+                pages={data?.pages}
                 flippedPage={flippedPage}
                 setFlippedPage={setFlippedPage}
                 handleDelete={handleDeleteButtonClick}

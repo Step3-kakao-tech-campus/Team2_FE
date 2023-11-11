@@ -9,6 +9,7 @@ import {
 
 import { LocalImage } from '../../../../common/atoms/Image';
 import './AlbumContent.scss';
+import { PageDetail } from '../../../../service/album';
 
 const STATES = {
     READ: 'read',
@@ -19,7 +20,8 @@ const STATES = {
 };
 
 interface contentProps {
-    pages: ReactNode[];
+    // pages: ReactNode[];
+    pages?: PageDetail[];
     flippedPage: number;
     setFlippedPage: Dispatch<SetStateAction<number>>;
     handleDelete: (pageIdx: number) => void;
@@ -56,9 +58,9 @@ const AlbumContent: FC<contentProps> = ({
 
     const PageContent = (pageIdx: number) => (
         <>
-            {pages[pageIdx] && (
+            {pages && pages[pageIdx] && (
                 <div className="page_content">
-                    {pages[pageIdx]}
+                    {<LocalImage src={pages[pageIdx].image} />}
 
                     <div className="page_menu">
                         <div className="icon">
@@ -157,7 +159,7 @@ const AlbumContent: FC<contentProps> = ({
     };
 
     const flipToNextPage = () => {
-        if (flippedPage < pages.length - flipCount) {
+        if (pages && flippedPage < pages.length - flipCount) {
             flipPage(
                 flippedPage + flipCount,
                 STATES.START_NEXT,

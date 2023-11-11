@@ -38,7 +38,7 @@ export interface CreateAlbumData {
     description: string;
     image: string;
 }
-interface PageDetail {
+export interface PageDetail {
     pageId: number;
     image: string;
     createAt: string;
@@ -46,6 +46,7 @@ interface PageDetail {
 
 export interface AlbumDetailResponse {
     albumId: number;
+    albumImage: string;
     albumName: string;
     description: string;
     people: number;
@@ -64,8 +65,8 @@ export interface AlbumMembersResponse {
 
 const albumApi = {
     getAlbumGroup: (): Promise<AlbumsResponse> => httpClient.get('/groups'),
-    getAlbumInfo: (): Promise<AlbumInfoResponse> =>
-        httpClient.get('/album-info'),
+    // getAlbumInfo: (): Promise<AlbumInfoResponse> =>
+    //     httpClient.get('/album-info'),
     getAlbumCanvasById: (albumId: string, pageId: string): Promise<any> =>
         httpClient.get(`/albums/${albumId}/pages/${pageId}`),
     getAlbumById: (albumId: String | null): Promise<AlbumDetailResponse> =>

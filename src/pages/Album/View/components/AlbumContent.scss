@@ -73,7 +73,7 @@ $transition_time: 0.3s;
         .left {
             left: 10px;
             &.flip {
-                background: red;
+                // background: red;
                 transform-origin: 100% 0%;
             }
         }
@@ -90,7 +90,7 @@ $transition_time: 0.3s;
             }
 
             &.flip {
-                background: blue;
+                // background: blue;
                 transform-origin: 0% 100%;
             }
         }
@@ -132,6 +132,7 @@ $transition_time: 0.3s;
     }
 
     .page_content {
+        background: white;
         transition: all $transition_time linear;
         @include mobile {
             width: 340px;

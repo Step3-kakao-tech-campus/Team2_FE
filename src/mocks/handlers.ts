@@ -23,9 +23,9 @@ export const handlers = [
     rest.get('/api/groups', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(albumList));
     }),
-    rest.get('/api/album-info', (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(albumInfo));
-    }),
+    // rest.get('/api/album-info', (req, res, ctx) => {
+    //     return res(ctx.status(200), ctx.json(albumInfo));
+    // }),
     rest.get('/api/albums/1/pages/1', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(canvasExample2));
 
