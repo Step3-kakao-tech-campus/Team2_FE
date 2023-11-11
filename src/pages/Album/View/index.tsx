@@ -49,6 +49,7 @@ const AlbumViewPage = () => {
     };
     const handleDeleteConfirm = () => {
         closeDeleteModal();
+        data?.pages.splice(targetIdx, 1);
         console.log(`delete page: ${targetIdx}`);
     };
 

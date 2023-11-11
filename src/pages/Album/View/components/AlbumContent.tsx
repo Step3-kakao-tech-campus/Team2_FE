@@ -10,6 +10,7 @@ import {
 import { LocalImage } from '../../../../common/atoms/Image';
 import './AlbumContent.scss';
 import { PageDetail } from '../../../../service/album';
+import Button from '../../../../common/atoms/Button';
 
 const STATES = {
     READ: 'read',
@@ -51,7 +52,7 @@ const AlbumContent: FC<contentProps> = ({
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, []);
+    }, [pages]);
 
     const transitionTime = 700;
     const transitionTimeStr = (transitionTime / 1000).toString() + 's';
@@ -204,24 +205,38 @@ const AlbumContent: FC<contentProps> = ({
         return style;
     };
 
+    const addPage = () => {
+        const newPage: PageDetail = {
+            pageId: -1,
+            image: '',
+            createAt: '2023-11-11',
+        };
+        pages?.push(newPage);
+    };
+
     return (
         <div className="album_content">
-            <div className="page_info">
-                <LocalImage
-                    className="btn_prev"
-                    width="30px"
-                    src="left_arrow.png"
-                    alt="앨범 이전 페이지"
-                    onClick={flipToPrevPage}
-                />
-                <LocalImage
-                    className="btn_next"
-                    width="30px"
-                    src="right_arrow.png"
-                    alt="앨범 다음 페이지"
-                    onClick={flipToNextPage}
-                ></LocalImage>
-                <div className="page_date">2023.09.03</div>
+            <div className="album_menu">
+                <div className="page_info">
+                    <LocalImage
+                        className="btn_prev"
+                        width="30px"
+                        src="left_arrow.png"
+                        alt="앨범 이전 페이지"
+                        onClick={flipToPrevPage}
+                    />
+                    <LocalImage
+                        className="btn_next"
+                        width="30px"
+                        src="right_arrow.png"
+                        alt="앨범 다음 페이지"
+                        onClick={flipToNextPage}
+                    ></LocalImage>
+                    <div className="page_date">2023.09.03</div>
+                </div>
+                <Button className="add_page" onClick={addPage}>
+                    페이지 추가
+                </Button>
             </div>
             <div className="book">
                 <div className="left_cover" />
