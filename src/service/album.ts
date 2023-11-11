@@ -12,6 +12,17 @@ interface AlbumsResponse {
         },
     ];
 }
+interface TrashPageResponse {
+    pages: TrashPageInfo[];
+}
+
+interface TrashPageInfo {
+    trashId: number;
+    image: string;
+    deleter: string;
+    createAt: string;
+    deleteAt: string;
+}
 
 interface AlbumInfoResponse {
     id: string;
@@ -65,16 +76,21 @@ export interface AlbumMembersResponse {
 
 const albumApi = {
     getAlbumGroup: (): Promise<AlbumsResponse> => httpClient.get('/groups'),
-    // getAlbumInfo: (): Promise<AlbumInfoResponse> =>
-    //     httpClient.get('/album-info'),
+    getAlbumInfo: (): Promise<AlbumInfoResponse> =>
+        httpClient.get('/album-info'),
     getAlbumCanvasById: (albumId: string, pageId: string): Promise<any> =>
         httpClient.get(`/albums/${albumId}/pages/${pageId}`),
     getAlbumById: (albumId: String | null): Promise<AlbumDetailResponse> =>
         httpClient.get(`/albums/${albumId}`),
-    getMembers: (albumId: String): Promise<AlbumMembersResponse> => {
-        console.log('1');
-        return httpClient.get(`/albums/${albumId}/members`);
+    getAlbumTrash: (
+        albumId: string | undefined,
+    ): Promise<TrashPageResponse> => {
+        return httpClient.get(`/albums/${albumId}/trashs`);
     },
+    restoreTrashPage: (albumId: string | undefined, trashId: Number) =>
+        httpClient.post(`/albums/${albumId}/trashs/${trashId}`),
+    getMembers: (albumId: String): Promise<AlbumMembersResponse> =>
+        httpClient.get(`/albums/${albumId}/members`),
 };
 
 const createAlbum = async (albumData: CreateAlbumData) => {

@@ -17,6 +17,7 @@ import { userState } from '../recoil/user';
 import { useEffect, useState } from 'react';
 import { userApi } from '../service/user';
 import Loader from '../common/atoms/Loader';
+import TrashPage from '../pages/Trash';
 
 const Router = () => {
     const setUser = useSetRecoilState(userState);
@@ -63,6 +64,10 @@ const Router = () => {
                             <Route
                                 path="view/:albumId"
                                 element={<AlbumViewPage />}
+                            />
+                            <Route
+                                path="view/:albumId/trash"
+                                element={<TrashPage />}
                             />
                             <Route
                                 path="invite"

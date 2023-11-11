@@ -1,0 +1,110 @@
+@mixin mobile {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+@mixin desktop_s {
+    @media (min-width: 768px) and (max-width: 1240px) {
+        @content;
+    }
+}
+@mixin desktop_l {
+    @media (min-width: 1240px) {
+        @content;
+    }
+}
+$transition_time: 0.3s;
+
+.album_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .album_fold {
+        display: flex;
+        justify-content: space-between;
+
+        transition: all $transition_time linear;
+        overflow: hidden;
+        height: 100px;
+
+        @include mobile {
+            width: 100%;
+            min-width: 360px;
+        }
+        @include desktop_s {
+            width: 750px;
+        }
+        @include desktop_l {
+            width: 1230px;
+        }
+        &.folded {
+            height: 0px;
+        }
+        .album_image {
+            width: 100px;
+            height: 100px;
+        }
+
+        .album_details {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 5px;
+
+            .album_title {
+                display: flex;
+                align-items: center;
+
+                .album_name {
+                    padding-right: 10px;
+                    font-size: large;
+                    font-weight: bold;
+                }
+
+                .album_members {
+                    display: flex;
+                }
+            }
+        }
+
+        .btns {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            height: 100px;
+            padding: 0 5px;
+
+            .btn {
+                width: 80px;
+                height: 40px;
+
+                @include mobile {
+                    width: 70px;
+                    height: 25px;
+                }
+                &.manage_album {
+                    background-color: #d9d9d9;
+                    color: black;
+                }
+                &.recycle_bin {
+                    background-color: #f94d4d;
+                }
+            }
+        }
+    }
+    .btn_fold {
+        width: 100px;
+        height: 10px;
+        background-color: #505050;
+        border: solid #505050;
+        border-radius: 10px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: black;
+            border: black;
+        }
+    }
+}
