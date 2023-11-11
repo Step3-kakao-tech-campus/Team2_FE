@@ -52,6 +52,16 @@ export interface AlbumDetailResponse {
     pages: PageDetail[];
 }
 
+export interface AlbumMember {
+    memberId: number;
+    nickname: string;
+    image: string;
+}
+
+export interface AlbumMembersResponse {
+    members: AlbumMember[];
+}
+
 const albumApi = {
     getAlbumGroup: (): Promise<AlbumsResponse> => httpClient.get('/groups'),
     getAlbumInfo: (): Promise<AlbumInfoResponse> =>
@@ -60,6 +70,10 @@ const albumApi = {
         httpClient.get(`/albums/${albumId}/pages/${pageId}`),
     getAlbumById: (albumId: String | null): Promise<AlbumDetailResponse> =>
         httpClient.get(`/albums/${albumId}`),
+    getMembers: (albumId: String): Promise<AlbumMembersResponse> => {
+        console.log('1');
+        return httpClient.get(`/albums/${albumId}/members`);
+    },
 };
 
 const createAlbum = async (albumData: CreateAlbumData) => {

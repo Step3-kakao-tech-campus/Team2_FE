@@ -66,6 +66,20 @@ export const albumInfo = {
     error: null,
 };
 
+export const albumMembers = {
+    success: true,
+    response: {
+        members: [
+            {
+                memberId: 1,
+                nickname: '레이스 스타터dddd',
+                image: 'userIcon.png',
+            },
+        ],
+    },
+    error: null,
+};
+
 export const canvasExample = {
     success: true,
     response: {

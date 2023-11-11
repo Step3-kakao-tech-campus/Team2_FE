@@ -7,6 +7,7 @@ import albumApi from '../../../service/album';
 import { MainContainer } from '../../../common/atoms/Container';
 import { AlbumInfo, AlbumContent } from './components';
 import DeleteAlbumModal from './components/DeleteAlbumModal';
+import ManageGroupModal from './components/ManageGroupModal';
 
 const pages = Array.from({ length: 9 }, (_, i) => (
     // <div key={i}>
@@ -17,6 +18,7 @@ const pages = Array.from({ length: 9 }, (_, i) => (
 
 const AlbumViewPage = () => {
     const userId = '1';
+    const albumId = '1';
     const navigate = useNavigate();
 
     const { isLoading, isError, data, error } = useQuery({
@@ -35,21 +37,59 @@ const AlbumViewPage = () => {
         setTargetImage(pages[pageIdx]);
         setDeleteModalOpen(true);
     };
-    const deleteModalClose = () => {
+    const closeDeleteModal = () => {
         setDeleteModalOpen(false);
     };
     const handleDeleteConfirm = () => {
-        deleteModalClose();
+        closeDeleteModal();
         console.log(`delete page: ${targetIdx}`);
     };
 
     const deleteAlbumProps = {
         albumImage: targetImage,
-        handleClose: deleteModalClose,
-        handleDelete: handleDeleteConfirm,
+        closeModal: closeDeleteModal,
+        deletePage: handleDeleteConfirm,
     };
 
-    const handleManageAlbum = () => {};
+    const [isGroupModalOpen, setGroupModalOpen] = useState(false);
+
+    const handleGroupButtonClick = () => {
+        setGroupModalOpen(true);
+    };
+    const closeGroupModal = () => {
+        setGroupModalOpen(false);
+    };
+    const handleDeleteGroupConfirm = () => {
+        closeGroupModal();
+        console.log(`delete group: 1`);
+    };
+
+    const {
+        isLoading: isLoading2,
+        isError: isError2,
+        data: data2,
+        error: error2,
+    } = useQuery({
+        queryKey: ['albumMembers', albumId],
+        queryFn: () => albumApi.getMembers(albumId),
+        retry: 3,
+        enabled: !!albumId,
+    });
+
+    const searchUser = (nickname: string) => {
+        console.log(`search user ${nickname}`);
+    };
+    const inviteMember = (userId: string) => {
+        console.log(`invite member ${userId}`);
+    };
+    const manageGroupProps = {
+        members: data2?.members,
+        searchUser: searchUser,
+        inviteMember: inviteMember,
+        closeModal: closeGroupModal,
+        deleteGroup: handleDeleteGroupConfirm,
+    };
+
     const handleManageRecycleBin = () => {};
     const handleEditPage = (pageIdx: number) => {
         console.log(pageIdx);
@@ -63,7 +103,7 @@ const AlbumViewPage = () => {
                 albumName={data?.name}
                 albumDescription={data?.description}
                 albumMembers={data?.members}
-                onManageAlbum={handleManageAlbum}
+                onManageGroup={handleGroupButtonClick}
                 onManageRecycleBin={handleManageRecycleBin}
             />
             <AlbumContent
@@ -74,6 +114,7 @@ const AlbumViewPage = () => {
                 handleEdit={handleEditPage}
             ></AlbumContent>
             {isDeleteModalOpen && <DeleteAlbumModal {...deleteAlbumProps} />}
+            {isGroupModalOpen && <ManageGroupModal {...manageGroupProps} />}
         </MainContainer>
     );
 };
