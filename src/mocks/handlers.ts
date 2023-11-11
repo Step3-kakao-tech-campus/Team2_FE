@@ -5,6 +5,7 @@ import {
     albumList,
     canvasExample2,
     albumDetailInfo,
+    albumMembers,
 } from './data/album';
 import { rewards } from './data/rewards';
 import { titles, userTitles } from './data/titles';
@@ -71,6 +72,10 @@ export const handlers = [
                 error: null,
             }),
         );
+    }),
+    rest.get('/api/albums/1/members', (req, res, ctx) => {
+        const { albumId } = req.params;
+        return res(ctx.status(200), ctx.json(albumMembers));
     }),
     rest.post('/api/albums/:albumId/members/join', (req, res, ctx) => {
         const { albumId } = req.params;

@@ -49,7 +49,7 @@ export interface CreateAlbumData {
     description: string;
     image: string;
 }
-interface PageDetail {
+export interface PageDetail {
     pageId: number;
     image: string;
     createAt: string;
@@ -57,10 +57,21 @@ interface PageDetail {
 
 export interface AlbumDetailResponse {
     albumId: number;
+    albumImage: string;
     albumName: string;
     description: string;
     people: number;
     pages: PageDetail[];
+}
+
+export interface AlbumMember {
+    memberId: number;
+    nickname: string;
+    image: string;
+}
+
+export interface AlbumMembersResponse {
+    members: AlbumMember[];
 }
 
 const albumApi = {
@@ -78,6 +89,8 @@ const albumApi = {
     },
     restoreTrashPage: (albumId: string | undefined, trashId: Number) =>
         httpClient.post(`/albums/${albumId}/trashs/${trashId}`),
+    getMembers: (albumId: String): Promise<AlbumMembersResponse> =>
+        httpClient.get(`/albums/${albumId}/members`),
 };
 
 const createAlbum = async (albumData: CreateAlbumData) => {

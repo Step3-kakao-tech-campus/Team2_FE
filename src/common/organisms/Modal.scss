@@ -39,6 +39,8 @@
         }
 
         .modal_body {
+            display: flex;
+            flex-direction: column;
             .varify_result {
                 margin-left: 10px;
                 margin-bottom: 10px;
