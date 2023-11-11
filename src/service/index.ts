@@ -12,7 +12,7 @@ const baseURL = () => {
 };
 
 const httpClient = axios.create({
-    baseURL: baseURL(),
+    baseURL: '',
     // timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
