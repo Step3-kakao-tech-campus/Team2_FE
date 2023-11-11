@@ -74,10 +74,10 @@ const albumApi = {
     getAlbumTrash: (
         albumId: string | undefined,
     ): Promise<TrashPageResponse> => {
-        return httpClient.get(`/api/albums/${albumId}/trashs`);
+        return httpClient.get(`/albums/${albumId}/trashs`);
     },
     restoreTrashPage: (albumId: string | undefined, trashId: Number) =>
-        httpClient.post(`/api/albums/${albumId}/trashs/${trashId}`),
+        httpClient.post(`/albums/${albumId}/trashs/${trashId}`),
 };
 
 const createAlbum = async (albumData: CreateAlbumData) => {

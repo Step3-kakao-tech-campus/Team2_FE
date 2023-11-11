@@ -96,14 +96,14 @@ export const handlers = [
                     pages: [
                         {
                             trashId: 1,
-                            image: '링크',
+                            image: '/honor.png',
                             deleter: 'tjralsrh',
                             createAt: '2023.09.12',
                             deleteAt: '2023.09.13',
                         },
                         {
                             trashId: 2,
-                            image: '링크',
+                            image: '/honor.png',
                             deleter: 'tjralsrh',
                             createAt: '2023.09.13',
                             deleteAt: '2023.09.13',

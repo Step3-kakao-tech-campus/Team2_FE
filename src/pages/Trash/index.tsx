@@ -34,7 +34,15 @@ const TrashPage = () => {
     });
 
     const [selectedPages, setSelectedPages] = useState(new Set());
+    const isAllSelected = trashData?.pages?.length === selectedPages.size;
 
+    const handleSelectAllCheckboxChange = () => {
+        if (isAllSelected) {
+            deselectAllPages();
+        } else {
+            selectAllPages();
+        }
+    };
     const togglePageSelection = (pageId: Number) => {
         setSelectedPages(prevSelected => {
             const newSelected = new Set(prevSelected);
@@ -87,13 +95,22 @@ const TrashPage = () => {
                 <div className="trash-list-header">
                     <div className="buttons-container">
                         <div className="left-buttons">
-                            <button onClick={selectAllPages}>전체 선택</button>
-                            <button onClick={deselectAllPages}>
-                                선택 해제
-                            </button>
+                            <div className="left-buttons">
+                                <input
+                                    type="checkbox"
+                                    checked={isAllSelected}
+                                    onChange={handleSelectAllCheckboxChange}
+                                />
+                                <label>전체 선택</label>
+                            </div>
                         </div>
-                        <div className="right-buttons">
-                            <button onClick={handleRestoreClick}>복구</button>
+                        <div className="right-button">
+                            <button
+                                className="right-buttons"
+                                onClick={handleRestoreClick}
+                            >
+                                복구
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -108,15 +125,13 @@ const TrashPage = () => {
                                 <p>삭제자: {page.deleter}</p>
                                 <p>생성 날짜: {page.createAt}</p>
                                 <p>삭제 날짜: {page.deleteAt}</p>
-                                <button
-                                    onClick={() =>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedPages.has(page.trashId)}
+                                    onChange={() =>
                                         togglePageSelection(page.trashId)
                                     }
-                                >
-                                    {selectedPages.has(page.trashId)
-                                        ? '선택 해제'
-                                        : '선택'}
-                                </button>
+                                />
                             </div>
                         </div>
                     ))}
