@@ -14,6 +14,7 @@ const LoginPage = () => {
     useEffect(() => {
 		console.log('kakaokey',process.env.REACT_APP_KAKAO_JS_KEY);
 		console.log('type',typeof process.env.REACT_APP_KAKAO_JS_KEY);
+		console.log(staticServerUri);
 
         if (window.Kakao) {
             const kakao = window.Kakao;
