@@ -3,6 +3,8 @@
     background-color: white;
     padding: 4px;
     border-radius: 4px;
+    width: 124px;
+    margin: 10px 0;
 
     button {
         border: none;
@@ -32,6 +34,9 @@
     padding: 10px;
     &:hover {
         background-color: #e5e5e5;
+    }
+    .group_image {
+        cursor: pointer;
     }
     .content {
         margin-top: 10px;

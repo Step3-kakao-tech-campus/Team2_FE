@@ -1,33 +1,53 @@
-import React, { useState } from 'react';
-
+import { useState, FC } from 'react';
+import { useRecoilState } from 'recoil';
 import { MainContainer } from '../../common/atoms/Container';
 import Profile from './components/Profile';
 import UserInfo from './components/UserInfo';
 import Notice from './components/Notice';
 import ChangeNicknameModal from './components/ChangeNicknameModal';
-
+import { useQuery } from 'react-query';
 import './Account.scss';
+import { userState } from '../../recoil/user';
+import { titleSearchApi, useChangeNickname } from '../../service/titles';
 
-const AccountPage: React.FC = () => {
+const AccountPage: FC = () => {
+    const [user, setUser] = useRecoilState(userState);
+
+    const userId = user?.id ? Number(user?.id) : 0;
+    const { mutate: changeTitle } = useChangeNickname();
+
     const [isModalOpen, setModalOpen] = useState(false);
     const [currentNickname, setCurrentNickname] = useState('수용이');
-
+    const { isLoading, isError, data, error } = useQuery(
+        ['userTitles', userId],
+        () =>
+            userId
+                ? titleSearchApi.getUserTitles(userId)
+                : Promise.reject('No user ID provided'),
+    );
     const handleChangeNicknameClick = () => {
         setModalOpen(true);
     };
 
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    };
+
     const handleVerifyNickname = (newNickname: string) => {
         console.log('닉네임 검사');
+        console.log(data);
     };
 
     const handleChangeNicknameComfirmClick = (newNickname: string) => {
         console.log('닉네임 변경');
         setCurrentNickname(newNickname);
+        const nickname = currentNickname;
+        changeTitle({ userId, nickname });
     };
 
-    const ModalProps = {
-        setModalOpen: setModalOpen,
+    const modalProps = {
         currentNickname: currentNickname,
+        onClose: handleCloseModal,
         onVerify: handleVerifyNickname,
         onChangeNickname: handleChangeNicknameComfirmClick,
     };
@@ -40,14 +60,16 @@ const AccountPage: React.FC = () => {
         console.log('');
     };
 
+    function getTitleNames(data: any) {
+        return data.titles.map(function (item: any) {
+            return item.titleName;
+        });
+    }
+
     const profileProps = {
         img: 'user.png',
         titleIdx: 2,
-        achievementTitle: [
-            '네컷 인플루언서',
-            '인싸가 될테야!',
-            '혼술? 아니 혼컷',
-        ],
+        achievementTitle: getTitleNames(data),
     };
 
     const userInfoProps = {
@@ -75,7 +97,7 @@ const AccountPage: React.FC = () => {
                 onNoticeClick={handleNoticeClick}
                 onInfoClick={handleInfoClick}
             />
-            {isModalOpen && <ChangeNicknameModal {...ModalProps} />}
+            {isModalOpen && <ChangeNicknameModal {...modalProps} />}
         </MainContainer>
     );
 };

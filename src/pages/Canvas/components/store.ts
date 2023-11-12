@@ -1,34 +1,42 @@
 import * as Y from 'yjs';
 import { WebsocketProvider } from 'y-websocket';
 import { TDAsset, TDBinding, TDShape } from '@tldraw/tldraw';
+import { useEffect, useMemo } from 'react';
+import { useUsers } from 'y-presence';
 
-const VERSION = 1;
+export default function useYjsStore(pageId: string, albumId: string) {
+    const doc = useMemo(() => new Y.Doc(), [pageId]);
+    const wsProvider = useMemo(() => {
+        console.log('wsProvider', pageId);
+        return new WebsocketProvider(
+            'ws://localhost:1234',
+            pageId + '-' + albumId,
+            doc,
+            {
+                connect: false,
+            },
+        );
+    }, [pageId]);
+    const users = useUsers(wsProvider.awareness);
+    // console.log('users', users);
+    useEffect(() => {
+        wsProvider.connect();
+        return () => {
+            wsProvider.disconnect();
+        };
+    }, [pageId]);
+    const yShapes: Y.Map<TDShape> = doc.getMap('shapes');
+    const yBindings: Y.Map<TDBinding> = doc.getMap('bindings');
+    const yAssets: Y.Map<TDAsset> = doc.getMap('assets');
+    const undoManager = new Y.UndoManager([yShapes, yBindings, yAssets]);
 
-// Create the doc
-export const doc = new Y.Doc();
-doc.on('update', () => {
-    // Handle the updated data here
-    console.log('Yjs document updated:', doc.toJSON());
-});
-
-export const roomID = `my-room-${VERSION}`;
-
-// Create a websocket provider
-export const wsProvider = new WebsocketProvider(
-    'ws://localhost:1234',
-    roomID,
-    doc,
-    {
-        connect: false,
-    },
-);
-
-// Export the provider's awareness API
-export const awareness = wsProvider.awareness;
-
-export const yShapes: Y.Map<TDShape> = doc.getMap('shapes');
-export const yBindings: Y.Map<TDBinding> = doc.getMap('bindings');
-export const yAssets: Y.Map<TDAsset> = doc.getMap('assets');
-
-// Create an undo manager for the shapes and binding maps
-export const undoManager = new Y.UndoManager([yShapes, yBindings, yAssets]);
+    return {
+        doc,
+        wsProvider,
+        yShapes,
+        yBindings,
+        yAssets,
+        undoManager,
+        users,
+    };
+}

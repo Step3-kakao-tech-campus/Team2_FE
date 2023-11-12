@@ -1,5 +1,6 @@
 import { LocalImage } from '../../../common/atoms/Image';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MainContainer } from '../../../common/atoms/Container';
 import { AlbumCard } from './components/AlbumCard';
 import { TipBox, TitleContainer, WrapContainer } from './components/Containers';
@@ -8,13 +9,16 @@ import albumApi from '../../../service/album';
 import StatusLayOut from '../../../common/templates/StatusLayOut';
 const AlbumGroupPage = () => {
     const userId = '1';
+    const navigate = useNavigate();
+
     const { isLoading, isError, data, error } = useQuery({
         queryKey: ['albumGroup', userId],
         queryFn: albumApi.getAlbumGroup,
-        retry: 3,
     });
 
-    //이렇게해야 타입도움을 받을수잇는듯?
+    const handleGroupClick = (groupId: string) => {
+        navigate(`/album/view/${groupId}`);
+    };
 
     return (
         <MainContainer>
@@ -30,6 +34,9 @@ const AlbumGroupPage = () => {
                             groupId={albumGroup.id}
                             groupName={albumGroup.albumName}
                             groupDescription={albumGroup.description}
+                            onClick={() => {
+                                handleGroupClick(albumGroup.id);
+                            }}
                         />
                     ))}
                 </WrapContainer>

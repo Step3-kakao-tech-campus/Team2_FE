@@ -6,16 +6,24 @@ interface AlbumCardProps {
     groupName: string;
     groupDescription: string;
     groupId: string;
+    onClick: () => void;
 }
 export const AlbumCard = ({
     image,
     groupId,
     groupName,
     groupDescription,
+    onClick,
 }: AlbumCardProps) => {
     return (
         <div className="album_card">
-            <LocalImage src={image} height="200px" width="100%" />
+            <LocalImage
+                className="group_image"
+                src={image}
+                height="200px"
+                width="100%"
+                onClick={onClick}
+            />
             <div className="content">
                 <DescriptionContainer
                     title={groupName}
@@ -31,7 +39,7 @@ export const AlbumCard = ({
 };
 
 const ButtonGroup = ({ id }: { id: String }) => {
-    const invitationLink = `http://localhost:3000/album/invite?id=${id}`;
+    const invitationLink = `https://k5ebddfe59255a.user-app.krampoline.com/album/invite?id=${id}`;
 
     const copyToClipboard = async () => {
         try {

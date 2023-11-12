@@ -19,7 +19,7 @@ const ErrorPage = () => {
     };
 
     return (
-        <MainContainer className="column" style={{ paddingBottom: '70px' }}>
+        <MainContainer className="column" style={{ paddingTop: '5%' }}>
             <div className="logo">
                 <LocalImage
                     src={'errorlogo1.png'}
