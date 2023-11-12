@@ -5,6 +5,7 @@ import {
     albumList,
     canvasExample2,
     albumDetailInfo,
+    albumMembers,
 } from './data/album';
 import { rewards } from './data/rewards';
 import { titles, userTitles } from './data/titles';
@@ -72,6 +73,10 @@ export const handlers = [
             }),
         );
     }),
+    rest.get('/api/albums/1/members', (req, res, ctx) => {
+        const { albumId } = req.params;
+        return res(ctx.status(200), ctx.json(albumMembers));
+    }),
     rest.post('/api/albums/:albumId/members/join', (req, res, ctx) => {
         const { albumId } = req.params;
         const authToken = req.headers.get('Authorization');
@@ -80,6 +85,36 @@ export const handlers = [
             ctx.json({
                 success: true,
                 response: null,
+                error: null,
+            }),
+        );
+    }),
+    rest.get('/api/albums/:albumId/trashs', (req, res, ctx) => {
+        const albumId = req.params.albumId;
+        // 실제 애플리케이션에서는 albumId를 사용하여 데이터를 필터링할 수 있습니다.
+        return res(
+            ctx.status(200),
+            ctx.json({
+                success: true,
+                response: {
+                    albumId: albumId,
+                    pages: [
+                        {
+                            trashId: 1,
+                            image: '/honor.png',
+                            deleter: 'tjralsrh',
+                            createAt: '2023.09.12',
+                            deleteAt: '2023.09.13',
+                        },
+                        {
+                            trashId: 2,
+                            image: '/honor.png',
+                            deleter: 'tjralsrh',
+                            createAt: '2023.09.13',
+                            deleteAt: '2023.09.13',
+                        },
+                    ],
+                },
                 error: null,
             }),
         );
