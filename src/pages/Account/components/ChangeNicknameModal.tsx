@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import { useState, FC, ChangeEvent } from 'react';
 import Button from '../../../common/atoms/Button';
 import Input from '../../../common/atoms/Input';
 import './ChangeNicknameModal.scss';
-import Modal from '../../../common/molecules/Modal';
+import Modal from '../../../common/organisms/Modal';
 
-interface ModalProps {
-    setModalOpen: (isOpen: boolean) => void;
+interface ChangeNicknameModalProps {
     currentNickname: string;
+    onClose: () => void;
     onVerify: (newNickname: string) => void;
     onChangeNickname: (newNickname: string) => void;
 }
 
-const ChangeNicknameModal: React.FC<ModalProps> = ({
-    setModalOpen,
+const ChangeNicknameModal: FC<ChangeNicknameModalProps> = ({
     currentNickname,
+    onClose,
     onVerify,
     onChangeNickname,
 }) => {
@@ -21,7 +21,7 @@ const ChangeNicknameModal: React.FC<ModalProps> = ({
     const [isVerified, setIsVerified] = useState(false);
     const [isNicknameValid, setIsNicknameValid] = useState(true);
 
-    const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleNicknameChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setNewNickname(value);
     };
@@ -34,56 +34,44 @@ const ChangeNicknameModal: React.FC<ModalProps> = ({
 
     const handleChangeNickname = () => {
         onChangeNickname(newNickname);
-        closeModal();
+        onClose();
     };
-    const closeModal = () => {
-        setModalOpen(false);
+
+    const modalProps = {
+        title: '닉네임 변경',
+        confirmText: '닉네임 변경',
+        onClose: onClose,
+        onConfirm: handleChangeNickname,
     };
 
     return (
-        <Modal className="nickName" setModalOpen={setModalOpen}>
-            <div className="modal_header">
-                <div className="modal_title">닉네임 변경</div>
-            </div>
-            <div className="modal_body">
-                <div className="check_nickname">
-                    <Input
-                        type="text"
-                        id="nickname"
-                        className="nickname"
-                        value={newNickname}
-                        onChange={handleNicknameChange}
-                        placeholder="닉네임"
-                    />
-                    <Button
-                        className="verify_nickname"
-                        onClick={handleVerifyNickname}
-                    >
-                        중복 조회
-                    </Button>
-                </div>
-                {isVerified && (
-                    <div
-                        className="varify_result"
-                        style={{ color: isNicknameValid ? 'black' : 'red' }}
-                    >
-                        {isNicknameValid
-                            ? '사용가능한 닉네임입니다.'
-                            : '사용할 수 없는 닉네임입니다.'}
-                    </div>
-                )}
-            </div>
-            <div className="modal_footer">
-                <Button className="cancle" onClick={closeModal}>
-                    취소
-                </Button>
+        <Modal {...modalProps}>
+            <div className="check_nickname">
+                <Input
+                    type="text"
+                    id="nickname"
+                    className="nickname"
+                    value={newNickname}
+                    onChange={handleNicknameChange}
+                    placeholder="닉네임"
+                />
                 <Button
-                    className="confirm_nickname"
-                    onClick={handleChangeNickname}
+                    className="verify_nickname"
+                    onClick={handleVerifyNickname}
                 >
-                    닉네임 변경
+                    중복 조회
                 </Button>
             </div>
+            {isVerified && (
+                <div
+                    className="verify_result"
+                    style={{ color: isNicknameValid ? 'black' : 'red' }}
+                >
+                    {isNicknameValid
+                        ? '사용 가능한 닉네임입니다.'
+                        : '사용할 수 없는 닉네임입니다.'}
+                </div>
+            )}
         </Modal>
     );
 };

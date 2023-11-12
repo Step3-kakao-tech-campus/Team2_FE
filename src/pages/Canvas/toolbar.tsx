@@ -1,7 +1,7 @@
 import { TDShapeType, TDToolType, TldrawApp } from '@tldraw/tldraw';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import Button from '../../common/atoms/Button';
-import Modal from '../../common/molecules/Modal';
+import Modal from '../../common/organisms/Modal';
 import Scanner from './components/Scanner';
 
 const imageStyle = {
@@ -84,9 +84,19 @@ function SelectQrButton({
     const [isModalOpen, setModalOpen] = useState(false);
     const [scanData, setScanData] = useState<String | null>(null);
 
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    };
+
     useEffect(() => {
         console.log(scanData);
     }, [scanData]);
+
+    const modalProps = {
+        className: 'qrModal',
+        contentOnly: true,
+        onClose: handleCloseModal,
+    };
 
     return (
         <>
@@ -102,7 +112,7 @@ function SelectQrButton({
                 imageStyle={imageStyle}
             />
             {isModalOpen && (
-                <Modal setModalOpen={setModalOpen} className="qrModal">
+                <Modal {...modalProps}>
                     <Scanner setScanData={setScanData} />
                     {scanData && (
                         <div
