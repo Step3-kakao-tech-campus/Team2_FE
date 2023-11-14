@@ -6,7 +6,7 @@ import CanvasEditContainer from './editContainer';
 import ErrorPage from '../Common/Error';
 import album from '../../service/album';
 import { useQuery } from 'react-query';
-import { canvasExample2 } from '../../mocks/data/album';
+import { canvasExample3 } from '../../mocks/data/album';
 import { TDAsset, TDBinding, TDShape } from '@tldraw/tldraw';
 import { useRecoilState } from 'recoil';
 import Album from '../../service/album';
@@ -20,7 +20,7 @@ const CanvasEditPage = () => {
     //     queryFn: () => albumApi.getAlbumCanvasById(albumId!, pageId!),
     //     enabled: !!pageId && !!albumId,
     // });
-    const { shapes, bindings, assets } = canvasExample2;
+    const { shapes, bindings, assets } = canvasExample3;
 
     const myData = {
         shapes: shapes as Record<string, TDShape | undefined>,

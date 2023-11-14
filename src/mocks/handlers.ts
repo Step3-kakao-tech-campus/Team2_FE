@@ -6,6 +6,7 @@ import {
     canvasExample2,
     albumDetailInfo,
     albumMembers,
+    canvasExample3,
 } from './data/album';
 import { rewards } from './data/rewards';
 import { titles, userTitles } from './data/titles';
@@ -28,13 +29,13 @@ export const handlers = [
         return res(ctx.status(200), ctx.json(albumInfo));
     }),
     rest.get('/albums/:albumId/pages/:pageId', (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(canvasExample2));
+        return res(ctx.status(200), ctx.json(canvasExample3));
     }),
     rest.put('/albums/:albumId/pages/:pageId', (req, res, ctx) => {
         const requestBody = req.body as any;
-        canvasExample2.assets = requestBody.assets;
-        canvasExample2.shapes = requestBody.shapes;
-        canvasExample2.bindings = requestBody.bindings;
+        canvasExample3.assets = requestBody.assets;
+        canvasExample3.shapes = requestBody.shapes;
+        canvasExample3.bindings = requestBody.bindings;
         return res(ctx.status(200), ctx.json(SuccessResponse));
     }),
 
@@ -58,7 +59,7 @@ export const handlers = [
         return res(ctx.status(200), ctx.json(logoutResponse));
     }),
 
-    rest.get('/albums/1', (req, res, ctx) => {
+    rest.get('/albums/:id', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(albumDetailInfo));
     }),
     rest.get('/users/rewards', (req, res, ctx) => {

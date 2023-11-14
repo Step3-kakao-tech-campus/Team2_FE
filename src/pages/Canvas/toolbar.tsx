@@ -17,6 +17,7 @@ const ToolBar = ({ app }: { app: TldrawApp }) => {
         <div className="toolbox">
             <SelectToolButton type="select" app={app} />
             <SelectToolButton type="erase" app={app} />
+            <SelectToolButton type={TDShapeType.Draw} app={app} />
             <SelectToolButton type={TDShapeType.Rectangle} app={app} />
             <SelectToolButton type={TDShapeType.Ellipse} app={app} />
             <SelectToolButton type={TDShapeType.Sticky} app={app} />
