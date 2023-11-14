@@ -12,7 +12,7 @@ const googleUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${proc
 const staticServerUri =
     process.env.NODE_ENV === 'development'
         ? 'http://localhost:3000'
-        : process.env.REACT_APP_API_URL;
+        : process.env.REACT_APP_FRONT_URL;
 
 const LoginPage = () => {
     useEffect(() => {
