@@ -5,7 +5,7 @@ export interface CustomError {
 }
 
 const httpClient = axios.create({
-    baseURL: 'https://k59de1f11b350a.user-app.krampoline.com/api',
+    baseURL: process.env.REACT_APP_API_URL,
     // timeout: 10000,
     headers: {
         'Content-Type': 'application/json',

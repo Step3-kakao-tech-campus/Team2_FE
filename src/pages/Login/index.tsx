@@ -12,11 +12,10 @@ const googleUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${proc
 const staticServerUri =
     process.env.NODE_ENV === 'development'
         ? 'http://localhost:3000'
-        : 'https://kff8c580d2bada.user-app.krampoline.com';
+        : process.env.REACT_APP_API_URL;
 
 const LoginPage = () => {
     useEffect(() => {
-
         if (window.Kakao) {
             const kakao = window.Kakao;
             if (!kakao.isInitialized()) {
