@@ -9,8 +9,8 @@ interface OauthLoginRequest {
 
 export const userApi = {
     oauthLogin: ({ vendor, authCode }: OauthLoginRequest): Promise<string> =>
-        httpClient.post(`/auth/${vendor}/login`, authCode),
-    getUserInfo: (): Promise<User> => httpClient.get('/users'),
-    logout: (): Promise<void> => httpClient.post('/auth/logout'),
-    adminLogin: (): Promise<string> => httpClient.post('/auth/test/admin'),
+        httpClient.post(`/api/auth/${vendor}/login`, authCode),
+    getUserInfo: (): Promise<User> => httpClient.get('/api/user'),
+    logout: (): Promise<void> => httpClient.post('/api/auth/logout'),
+    adminLogin: (): Promise<string> => httpClient.post('/api/auth/test/admin'),
 };

@@ -28,9 +28,10 @@ const RedirectPage = () => {
             return;
         }
         try {
-            // console.log(vendor, authCode);
-            // const token = await userApi.oauthLogin({ vendor, authCode });
-            const token = await userApi.adminLogin();
+            console.log('vender', vendor, '\nauthCode', authCode);
+            const token = await userApi.oauthLogin({ vendor, authCode });
+            console.log('token', token);
+            // const token = await userApi.adminLogin();
             await localStorage.setItem('accessToken', token);
             const userData = await userApi.getUserInfo();
             setUser(userData as User);

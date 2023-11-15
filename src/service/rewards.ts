@@ -15,7 +15,8 @@ interface RewordResponse {
     ];
 }
 const rewordApi = {
-    getUserRewords: (): Promise<RewordResponse> => httpClient.get('/rewards'),
+    getUserRewords: (): Promise<RewordResponse> =>
+        httpClient.get('/api/rewards'),
 };
 
 export default rewordApi;

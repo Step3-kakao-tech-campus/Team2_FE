@@ -5,7 +5,7 @@ export interface CustomError {
 }
 
 const httpClient = axios.create({
-    baseURL: 'https://k59de1f11b350a.user-app.krampoline.com/api',
+    baseURL: process.env.REACT_APP_API_URL,
     // timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
@@ -16,6 +16,7 @@ const httpClient = axios.create({
 httpClient.interceptors.request.use(
     config => {
         const accessToken = localStorage.getItem('accessToken');
+        console.log('req add token', accessToken);
 
         if (accessToken) {
             config.headers['Authorization'] = accessToken;
