@@ -47,7 +47,7 @@ export const handlers = [
     rest.post('/auth/kakao/login', (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(loginResponse));
     }),
-    rest.get('/user', (req, res, ctx) => {
+    rest.get('/users', (req, res, ctx) => {
         if (req.headers.get('Authorization') === 'Bearer token') {
             return res(ctx.status(200), ctx.json(userResponse));
         } else {
